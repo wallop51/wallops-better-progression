@@ -1,0 +1,8 @@
+{
+  "values": [
+    "#betterprogression:needs_copper_tool",
+    "#betterprogression:needs_bronze_tool",
+    "#minecraft:needs_diamond_tool",
+    "#minecraft:needs_iron_tool"
+  ]
+}
