@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "betterprogression:coppermail"
+    },
+    "C": {
+      "item": "betterprogression:cloth"
+    }
+  },
+  "pattern": [
+    "#C#",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterprogression:coppermail_chestplate"
+  }
+}

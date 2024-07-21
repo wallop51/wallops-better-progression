@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:dandelion"
+    },
+    {
+      "tag": "betterprogression:tin_oil_food_ingredients"
+    },
+    {
+      "item": "betterprogression:tin_dust"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterprogression:tin_oil"
+  }
+}

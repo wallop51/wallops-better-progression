@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_coppermail": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betterprogression:coppermail"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betterprogression:coppermail_boots"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_coppermail"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betterprogression:coppermail_boots"
+    ]
+  }
+}
