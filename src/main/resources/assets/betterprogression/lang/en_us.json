@@ -1,11 +1,19 @@
 {
   "item.betterprogression.plant_fiber": "Plant Fiber",
   "item.betterprogression.tool_handle": "Tool Handle",
+  "item.betterprogression.coppermail": "Coppermail",
+  "item.betterprogression.cloth": "Cloth",
+  "item.betterprogression.tin_dust": "Tin Dust",
+  "item.betterprogression.tin_oil": "Oil of Tin",
   "item.betterprogression.copper_sword": "Copper Sword",
   "item.betterprogression.copper_pickaxe": "Copper Pickaxe",
   "item.betterprogression.copper_axe": "Copper Axe",
   "item.betterprogression.copper_shovel": "Copper Shovel",
   "item.betterprogression.copper_hoe": "Copper Hoe",
+  "item.betterprogression.coppermail_helmet": "Coppermail Helmet",
+  "item.betterprogression.coppermail_chestplate": "Coppermail Chestplate",
+  "item.betterprogression.coppermail_leggings": "Coppermail Leggings",
+  "item.betterprogression.coppermail_boots": "Coppermail Boots",
 
   "itemgroup.better_progression": "Better Progression"
 }

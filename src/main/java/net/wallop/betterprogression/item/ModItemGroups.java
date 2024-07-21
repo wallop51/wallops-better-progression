@@ -17,11 +17,19 @@ public class ModItemGroups {
                     .icon(() -> new ItemStack(Items.IRON_PICKAXE)).entries((displayContext, entries) -> {
                         entries.add(ModItems.PLANT_FIBER);
                         entries.add(ModItems.TOOL_HANDLE);
+                        entries.add(ModItems.COPPERMAIL);
+                        entries.add(ModItems.CLOTH);
+                        entries.add(ModItems.TIN_DUST);
+                        entries.add(ModItems.TIN_OIL);
                         entries.add(ModItems.COPPER_PICKAXE);
                         entries.add(ModItems.COPPER_SWORD);
                         entries.add(ModItems.COPPER_AXE);
                         entries.add(ModItems.COPPER_HOE);
                         entries.add(ModItems.COPPER_SHOVEL);
+                        entries.add(ModItems.COPPERMAIL_HELMET);
+                        entries.add(ModItems.COPPERMAIL_CHESTPLATE);
+                        entries.add(ModItems.COPPERMAIL_LEGGINGS);
+                        entries.add(ModItems.COPPERMAIL_BOOTS);
 
                     }).build());
 

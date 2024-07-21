@@ -31,6 +31,8 @@ public class ModTags {
     }
 
     public static class Items {
+        public static final TagKey<Item> TIN_OIL_FOOD_INGREDIENTS =
+                createTag("tin_oil_food_ingredients");
 
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(BetterProgression.MOD_ID, name));

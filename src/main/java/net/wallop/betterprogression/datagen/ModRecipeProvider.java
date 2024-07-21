@@ -11,6 +11,7 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.wallop.betterprogression.item.ModItems;
+import net.wallop.betterprogression.util.ModTags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -227,6 +228,60 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("X")
                 .pattern("#")
                 .criterion("has_copper", conditionsFromItem(Items.COPPER_INGOT))
+                .offerTo(exporter);
+
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.COPPERMAIL,2)
+                .input('#', Items.COPPER_INGOT)
+                .pattern("# #")
+                .pattern(" # ")
+                .pattern("# #")
+                .criterion("has_copper", conditionsFromItem(Items.COPPER_INGOT))
+                .offerTo(exporter);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CLOTH,2)
+                .input(Items.STRING,2)
+                .input(ItemTags.WOOL)
+                .criterion("has_string", conditionsFromItem(Items.STRING))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COPPERMAIL_HELMET)
+                .input('#', ModItems.COPPERMAIL)
+                .input('C', ModItems.CLOTH)
+                .pattern("###")
+                .pattern("#C#")
+                .criterion("has_coppermail", conditionsFromItem(ModItems.COPPERMAIL))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COPPERMAIL_CHESTPLATE)
+                .input('#', ModItems.COPPERMAIL)
+                .input('C', ModItems.CLOTH)
+                .pattern("#C#")
+                .pattern("###")
+                .pattern("###")
+                .criterion("has_coppermail", conditionsFromItem(ModItems.COPPERMAIL))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COPPERMAIL_LEGGINGS)
+                .input('#', ModItems.COPPERMAIL)
+                .input('C', ModItems.CLOTH)
+                .pattern("###")
+                .pattern("#C#")
+                .pattern("# #")
+                .criterion("has_coppermail", conditionsFromItem(ModItems.COPPERMAIL))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COPPERMAIL_BOOTS)
+                .input('#', ModItems.COPPERMAIL)
+                .input('C', ModItems.CLOTH)
+                .pattern("C C")
+                .pattern("# #")
+                .pattern("# #")
+                .criterion("has_coppermail", conditionsFromItem(ModItems.COPPERMAIL))
+                .offerTo(exporter);
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.TIN_OIL)
+                .input(Items.BOWL)
+                .input(Items.DANDELION)
+                .input(ModTags.Items.TIN_OIL_FOOD_INGREDIENTS)
+                .input(ModItems.TIN_DUST)
+                .criterion("has_tin_dust", conditionsFromItem(ModItems.TIN_DUST))
                 .offerTo(exporter);
     }
 }
