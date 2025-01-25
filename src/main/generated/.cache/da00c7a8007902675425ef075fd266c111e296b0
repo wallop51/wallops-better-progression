@@ -1,11 +1,11 @@
-// 1.21	2024-07-21T20:37:05.2028748	Wallop's Better Progression/Tags for minecraft:item
-180effd532921d2ffb0f51e6014e49de0f47030b data\minecraft\tags\item\axes.json
+// 1.21	2025-01-25T20:48:08.849248	Wallop's Better Progression/Tags for minecraft:item
 7191f63d2dadd2905af19028342dbb003d05a6a0 data\betterprogression\tags\item\tin_oil_food_ingredients.json
-089c37bbfb75f0f9a57558bbe519975be554569a data\minecraft\tags\item\shovels.json
+180effd532921d2ffb0f51e6014e49de0f47030b data\minecraft\tags\item\axes.json
 b60b5cb893e889379f50fd5a7d10db6df3c89e58 data\minecraft\tags\item\swords.json
+089c37bbfb75f0f9a57558bbe519975be554569a data\minecraft\tags\item\shovels.json
 97b47e0c140db433fad97cfeebfb436930067823 data\minecraft\tags\item\head_armor.json
 19768852cba452c8f21cf095194a00dfec9ae7cc data\minecraft\tags\item\chest_armor.json
 82597bf76ba9fa746662f4690a553cd33f52af34 data\minecraft\tags\item\pickaxes.json
-0dd3e1e8cc74763ab9fb7bdb3c2d2f225db500de data\minecraft\tags\item\hoes.json
-51a254de60fbce9535ee8f05862447a830985f3b data\minecraft\tags\item\foot_armor.json
 401979b9ffe8676c7e457f2cdd11eac0209ebe92 data\minecraft\tags\item\leg_armor.json
+51a254de60fbce9535ee8f05862447a830985f3b data\minecraft\tags\item\foot_armor.json
+0dd3e1e8cc74763ab9fb7bdb3c2d2f225db500de data\minecraft\tags\item\hoes.json

@@ -17,6 +17,7 @@ import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.predicate.StatePredicate;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
+import net.wallop.betterprogression.block.ModBlocks;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -27,6 +28,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
+        addDrop(ModBlocks.FORGE);
 
     }
 }

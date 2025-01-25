@@ -9,6 +9,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.wallop.betterprogression.BetterProgression;
+import net.wallop.betterprogression.block.ModBlocks;
 
 public class ModItemGroups {
     public static final ItemGroup BETTER_PROGRESSION_GROUP = Registry.register(Registries.ITEM_GROUP,
@@ -30,6 +31,7 @@ public class ModItemGroups {
                         entries.add(ModItems.COPPERMAIL_CHESTPLATE);
                         entries.add(ModItems.COPPERMAIL_LEGGINGS);
                         entries.add(ModItems.COPPERMAIL_BOOTS);
+                        entries.add(ModBlocks.FORGE);
 
                     }).build());
 

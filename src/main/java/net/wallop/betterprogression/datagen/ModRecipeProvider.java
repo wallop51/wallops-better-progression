@@ -2,6 +2,7 @@ package net.wallop.betterprogression.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
@@ -10,6 +11,7 @@ import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
+import net.wallop.betterprogression.block.ModBlocks;
 import net.wallop.betterprogression.item.ModItems;
 import net.wallop.betterprogression.util.ModTags;
 
@@ -282,6 +284,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input(ModTags.Items.TIN_OIL_FOOD_INGREDIENTS)
                 .input(ModItems.TIN_DUST)
                 .criterion("has_tin_dust", conditionsFromItem(ModItems.TIN_DUST))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.FORGE)
+                .input('C', Blocks.COPPER_BLOCK)
+                .input('#', Blocks.STONE_BRICKS)
+                .input('F', Blocks.FURNACE)
+                .pattern("###")
+                .pattern("#F#")
+                .pattern("CCC")
+                .criterion("has_furnace", conditionsFromItem(Blocks.FURNACE))
+                .criterion("has_copper", conditionsFromItem(Blocks.COPPER_BLOCK))
                 .offerTo(exporter);
     }
 }

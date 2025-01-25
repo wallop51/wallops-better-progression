@@ -1,4 +1,4 @@
-// 1.21	2024-07-21T20:37:05.1988725	Wallop's Better Progression/Recipes
+// 1.21	2025-01-25T20:48:08.8472476	Wallop's Better Progression/Recipes
 9c41f1b65b111145db2bd0e16327546fa582e5ab data\betterprogression\recipe\copper_axe.json
 2049366ced623029eec4b15ffdacbac5eb84b8c3 data\betterprogression\advancement\recipes\tools\diamond_pickaxe.json
 dfbe8371193faf659b4a7dadd74273db8d89f567 data\betterprogression\recipe\stone_pickaxe.json
@@ -43,6 +43,7 @@ b9f8fb1dab81ab7a60dc54ba6052bf9c1f0baf27 data\betterprogression\advancement\reci
 0137553f32205dee32699c35bf21e7c8e73313e9 data\betterprogression\advancement\recipes\misc\cloth.json
 e8fc81ee7e0dfc8afd903c7a88846398435f2d7b data\betterprogression\recipe\cloth.json
 863db563502ceb2ec0190ca9c05d750e88c34615 data\betterprogression\advancement\recipes\tools\diamond_hoe.json
+b5813023daa925a24ec720e899e416455faed47d data\betterprogression\advancement\recipes\building_blocks\forge.json
 abd4ba3787fcb6ef6f33cf6f121a6bd1474e71c8 data\betterprogression\advancement\recipes\combat\coppermail_leggings.json
 7fbf9d3c742d96a7610e126bc6f9bf1624dde5f7 data\betterprogression\recipe\iron_pickaxe.json
 94d2e99a0a8094c4cc639459ad81c2b32896f4a1 data\betterprogression\advancement\recipes\misc\tool_handle.json
@@ -52,6 +53,7 @@ abd4ba3787fcb6ef6f33cf6f121a6bd1474e71c8 data\betterprogression\advancement\reci
 bcc928e58bf9ca35379eb5edc4c3e86d4ce6ae68 data\betterprogression\recipe\iron_axe.json
 e16f75ea41e96c7e9e2149dd28579eb0beb99cd0 data\betterprogression\recipe\copper_pickaxe.json
 74ebc1f5d596f3709b65f2b4ff97e955b49e58a8 data\betterprogression\advancement\recipes\tools\golden_shovel.json
+38a45d8a8dbc398a61aa47db05ad016a3b21af2a data\betterprogression\recipe\forge.json
 58595f2f0bacfc456b9bbdec231c48778e7ff793 data\betterprogression\advancement\recipes\tools\iron_hoe.json
 8b331d353053474d8b02055cc8e5aea6910308af data\betterprogression\advancement\recipes\tools\iron_axe.json
 aeff459435136dad0f626d656fe13bd0fbaa58af data\betterprogression\advancement\recipes\tools\copper_pickaxe.json

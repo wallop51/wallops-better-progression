@@ -3,6 +3,9 @@ package net.wallop.betterprogression.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.*;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.Direction;
+import net.wallop.betterprogression.block.ModBlocks;
 import net.wallop.betterprogression.item.ModItems;
 
 public class ModModelProvider extends FabricModelProvider {
@@ -12,8 +15,18 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-    }
 
+        TextureMap FORGE_TEXTURE_MAP = new TextureMap()
+                .put(TextureKey.TOP, TextureMap.getSubId(ModBlocks.FORGE, "_top"))
+                .put(TextureKey.SIDE, TextureMap.getSubId(ModBlocks.FORGE, "_side"))
+                .put(TextureKey.FRONT, TextureMap.getSubId(ModBlocks.FORGE, "_front"))
+                .put(TextureKey.BOTTOM, TextureMap.getSubId(ModBlocks.FORGE, "_bottom"));
+        blockStateModelGenerator.registerNorthDefaultHorizontalRotatable(
+                ModBlocks.FORGE,
+                FORGE_TEXTURE_MAP
+        );
+
+    }
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(ModItems.PLANT_FIBER, Models.GENERATED);
