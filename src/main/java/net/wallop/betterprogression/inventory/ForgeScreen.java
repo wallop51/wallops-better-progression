@@ -7,11 +7,12 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.wallop.betterprogression.BetterProgression;
 
 public class ForgeScreen extends HandledScreen<ForgeScreenHandler> {
     // A path to the gui texture. In this example we use the texture from the dispenser
 
-    private static final Identifier TEXTURE = Identifier.ofVanilla("textures/gui/container/dispenser.png");
+    private static final Identifier TEXTURE = Identifier.of("betterprogression","textures/gui/container/forge.png");
 
     public ForgeScreen(ForgeScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);

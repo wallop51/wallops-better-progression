@@ -3,6 +3,8 @@ package net.wallop.betterprogression.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.screen.NamedScreenHandlerFactory;
@@ -117,5 +119,12 @@ public class ForgeBlock extends BlockWithEntity implements BlockEntityProvider {
     @Override
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return state.get(LIT) ? 15 : 0;
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return validateTicker(type, ModBlockEntityType.FORGE_BLOCK_ENTITY,
+                ((world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1)));
     }
 }
