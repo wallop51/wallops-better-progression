@@ -5,10 +5,12 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
@@ -20,7 +22,10 @@ import net.minecraft.world.World;
 import net.wallop.betterprogression.block.ModBlockEntityType;
 import net.wallop.betterprogression.inventory.ForgeScreenHandler;
 import net.wallop.betterprogression.inventory.ImplementedInventory;
-import net.wallop.betterprogression.item.ModItems;
+import net.wallop.betterprogression.recipe.ForgeRecipe;
+import net.wallop.betterprogression.recipe.ForgeRecipeInput;
+
+import java.util.Optional;
 
 public class ForgeBlockEntity extends BlockEntity implements ImplementedInventory, NamedScreenHandlerFactory {
     private static final int INPUT1_SLOT = 0;
@@ -40,7 +45,7 @@ public class ForgeBlockEntity extends BlockEntity implements ImplementedInventor
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
-                return switch (index){
+                return switch (index) {
                     case 0 -> ForgeBlockEntity.this.progress;
                     case 1 -> ForgeBlockEntity.this.maxProgress;
                     case 2 -> ForgeBlockEntity.this.fuelCounter;
@@ -97,7 +102,7 @@ public class ForgeBlockEntity extends BlockEntity implements ImplementedInventor
             return;
         }
 
-        if (isOutputSlotEmptyOrRecievable()) {
+        if (isOutputSlotEmptyOrReceivable()) {
             if (this.hasFuel()) {
                 if (this.hasRecipe()) {
                     this.increaseCraftProgress();
@@ -125,17 +130,18 @@ public class ForgeBlockEntity extends BlockEntity implements ImplementedInventor
     }
 
     private void craftItem() {
+        Optional<RecipeEntry<ForgeRecipe>> recipe = getCurrentRecipe();
+
         fuelCounter++;
-        this.removeStack(INPUT1_SLOT,1);
-        this.removeStack(INPUT2_SLOT,1);
+        this.removeStack(INPUT1_SLOT, 1);
+        this.removeStack(INPUT2_SLOT, 1);
         if (fuelCounter == 8) {
             this.removeStack(FUEL_SLOT, 1);
             fuelCounter = 0;
         }
-        ItemStack result = new ItemStack(ModItems.CLOTH);
 
-        this.setStack(OUTPUT_SLOT, new ItemStack(result.getItem(),
-                getStack(OUTPUT_SLOT).getCount() + result.getCount()));
+        this.setStack(OUTPUT_SLOT, new ItemStack(recipe.get().value().getResult(null).getItem(),
+                getStack(OUTPUT_SLOT).getCount() + recipe.get().value().getResult(null).getCount()));
     }
 
     private boolean hasCraftingFinished() {
@@ -147,10 +153,24 @@ public class ForgeBlockEntity extends BlockEntity implements ImplementedInventor
     }
 
     private boolean hasRecipe() {
-        ItemStack result = new ItemStack(ModItems.CLOTH);
-        boolean hasInput = getStack(INPUT1_SLOT).getItem() == ModItems.TIN_DUST && getStack(INPUT2_SLOT).getItem() == Items.COPPER_INGOT
-                || getStack(INPUT2_SLOT).getItem() == ModItems.TIN_DUST && getStack(INPUT1_SLOT).getItem() == Items.COPPER_INGOT;
-        return hasInput && canInsertAmountIntoOutputSlot(result) && canInsertItemIntoOutputSlot(result.getItem());
+        Optional<RecipeEntry<ForgeRecipe>> recipe = getCurrentRecipe();
+
+        return recipe.isPresent() && canInsertAmountIntoOutputSlot(recipe.get().value().getResult(null))
+                && canInsertItemIntoOutputSlot(recipe.get().value().getResult(null).getItem());
+    }
+
+    private Optional<RecipeEntry<ForgeRecipe>> getCurrentRecipe() {
+        SimpleInventory inv = new SimpleInventory(this.size());
+        for (int i = 0; i < this.size(); i++) {
+            inv.setStack(i, this.getStack(i));
+        }
+        return getWorld().getRecipeManager().getFirstMatch(
+                ForgeRecipe.ForgeRecipeType.INSTANCE,
+                new ForgeRecipeInput(
+                inv.getStack(INPUT1_SLOT),
+                        inv.getStack(INPUT2_SLOT),
+                        inv.getStack(UPGRADE_SLOT)
+        ), getWorld());
     }
 
     private boolean canInsertItemIntoOutputSlot(Item item) {
@@ -165,7 +185,9 @@ public class ForgeBlockEntity extends BlockEntity implements ImplementedInventor
         return this.getStack(FUEL_SLOT).getItem() == Items.COAL;
     }
 
-    private boolean isOutputSlotEmptyOrRecievable() {
+    private boolean isOutputSlotEmptyOrReceivable() {
         return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
+
+
     }
 }

@@ -31,6 +31,7 @@ public class ModItemGroups {
                         entries.add(ModItems.COPPERMAIL_CHESTPLATE);
                         entries.add(ModItems.COPPERMAIL_LEGGINGS);
                         entries.add(ModItems.COPPERMAIL_BOOTS);
+                        entries.add(ModItems.BRONZE_INGOT);
                         entries.add(ModBlocks.FORGE);
 
                     }).build());

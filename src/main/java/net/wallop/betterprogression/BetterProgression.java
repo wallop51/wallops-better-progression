@@ -15,6 +15,7 @@ import net.wallop.betterprogression.block.entity.ForgeBlockEntity;
 import net.wallop.betterprogression.inventory.ForgeScreenHandler;
 import net.wallop.betterprogression.item.ModItemGroups;
 import net.wallop.betterprogression.item.ModItems;
+import net.wallop.betterprogression.recipe.ModRecipes;
 import net.wallop.betterprogression.util.ModLootTableModifiers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class BetterProgression implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModLootTableModifiers.modifyLootTables();
 		ModBlockEntityType.registerBlockEntityTypes();
+		ModRecipes.registerRecipes();
 
 
 		LOGGER.info("Loaded!");

@@ -15,6 +15,7 @@ public class ModItems {
     public static final Item COPPERMAIL = registerItem("coppermail", new Item(new Item.Settings()));
     public static final Item CLOTH = registerItem("cloth", new Item(new Item.Settings()));
     public static final Item TIN_DUST = registerItem("tin_dust", new Item(new Item.Settings()));
+    public static final Item BRONZE_INGOT = registerItem("bronze_ingot", new Item(new Item.Settings()));
     public static final Item TIN_OIL = registerItem("tin_oil", new Item(new Item.Settings().food(ModFoodComponents.TIN_OIL).maxCount(16).recipeRemainder(Items.BOWL)));
 
     public static final Item COPPER_PICKAXE = registerItem("copper_pickaxe",
@@ -52,6 +53,7 @@ public class ModItems {
         entries.add(COPPERMAIL);
         entries.add(CLOTH);
         entries.add(TIN_DUST);
+        entries.add(BRONZE_INGOT);
     }
 
     private static Item registerItem(String name, Item item) {

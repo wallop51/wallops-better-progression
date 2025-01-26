@@ -1,0 +1,19 @@
+{
+  "type": "betterprogression:forge",
+  "cookingtime": 400,
+  "experience": 10,
+  "ingredients": [
+    {
+      "item": "betterprogression:tin_dust"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": ""
+    }
+  ],
+  "result": {
+    "id": "betterprogression:bronze_ingot"
+  }
+}
