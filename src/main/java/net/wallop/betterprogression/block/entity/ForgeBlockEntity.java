@@ -19,9 +19,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.wallop.betterprogression.BetterProgression;
 import net.wallop.betterprogression.block.ModBlockEntityType;
 import net.wallop.betterprogression.inventory.ForgeScreenHandler;
 import net.wallop.betterprogression.inventory.ImplementedInventory;
+import net.wallop.betterprogression.item.ModItems;
 import net.wallop.betterprogression.recipe.ForgeRecipe;
 import net.wallop.betterprogression.recipe.ForgeRecipeInput;
 
@@ -30,9 +32,9 @@ import java.util.Optional;
 public class ForgeBlockEntity extends BlockEntity implements ImplementedInventory, NamedScreenHandlerFactory {
     private static final int INPUT1_SLOT = 0;
     private static final int INPUT2_SLOT = 1;
-    private static final int FUEL_SLOT = 2;
-    private static final int OUTPUT_SLOT = 3;
-    private static final int UPGRADE_SLOT = 4;
+    private static final int UPGRADE_SLOT = 2;
+    private static final int FUEL_SLOT = 3;
+    private static final int OUTPUT_SLOT = 4;
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
 
     protected final PropertyDelegate propertyDelegate;
@@ -105,6 +107,7 @@ public class ForgeBlockEntity extends BlockEntity implements ImplementedInventor
         if (isOutputSlotEmptyOrReceivable()) {
             if (this.hasFuel()) {
                 if (this.hasRecipe()) {
+                    //BetterProgression.LOGGER.info("Recipe matched");
                     this.increaseCraftProgress();
                     markDirty(world, pos, state);
 
@@ -114,6 +117,7 @@ public class ForgeBlockEntity extends BlockEntity implements ImplementedInventor
                     }
                 } else {
                     this.resetProgress();
+                    //BetterProgression.LOGGER.info("Recipe not matched");
                 }
             } else {
                 this.resetProgress();
@@ -162,12 +166,18 @@ public class ForgeBlockEntity extends BlockEntity implements ImplementedInventor
     private Optional<RecipeEntry<ForgeRecipe>> getCurrentRecipe() {
         SimpleInventory inv = new SimpleInventory(this.size());
         for (int i = 0; i < this.size(); i++) {
-            inv.setStack(i, this.getStack(i));
+            if (this.getStack(i) == ItemStack.EMPTY) {
+                inv.setStack(i, ModItems.EMPTY_SLOT.getDefaultStack());
+            } else {
+                inv.setStack(i, this.getStack(i));
+            }
         }
+        //BetterProgression.LOGGER.info("Checking current recipe: " + inv);
+
         return getWorld().getRecipeManager().getFirstMatch(
                 ForgeRecipe.ForgeRecipeType.INSTANCE,
                 new ForgeRecipeInput(
-                inv.getStack(INPUT1_SLOT),
+                        inv.getStack(INPUT1_SLOT),
                         inv.getStack(INPUT2_SLOT),
                         inv.getStack(UPGRADE_SLOT)
         ), getWorld());

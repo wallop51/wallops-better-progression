@@ -37,9 +37,9 @@ public class ForgeScreenHandler extends ScreenHandler {
         //Forge Inventory
         this.addSlot(new Slot(inventory, 0,70,23));//Input 1
         this.addSlot(new Slot(inventory, 1,70,48));//Input 2
-        this.addSlot(new Slot(inventory, 2,33,35));//Fuel
-        this.addSlot(new Slot(inventory, 3,125,35));//Output
-        this.addSlot(new Slot(inventory, 4,8,62));//Upgrade
+        this.addSlot(new Slot(inventory, 2,8,62));//Upgrade
+        this.addSlot(new Slot(inventory, 3,33,35));//Fuel
+        this.addSlot(new Slot(inventory, 4,125,35));//Output
 
         int m;
         int l;

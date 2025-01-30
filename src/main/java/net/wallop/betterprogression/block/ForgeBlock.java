@@ -57,7 +57,6 @@ public class ForgeBlock extends BlockWithEntity implements BlockEntityProvider {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        BetterProgression.LOGGER.info("Creating ForgeBlockEntity at " + pos);
         return new ForgeBlockEntity(pos, state);
     }
 
@@ -76,10 +75,8 @@ public class ForgeBlock extends BlockWithEntity implements BlockEntityProvider {
     public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof NamedScreenHandlerFactory) {
-            BetterProgression.LOGGER.info("Found NamedScreenHandlerFactory at " + pos);
             return (NamedScreenHandlerFactory) blockEntity;
         }
-        BetterProgression.LOGGER.warn("No NamedScreenHandlerFactory found at " + pos);
         return null;
     }
 
@@ -87,10 +84,8 @@ public class ForgeBlock extends BlockWithEntity implements BlockEntityProvider {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient) {
             NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-            BetterProgression.LOGGER.info("screenHandlerFactory created");
             if (screenHandlerFactory != null) {
                 player.openHandledScreen(screenHandlerFactory);
-                BetterProgression.LOGGER.info("openHandledScreen passed");
             }
         }
         return ActionResult.SUCCESS;

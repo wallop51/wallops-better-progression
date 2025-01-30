@@ -7,6 +7,7 @@ import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.SmeltingRecipe;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
@@ -296,5 +297,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion("has_furnace", conditionsFromItem(Blocks.FURNACE))
                 .criterion("has_copper", conditionsFromItem(Blocks.COPPER_BLOCK))
                 .offerTo(exporter);
+
     }
 }

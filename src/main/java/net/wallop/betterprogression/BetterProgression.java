@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.resource.featuretoggle.FeatureSet;
@@ -12,11 +13,14 @@ import net.minecraft.util.Identifier;
 import net.wallop.betterprogression.block.ModBlockEntityType;
 import net.wallop.betterprogression.block.ModBlocks;
 import net.wallop.betterprogression.block.entity.ForgeBlockEntity;
+import net.wallop.betterprogression.command.RecipeCommand;
 import net.wallop.betterprogression.inventory.ForgeScreenHandler;
 import net.wallop.betterprogression.item.ModItemGroups;
 import net.wallop.betterprogression.item.ModItems;
 import net.wallop.betterprogression.recipe.ModRecipes;
+import net.wallop.betterprogression.recipe.RecipeDebugger;
 import net.wallop.betterprogression.util.ModLootTableModifiers;
+import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +40,7 @@ public class BetterProgression implements ModInitializer {
 		ModLootTableModifiers.modifyLootTables();
 		ModBlockEntityType.registerBlockEntityTypes();
 		ModRecipes.registerRecipes();
+		RecipeCommand.register();
 
 
 		LOGGER.info("Loaded!");

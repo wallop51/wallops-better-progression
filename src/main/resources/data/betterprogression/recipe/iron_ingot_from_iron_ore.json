@@ -1,0 +1,20 @@
+{
+  "type": "betterprogression:forge",
+  "id": "betterprogression:iron_ingot_from_iron_ore",
+  "cookingtime": 400,
+  "experience": 3,
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ore"
+    },
+    {
+      "item": "betterprogression:empty_slot"
+    },
+    {
+      "item": "betterprogression:totem_of_forging"
+    }
+  ],
+  "result": {
+    "id": "minecraft:iron_ingot"
+  }
+}

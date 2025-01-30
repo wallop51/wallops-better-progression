@@ -1,21 +1,21 @@
 package net.wallop.betterprogression.recipe;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
-import com.mojang.serialization.MapCodec;
+import com.google.gson.JsonObject;
+import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.*;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
+import net.wallop.betterprogression.BetterProgression;
+import net.wallop.betterprogression.item.ModItems;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ForgeRecipe implements Recipe<ForgeRecipeInput> {
 
@@ -36,10 +36,9 @@ public class ForgeRecipe implements Recipe<ForgeRecipeInput> {
         }
     }
 
-    private static final int mNumberOfInputs = 2;
-    // private static final int mNumberOfOutputs = 1;
+    private static final int mNumberOfInputs = 3;
 
-    public ForgeRecipe( int cookingtime, int experience, List<Ingredient> recipeItems, ItemStack output) {
+    public ForgeRecipe(int cookingtime, int experience, List<Ingredient> recipeItems, ItemStack output) {
         mCookingTime = cookingtime;
         mExperience = experience;
         mRecipeItems = recipeItems;
@@ -50,14 +49,19 @@ public class ForgeRecipe implements Recipe<ForgeRecipeInput> {
     public boolean matches(ForgeRecipeInput recipeInput, World world) {
         if (world.isClient()) return false;
 
-        boolean matchA = mRecipeItems.get(0).test(recipeInput.getStackInSlot(0 /* 0 is the first slot */)) &&
-                mRecipeItems.get(1).test(recipeInput.getStackInSlot(1 /* 1 is the second slot */));
+        for (int i = 0; i < 3; i++) {
+            //BetterProgression.LOGGER.info("Checking " + recipeInput.getStackInSlot(i).getItem() + " against " + this.mRecipeItems.get(i).toString());
+            if (!mRecipeItems.get(i).test(recipeInput.getStackInSlot(i))) {
+                if (recipeInput.getStackInSlot(i).getItem() == ModItems.TOTEM_OF_FORGING && i == 2 && mRecipeItems.get(2).test(ModItems.EMPTY_SLOT.getDefaultStack())) {
+                    //BetterProgression.LOGGER.info("Totem found but not required");
+                    return true;
+                }
+                BetterProgression.LOGGER.info("index " + i + " failed");
+                return false;
+            }
+        }
 
-        // This is here because the inputs are slot agnostic
-        boolean matchB = mRecipeItems.get(1).test(recipeInput.getStackInSlot(0 /* 0 is the first slot */)) &&
-                mRecipeItems.get(0).test(recipeInput.getStackInSlot(1 /* 1 is the second slot */));
-
-        return matchA || matchB;
+        return true;
     }
 
     @Override
@@ -103,49 +107,49 @@ public class ForgeRecipe implements Recipe<ForgeRecipeInput> {
     public static class ForgeRecipeType implements RecipeType<ForgeRecipe> {
         private ForgeRecipeType() {}
         public static final ForgeRecipeType INSTANCE = new ForgeRecipeType();
-        public static final String ID = "forge";
+        public static final Identifier ID = Identifier.of(BetterProgression.MOD_ID, "forge");
+
+        @Override
+        public String toString() {
+            return "ForgeRecipeType{" + "id=" + ID + '}';
+        }
     }
 
     public static class ForgeRecipeSerializer implements RecipeSerializer<ForgeRecipe> {
         public ForgeRecipeSerializer() {}
         public static final ForgeRecipeSerializer INSTANCE = new ForgeRecipeSerializer();
-        public static final String ID = "forge"; // name given in the json file
+        public static final Identifier ID = Identifier.of(BetterProgression.MOD_ID, "forge");
 
         public static final MapCodec<ForgeRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                Codec.INT.fieldOf(ForgeRecipeAttributes.COOKINGTIME.value).forGetter(ForgeRecipe::getCookingTime), // Cooking Time
-                Codec.INT.fieldOf(ForgeRecipeAttributes.EXPERIENCE.value).forGetter(ForgeRecipe::getExperience), // Experience
-                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, mNumberOfInputs)
+                Codec.INT.fieldOf(ForgeRecipeAttributes.COOKINGTIME.value).forGetter(ForgeRecipe::getCookingTime),
+                Codec.INT.fieldOf(ForgeRecipeAttributes.EXPERIENCE.value).forGetter(ForgeRecipe::getExperience),
+                validateAmount(Ingredient.ALLOW_EMPTY_CODEC, mNumberOfInputs)
                         .fieldOf(ForgeRecipeAttributes.INGREDIENTS.value)
-                        .forGetter(ForgeRecipe::getIngredients), // Ingredients
-                ItemStack.VALIDATED_UNCOUNTED_CODEC.fieldOf(ForgeRecipeAttributes.RESULT.value).forGetter(r -> r.mOutput) // Result (output)
+                        .forGetter(ForgeRecipe::getIngredients),
+                ItemStack.VALIDATED_UNCOUNTED_CODEC.fieldOf(ForgeRecipeAttributes.RESULT.value).forGetter(r -> r.mOutput)
         ).apply(instance, ForgeRecipe::new));
 
         public static final PacketCodec<RegistryByteBuf, ForgeRecipe> PACKET_CODEC =
                 PacketCodec.ofStatic(ForgeRecipeSerializer::write, ForgeRecipeSerializer::read);
 
         private static Codec<List<Ingredient>> validateAmount(Codec<Ingredient> delegate, int max) {
-            Codec<List<Ingredient>> validatedResult = Ingredient.DISALLOW_EMPTY_CODEC.listOf().flatXmap(
+            return delegate.listOf().flatXmap(
                     (ingredients) -> {
-                        Ingredient[] copyOfIngredients = (Ingredient[])ingredients.stream().filter(ingredient -> {
-                            return !ingredient.isEmpty();
-                        }).toArray((i) -> {
-                            return new Ingredient[i];
-                        });
+                        Ingredient[] copyOfIngredients = ingredients.stream()
+                                .map(ingredient -> ingredient != null ? ingredient : Ingredient.EMPTY)
+                                .toArray(Ingredient[]::new);
 
                         if (copyOfIngredients.length == 0) {
-                            return DataResult.error(() -> {
-                                return "No ingredients for shapeless recipe";
-                            });
+                            return DataResult.error(() -> "No ingredients for shapeless recipe");
+                        } else if (copyOfIngredients.length > max) {
+                            return DataResult.error(() -> "Too many ingredients for shapeless recipe");
                         } else {
-                            return copyOfIngredients.length > max ? DataResult.error(() -> {
-                                return "Too many ingredients for shapeless recipe";
-                            }) : DataResult.success(DefaultedList.copyOf(Ingredient.EMPTY, copyOfIngredients));
+                            return DataResult.success(DefaultedList.copyOf(Ingredient.EMPTY, copyOfIngredients));
                         }
                     },
                     DataResult::success
             );
 
-            return validatedResult;
         }
 
         @Override
@@ -161,13 +165,23 @@ public class ForgeRecipe implements Recipe<ForgeRecipeInput> {
         private static ForgeRecipe read(RegistryByteBuf buf) {
             int cookingtime = buf.readInt();
             int experience = buf.readInt();
+            //BetterProgression.LOGGER.info("Reading recipe: " + experience);
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.PACKET_CODEC.decode(buf));
+                //Ingredient ingredient = inputs.get(i);
+                //BetterProgression.LOGGER.info("Reading ingredient " + i + " as " + ingredient);
+
+                try {
+                    inputs.set(i, Ingredient.PACKET_CODEC.decode(buf));
+                } catch (Exception e) {
+                    BetterProgression.LOGGER.error("Error decoding ingredient at index " + i, e);
+                    throw e; // rethrow to preserve original error
+                }
             }
 
-            return new ForgeRecipe(cookingtime, experience, inputs, /* output --> */ ItemStack.PACKET_CODEC.decode(buf));
+            ItemStack output = ItemStack.PACKET_CODEC.decode(buf);
+            return new ForgeRecipe(cookingtime, experience, inputs, output);
         }
 
         private static void write(RegistryByteBuf buf, ForgeRecipe recipe) {
@@ -176,7 +190,7 @@ public class ForgeRecipe implements Recipe<ForgeRecipeInput> {
             buf.writeInt(recipe.getIngredients().size());
 
             for (Ingredient ingredient : recipe.getIngredients()) {
-                Ingredient.PACKET_CODEC.encode(buf, ingredient);
+                    Ingredient.PACKET_CODEC.encode(buf, ingredient);
             }
 
             ItemStack.PACKET_CODEC.encode(buf, recipe.getResult(null));

@@ -32,6 +32,8 @@ public class ModItemGroups {
                         entries.add(ModItems.COPPERMAIL_LEGGINGS);
                         entries.add(ModItems.COPPERMAIL_BOOTS);
                         entries.add(ModItems.BRONZE_INGOT);
+                        entries.add(ModItems.CRUDE_IRON);
+                        entries.add(ModItems.TOTEM_OF_FORGING);
                         entries.add(ModBlocks.FORGE);
 
                     }).build());

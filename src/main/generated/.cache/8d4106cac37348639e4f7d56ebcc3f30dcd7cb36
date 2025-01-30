@@ -1,4 +1,4 @@
-// 1.21	2025-01-25T20:48:08.8442446	Wallop's Better Progression/Model Definitions
+// 1.21	2025-01-27T23:49:10.8331866	Wallop's Better Progression/Model Definitions
 a5982081a13732d63838cecc2666dfbbd2f701c3 assets\betterprogression\models\item\coppermail_helmet.json
 67f39ebc396a43038b16ce2356de34180b795a0d assets\betterprogression\models\item\coppermail.json
 fc9df01d43a43a64eb8c160e4a95c3fbc8da6123 assets\betterprogression\models\item\cloth.json
@@ -9,11 +9,14 @@ f82b650738d669da64d76ca6f9c617f8bf88582b assets\betterprogression\models\item\co
 53855dd4df73f414882a01d45e5dce1571133dde assets\betterprogression\blockstates\forge.json
 174040141465596a30675ca99958f27c22324f78 assets\betterprogression\models\item\coppermail_chestplate.json
 356db914b9f0b5d1487f362aa79b6cfc2c18e50e assets\betterprogression\models\item\plant_fiber.json
+c34e7fd9e79b4e8c526dcae31e846efb2957efa4 assets\betterprogression\models\item\totem_of_forging.json
 91678de78ce4b5ae43affa82a3160cfdb9741255 assets\betterprogression\models\item\tin_dust.json
 aecb5063b4e50dcf26515565d8a8d333ae453041 assets\betterprogression\models\item\forge.json
 1e84a5750a4f7f5ed62ca3caee5d6addb6376780 assets\betterprogression\models\block\forge.json
 953cee95f94bb8b60fbc05d4632a173dd93fb43b assets\betterprogression\models\item\copper_axe.json
 617f198111e1825f2125a0a5ad793ceb29750dca assets\betterprogression\models\item\copper_sword.json
 84895b669ed84301964e748fe4c2d9209e796f59 assets\betterprogression\models\item\copper_hoe.json
+00d20aa510b3e06c3690b00d49c1cd2a2e2c5984 assets\betterprogression\models\item\crude_iron.json
 12d386e2be0c9a24be02c5a90fe21798d3e38a02 assets\betterprogression\models\item\copper_pickaxe.json
+989eda2ca94e5f6f26aa02f49a87cbff78406432 assets\betterprogression\models\item\bronze_ingot.json
 c78ae3bebe98ca98dee6ee6534598a494faea9ea assets\betterprogression\models\item\coppermail_boots.json

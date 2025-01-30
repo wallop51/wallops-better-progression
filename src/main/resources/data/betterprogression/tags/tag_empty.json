@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:air",
+    "betterprogression:empty_slot"
+  ]
+}
