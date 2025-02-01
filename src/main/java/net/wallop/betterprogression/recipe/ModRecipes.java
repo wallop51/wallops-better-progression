@@ -1,9 +1,7 @@
 package net.wallop.betterprogression.recipe;
 
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.wallop.betterprogression.BetterProgression;
 
 public class ModRecipes {
@@ -15,13 +13,13 @@ public class ModRecipes {
 
 
         Registry.register(
-                Registries.RECIPE_SERIALIZER,
+                BuiltInRegistries.RECIPE_SERIALIZER,
                 ForgeRecipe.ForgeRecipeSerializer.ID,
                 ForgeRecipe.ForgeRecipeSerializer.INSTANCE
         );
 
         Registry.register(
-                Registries.RECIPE_TYPE,
+                BuiltInRegistries.RECIPE_TYPE,
                 ForgeRecipe.ForgeRecipeType.ID,
                 ForgeRecipe.ForgeRecipeType.INSTANCE
         );

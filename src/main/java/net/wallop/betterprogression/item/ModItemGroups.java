@@ -1,40 +1,40 @@
 package net.wallop.betterprogression.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.wallop.betterprogression.BetterProgression;
 import net.wallop.betterprogression.block.ModBlocks;
 
 public class ModItemGroups {
-    public static final ItemGroup BETTER_PROGRESSION_GROUP = Registry.register(Registries.ITEM_GROUP,
-            Identifier.of(BetterProgression.MOD_ID, "better_progression"),
-            FabricItemGroup.builder().displayName(Text.translatable("itemgroup.better_progression"))
-                    .icon(() -> new ItemStack(Items.IRON_PICKAXE)).entries((displayContext, entries) -> {
-                        entries.add(ModItems.PLANT_FIBER);
-                        entries.add(ModItems.TOOL_HANDLE);
-                        entries.add(ModItems.COPPERMAIL);
-                        entries.add(ModItems.CLOTH);
-                        entries.add(ModItems.TIN_DUST);
-                        entries.add(ModItems.TIN_OIL);
-                        entries.add(ModItems.COPPER_PICKAXE);
-                        entries.add(ModItems.COPPER_SWORD);
-                        entries.add(ModItems.COPPER_AXE);
-                        entries.add(ModItems.COPPER_HOE);
-                        entries.add(ModItems.COPPER_SHOVEL);
-                        entries.add(ModItems.COPPERMAIL_HELMET);
-                        entries.add(ModItems.COPPERMAIL_CHESTPLATE);
-                        entries.add(ModItems.COPPERMAIL_LEGGINGS);
-                        entries.add(ModItems.COPPERMAIL_BOOTS);
-                        entries.add(ModItems.BRONZE_INGOT);
-                        entries.add(ModItems.CRUDE_IRON);
-                        entries.add(ModItems.TOTEM_OF_FORGING);
-                        entries.add(ModBlocks.FORGE);
+    public static final CreativeModeTab BETTER_PROGRESSION_GROUP = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,
+            ResourceLocation.fromNamespaceAndPath(BetterProgression.MOD_ID, "better_progression"),
+            FabricItemGroup.builder().title(Component.translatable("itemgroup.better_progression"))
+                    .icon(() -> new ItemStack(Items.IRON_PICKAXE)).displayItems((displayContext, entries) -> {
+                        entries.accept(ModItems.PLANT_FIBER);
+                        entries.accept(ModItems.TOOL_HANDLE);
+                        entries.accept(ModItems.COPPERMAIL);
+                        entries.accept(ModItems.CLOTH);
+                        entries.accept(ModItems.TIN_DUST);
+                        entries.accept(ModItems.TIN_OIL);
+                        entries.accept(ModItems.COPPER_PICKAXE);
+                        entries.accept(ModItems.COPPER_SWORD);
+                        entries.accept(ModItems.COPPER_AXE);
+                        entries.accept(ModItems.COPPER_HOE);
+                        entries.accept(ModItems.COPPER_SHOVEL);
+                        entries.accept(ModItems.COPPERMAIL_HELMET);
+                        entries.accept(ModItems.COPPERMAIL_CHESTPLATE);
+                        entries.accept(ModItems.COPPERMAIL_LEGGINGS);
+                        entries.accept(ModItems.COPPERMAIL_BOOTS);
+                        entries.accept(ModItems.BRONZE_INGOT);
+                        entries.accept(ModItems.CRUDE_IRON);
+                        entries.accept(ModItems.TOTEM_OF_FORGING);
+                        entries.accept(ModBlocks.FORGE);
 
                     }).build());
 

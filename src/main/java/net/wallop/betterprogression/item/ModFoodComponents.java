@@ -1,11 +1,11 @@
 package net.wallop.betterprogression.item;
 
-import net.minecraft.component.type.FoodComponent;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.Items;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Items;
 
 public class ModFoodComponents {
-    public static final FoodComponent TIN_OIL = new FoodComponent.Builder().nutrition(1).saturationModifier(0.25f).usingConvertsTo(Items.BOWL).alwaysEdible().snack()
-            .statusEffect(new StatusEffectInstance(StatusEffects.INSTANT_HEALTH, 1,0,false,false), 1f).build();
+    public static final FoodProperties TIN_OIL = new FoodProperties.Builder().nutrition(1).saturationModifier(0.25f).usingConvertsTo(Items.BOWL).alwaysEdible().fast()
+            .effect(new MobEffectInstance(MobEffects.HEAL, 1,0,false,false), 1f).build();
 }

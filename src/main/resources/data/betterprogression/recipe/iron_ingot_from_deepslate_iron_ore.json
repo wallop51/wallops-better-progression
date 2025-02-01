@@ -1,7 +1,7 @@
 {
   "type": "betterprogression:forge",
   "id": "betterprogression:iron_ingot_from_deepslate_iron_ore",
-  "cookingtime": 400,
+  "cookingtime": 200,
   "experience": 2,
   "ingredients": [
     {

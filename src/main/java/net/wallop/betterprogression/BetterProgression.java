@@ -2,14 +2,11 @@ package net.wallop.betterprogression;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.resource.featuretoggle.FeatureSet;
-import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.inventory.MenuType;
 import net.wallop.betterprogression.block.ModBlockEntityType;
 import net.wallop.betterprogression.block.ModBlocks;
 import net.wallop.betterprogression.block.entity.ForgeBlockEntity;
@@ -28,7 +25,7 @@ public class BetterProgression implements ModInitializer {
 	public static final String MOD_ID = "betterprogression";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static final ScreenHandlerType<ForgeScreenHandler> FORGE_SCREEN_HANDLER = Registry.register(Registries.SCREEN_HANDLER, Identifier.of(MOD_ID,"forge"), new ScreenHandlerType<>(ForgeScreenHandler::new, FeatureSet.empty()));
+	public static final MenuType<ForgeScreenHandler> FORGE_SCREEN_HANDLER = Registry.register(BuiltInRegistries.MENU, ResourceLocation.fromNamespaceAndPath(MOD_ID,"forge"), new MenuType<>(ForgeScreenHandler::new, FeatureFlagSet.of()));
 
 	@Override
 	public void onInitialize() {

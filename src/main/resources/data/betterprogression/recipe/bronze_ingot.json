@@ -1,7 +1,7 @@
 {
   "type": "betterprogression:forge",
   "id": "betterprogression:bronze_ingot",
-  "cookingtime": 400,
+  "cookingtime": 200,
   "experience": 0,
   "ingredients": [
     {

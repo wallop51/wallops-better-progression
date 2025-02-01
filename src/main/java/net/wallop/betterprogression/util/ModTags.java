@@ -1,10 +1,10 @@
 package net.wallop.betterprogression.util;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.wallop.betterprogression.BetterProgression;
 
 import javax.swing.text.html.HTML;
@@ -27,7 +27,7 @@ public class ModTags {
                 createTag("needs_netherite_tool");
 
         private static TagKey<Block> createTag(String name) {
-            return TagKey.of(RegistryKeys.BLOCK, Identifier.of(BetterProgression.MOD_ID, name));
+            return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(BetterProgression.MOD_ID, name));
         }
 
     }
@@ -39,8 +39,17 @@ public class ModTags {
         public static final TagKey<Item> TAG_EMPTY =
                 createTag("tag_empty");
 
+        public static final TagKey<Item> FORGE_SLOT_0_ITEMS =
+                createTag("forge_slot_0_items");
+        public static final TagKey<Item> FORGE_SLOT_1_ITEMS =
+                createTag("forge_slot_1_items");
+        public static final TagKey<Item> FORGE_SLOT_2_ITEMS =
+                createTag("forge_slot_2_items");
+        public static final TagKey<Item> FORGE_SLOT_3_ITEMS =
+                createTag("forge_slot_3_items");
+
         private static TagKey<Item> createTag(String name) {
-            return TagKey.of(RegistryKeys.ITEM, Identifier.of(BetterProgression.MOD_ID, name));
+            return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(BetterProgression.MOD_ID, name));
         }
 
     }

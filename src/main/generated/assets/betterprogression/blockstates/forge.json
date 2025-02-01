@@ -1,17 +1,32 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,lit=true": {
+      "model": "betterprogression:block/forge_lit",
+      "y": 90
+    },
+    "facing=east,lit=false": {
       "model": "betterprogression:block/forge",
       "y": 90
     },
-    "facing=north": {
+    "facing=north,lit=true": {
+      "model": "betterprogression:block/forge_lit"
+    },
+    "facing=north,lit=false": {
       "model": "betterprogression:block/forge"
     },
-    "facing=south": {
+    "facing=south,lit=true": {
+      "model": "betterprogression:block/forge_lit",
+      "y": 180
+    },
+    "facing=south,lit=false": {
       "model": "betterprogression:block/forge",
       "y": 180
     },
-    "facing=west": {
+    "facing=west,lit=true": {
+      "model": "betterprogression:block/forge_lit",
+      "y": 270
+    },
+    "facing=west,lit=false": {
       "model": "betterprogression:block/forge",
       "y": 270
     }
