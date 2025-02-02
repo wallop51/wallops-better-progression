@@ -1,16 +1,19 @@
 package net.wallop.betterprogression.item;
 
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.block.Block;
+import net.minecraft.item.Items;
+import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.ToolMaterials;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.wallop.betterprogression.util.ModTags;
 
 import java.util.function.Supplier;
-public enum ModToolMaterial implements Tier {
+public enum ModToolMaterial implements ToolMaterial {
     COPPER(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL, 220, 4f, 1f,
-            17, () -> Ingredient.of(Items.COPPER_INGOT));
+            17, () -> Ingredient.ofItems(Items.COPPER_INGOT));
 
     private final TagKey<Block> inverseTag;
     private final int itemDurability;
@@ -29,27 +32,27 @@ public enum ModToolMaterial implements Tier {
     }
 
     @Override
-    public int getUses() {
+    public int getDurability() {
         return this.itemDurability;
     }
 
     @Override
-    public float getSpeed() {
+    public float getMiningSpeedMultiplier() {
         return this.miningSpeed;
     }
 
     @Override
-    public float getAttackDamageBonus() {
+    public float getAttackDamage() {
         return this.attackDamage;
     }
 
     @Override
-    public TagKey<Block> getIncorrectBlocksForDrops() {
+    public TagKey<Block> getInverseTag() {
         return inverseTag;
     }
 
     @Override
-    public int getEnchantmentValue() {
+    public int getEnchantability() {
         return this.enchantability;
     }
 

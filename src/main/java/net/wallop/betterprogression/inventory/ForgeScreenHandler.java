@@ -1,38 +1,45 @@
 package net.wallop.betterprogression.inventory;
 
-import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.screen.ArrayPropertyDelegate;
+import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.wallop.betterprogression.BetterProgression;
+import net.wallop.betterprogression.block.entity.ForgeBlockEntity;
 
-public class ForgeScreenHandler extends AbstractContainerMenu {
-    private final Container inventory;
+public class ForgeScreenHandler extends ScreenHandler {
+    private final Inventory inventory;
+    private final PropertyDelegate propertyDelegate;
+    public final ForgeBlockEntity blockEntity;
 
-    public ForgeScreenHandler(int syncId, Inventory playerInventory) {
-        this(syncId, playerInventory, new SimpleContainer(5));
+    public ForgeScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos obj) {
+        this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(obj),
+                new ArrayPropertyDelegate(4));
     }
 
-    public ForgeScreenHandler(int syncId, Inventory playerInventory, Container inventory) {
+    public ForgeScreenHandler(
+            int syncId,
+            PlayerInventory playerInventory,
+            BlockEntity blockEntity,
+            PropertyDelegate propertyDelegate
+    ) {
         super(BetterProgression.FORGE_SCREEN_HANDLER, syncId);
-        checkContainerSize(inventory, 5);
-        this.inventory = inventory;
-        inventory.startOpen(playerInventory.player);
+        checkSize(((Inventory) blockEntity), 5);
+        this.inventory = ((Inventory) blockEntity);
+        inventory.onOpen(playerInventory.player);
+        this.propertyDelegate = propertyDelegate;
+        this.blockEntity = ((ForgeBlockEntity) blockEntity);
 
-        /*
-        int m;
-        int l;
-        // Our inventory
-        int column;
-        for (m = 0; m < 3; ++m) {
-            for (l = 0; l < 3; ++l) {
-                this.addSlot(new Slot(inventory, l + m * 3, 62 + l * 18, 17 + m * 18));
-            }
-        }
-         */
+        addProperties(propertyDelegate);
 
         //Forge Inventory
         this.addSlot(new Slot(inventory, 0,70,23));//Input 1
@@ -56,34 +63,55 @@ public class ForgeScreenHandler extends AbstractContainerMenu {
 
     }
 
+
+
     @Override
-    public boolean stillValid(Player player) {
-        return this.inventory.stillValid(player);
+    public boolean canUse(PlayerEntity player) {
+        return this.inventory.canPlayerUse(player);
     }
 
     // Shift + Player Inv Slot
     @Override
-    public ItemStack quickMoveStack(Player player, int invSlot) {
+    public ItemStack quickMove(PlayerEntity player, int invSlot) {
         ItemStack newStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(invSlot);
-        if (slot != null && slot.hasItem()) {
-            ItemStack originalStack = slot.getItem();
+        if (slot != null && slot.hasStack()) {
+            ItemStack originalStack = slot.getStack();
             newStack = originalStack.copy();
-            if (invSlot < this.inventory.getContainerSize()) {
-                if (!this.moveItemStackTo(originalStack, this.inventory.getContainerSize(), this.slots.size(), true)) {
+            if (invSlot < this.inventory.size()) {
+                if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(originalStack, 0, this.inventory.getContainerSize(), false)) {
+            } else if (!this.insertItem(originalStack, 0, this.inventory.size(), false)) {
                 return ItemStack.EMPTY;
             }
 
             if (originalStack.isEmpty()) {
-                slot.setByPlayer(ItemStack.EMPTY);
+                slot.setStack(ItemStack.EMPTY);
             } else {
-                slot.setChanged();
+                slot.markDirty();
             }
         }
 
         return newStack;
+    }
+
+    public float getCookProgress() {
+        int i = this.propertyDelegate.get(2);
+        int j = this.propertyDelegate.get(3);
+        return j != 0 && i != 0 ? MathHelper.clamp((float)i / (float)j, 0.0F, 1.0F) : 0.0F;
+    }
+
+    public float getFuelProgress() {
+        int i = this.propertyDelegate.get(1);
+        if (i == 0) {
+            i = 200;
+        }
+
+        return MathHelper.clamp((float)this.propertyDelegate.get(0) / (float)i, 0.0F, 1.0F);
+    }
+
+    public boolean isBurning() {
+        return this.propertyDelegate.get(0) > 0;
     }
 }

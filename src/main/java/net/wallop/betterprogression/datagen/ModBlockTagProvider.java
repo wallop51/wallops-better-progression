@@ -2,22 +2,23 @@ package net.wallop.betterprogression.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.BlockTags;
 import net.wallop.betterprogression.block.ModBlocks;
 import net.wallop.betterprogression.util.ModTags;
 
 import java.util.concurrent.CompletableFuture;
 
 public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider{
-    public ModBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public ModBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider wrapperLookup) {
-        tag(ModTags.Blocks.NEEDS_COPPER_TOOL)
+    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+        getOrCreateTagBuilder(ModTags.Blocks.NEEDS_COPPER_TOOL)
                 .add(
                         Blocks.IRON_BLOCK,
                         Blocks.RAW_IRON_BLOCK,
@@ -28,18 +29,18 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider{
                         Blocks.DEEPSLATE_LAPIS_ORE,
                         ModBlocks.FORGE);
 
-        tag(ModTags.Blocks.NEEDS_BRONZE_TOOL)
+        getOrCreateTagBuilder(ModTags.Blocks.NEEDS_BRONZE_TOOL)
                 .add(Blocks.BEDROCK);
 
-        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(ModBlocks.FORGE);
 
-        tag(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL)
+        getOrCreateTagBuilder(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL)
                 .forceAddTag(BlockTags.NEEDS_IRON_TOOL)
                 .forceAddTag(ModTags.Blocks.NEEDS_BRONZE_TOOL)
                 .forceAddTag(BlockTags.NEEDS_DIAMOND_TOOL);
 
-        tag(BlockTags.INCORRECT_FOR_STONE_TOOL)
+        getOrCreateTagBuilder(BlockTags.INCORRECT_FOR_STONE_TOOL)
                 .forceAddTag(ModTags.Blocks.NEEDS_COPPER_TOOL)
                 .forceAddTag(ModTags.Blocks.NEEDS_BRONZE_TOOL)
                 .forceAddTag(BlockTags.NEEDS_DIAMOND_TOOL)

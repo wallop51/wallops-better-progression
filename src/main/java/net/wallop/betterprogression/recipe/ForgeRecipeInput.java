@@ -1,8 +1,8 @@
 package net.wallop.betterprogression.recipe;
 
 
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.input.RecipeInput;
 
 
 public record ForgeRecipeInput(ItemStack slotA, ItemStack slotB, ItemStack slotC) implements RecipeInput {
@@ -15,12 +15,12 @@ public record ForgeRecipeInput(ItemStack slotA, ItemStack slotB, ItemStack slotC
     }
 
     @Override
-    public int size() {
+    public int getSize() {
         return 3;
     }
 
     @Override
-    public ItemStack getItem(int slot) {
+    public ItemStack getStackInSlot(int slot) {
         ItemStack result;
         switch (slot) {
             case 0:

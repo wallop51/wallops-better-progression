@@ -1,15 +1,15 @@
 package net.wallop.betterprogression.item;
 
-import net.minecraft.Util;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import net.wallop.betterprogression.BetterProgression;
 
 import java.util.EnumMap;
@@ -18,32 +18,32 @@ import java.util.function.Supplier;
 
 public class ModArmorMaterials {
 
-    public static final Holder<ArmorMaterial> COPPERMAIL = register("coppermail", Util.make(new EnumMap(ArmorItem.Type.class), map -> {
+    public static final RegistryEntry<ArmorMaterial> COPPERMAIL = register("coppermail", Util.make(new EnumMap(ArmorItem.Type.class), map -> {
         map.put(ArmorItem.Type.BOOTS, 1);
         map.put(ArmorItem.Type.LEGGINGS, 4);
         map.put(ArmorItem.Type.CHESTPLATE, 5);
         map.put(ArmorItem.Type.HELMET, 2);
         map.put(ArmorItem.Type.BODY, 4);
-    }), 14, SoundEvents.ARMOR_EQUIP_CHAIN, 0.0F, 0.0F, () -> Ingredient.of(ModItems.COPPERMAIL));
+    }), 14, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.0F, 0.0F, () -> Ingredient.ofItems(ModItems.COPPERMAIL));
 
-    private static Holder<ArmorMaterial> register(
+    private static RegistryEntry<ArmorMaterial> register(
             String id,
             EnumMap<ArmorItem.Type, Integer> defense,
             int enchantability,
-            Holder<SoundEvent> equipSound,
+            RegistryEntry<SoundEvent> equipSound,
             float toughness,
             float knockbackResistance,
             Supplier<Ingredient> repairIngredient
     ) {
-        List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(ResourceLocation.tryParse(BetterProgression.MOD_ID + ":" + id)));
+        List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(Identifier.tryParse(BetterProgression.MOD_ID + ":" + id)));
         return register(id, defense, enchantability, equipSound, toughness, knockbackResistance, repairIngredient, list);
     }
 
-    private static Holder<ArmorMaterial> register(
+    private static RegistryEntry<ArmorMaterial> register(
             String id,
             EnumMap<ArmorItem.Type, Integer> defense,
             int enchantability,
-            Holder<SoundEvent> equipSound,
+            RegistryEntry<SoundEvent> equipSound,
             float toughness,
             float knockbackResistance,
             Supplier<Ingredient> repairIngredient,
@@ -55,9 +55,9 @@ public class ModArmorMaterials {
             enumMap.put(type, (Integer)defense.get(type));
         }
 
-        return Registry.registerForHolder(
-                BuiltInRegistries.ARMOR_MATERIAL,
-                ResourceLocation.tryParse(BetterProgression.MOD_ID + ":" + id),
+        return Registry.registerReference(
+                Registries.ARMOR_MATERIAL,
+                Identifier.tryParse(BetterProgression.MOD_ID + ":" + id),
                 new ArmorMaterial(enumMap, enchantability, equipSound, repairIngredient, layers, toughness, knockbackResistance)
         );
     }

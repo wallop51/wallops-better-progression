@@ -1,28 +1,28 @@
 package net.wallop.betterprogression.inventory;
 
-import net.minecraft.core.NonNullList;
-import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.collection.DefaultedList;
 
 /**
  * A simple {@code Inventory} implementation with only default methods + an item list getter.
  *
  * @author Juuz
  */
-public interface ImplementedInventory extends Container {
+public interface ImplementedInventory extends Inventory {
 
     /**
      * Retrieves the item list of this inventory.
      * Must return the same instance every time it's called.
      */
-    NonNullList<ItemStack> getItems();
+    DefaultedList<ItemStack> getItems();
 
     /**
      * Creates an inventory from the item list.
      */
-    static ImplementedInventory of(NonNullList<ItemStack> items) {
+    static ImplementedInventory of(DefaultedList<ItemStack> items) {
         return () -> items;
     }
 
@@ -30,14 +30,14 @@ public interface ImplementedInventory extends Container {
      * Creates a new inventory with the specified size.
      */
     static ImplementedInventory ofSize(int size) {
-        return of(NonNullList.withSize(size, ItemStack.EMPTY));
+        return of(DefaultedList.ofSize(size, ItemStack.EMPTY));
     }
 
     /**
      * Returns the inventory size.
      */
     @Override
-    default int getContainerSize() {
+    default int size() {
         return getItems().size();
     }
 
@@ -47,8 +47,8 @@ public interface ImplementedInventory extends Container {
      */
     @Override
     default boolean isEmpty() {
-        for (int i = 0; i < getContainerSize(); i++) {
-            ItemStack stack = getItem(i);
+        for (int i = 0; i < size(); i++) {
+            ItemStack stack = getStack(i);
             if (!stack.isEmpty()) {
                 return false;
             }
@@ -60,7 +60,7 @@ public interface ImplementedInventory extends Container {
      * Retrieves the item in the slot.
      */
     @Override
-    default ItemStack getItem(int slot) {
+    default ItemStack getStack(int slot) {
         return getItems().get(slot);
     }
 
@@ -71,10 +71,10 @@ public interface ImplementedInventory extends Container {
      *              takes all items in that slot.
      */
     @Override
-    default ItemStack removeItem(int slot, int count) {
-        ItemStack result = ContainerHelper.removeItem(getItems(), slot, count);
+    default ItemStack removeStack(int slot, int count) {
+        ItemStack result = Inventories.splitStack(getItems(), slot, count);
         if (!result.isEmpty()) {
-            setChanged();
+            markDirty();
         }
         return result;
     }
@@ -84,22 +84,22 @@ public interface ImplementedInventory extends Container {
      * @param slot The slot to remove from.
      */
     @Override
-    default ItemStack removeItemNoUpdate(int slot) {
-        return ContainerHelper.takeItem(getItems(), slot);
+    default ItemStack removeStack(int slot) {
+        return Inventories.removeStack(getItems(), slot);
     }
 
     /**
      * Replaces the current stack in an inventory slot with the provided stack.
      * @param slot  The inventory slot of which to replace the itemstack.
      * @param stack The replacing itemstack. If the stack is too big for
-     *              this inventory ({@link Container#getMaxStackSize()}),
+     *              this inventory ({@link Inventory#getMaxCountPerStack()}),
      *              it gets resized to this inventory's maximum amount.
      */
     @Override
-    default void setItem(int slot, ItemStack stack) {
+    default void setStack(int slot, ItemStack stack) {
         getItems().set(slot, stack);
-        if (stack.getCount() > stack.getMaxStackSize()) {
-            stack.setCount(stack.getMaxStackSize());
+        if (stack.getCount() > stack.getMaxCount()) {
+            stack.setCount(stack.getMaxCount());
         }
     }
 
@@ -107,7 +107,7 @@ public interface ImplementedInventory extends Container {
      * Clears the inventory.
      */
     @Override
-    default void clearContent() {
+    default void clear() {
         getItems().clear();
     }
 
@@ -117,7 +117,7 @@ public interface ImplementedInventory extends Container {
      * the inventory contents and notify neighboring blocks of inventory changes.
      */
     @Override
-    default void setChanged() {
+    default void markDirty() {
         // Override if you want behavior.
     }
 
@@ -125,7 +125,7 @@ public interface ImplementedInventory extends Container {
      * @return true if the player can use the inventory, false otherwise.
      */
     @Override
-    default boolean stillValid(Player player) {
+    default boolean canPlayerUse(PlayerEntity player) {
         return true;
     }
 }
