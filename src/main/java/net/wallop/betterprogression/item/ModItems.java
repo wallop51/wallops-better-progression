@@ -7,6 +7,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.wallop.betterprogression.BetterProgression;
+import net.wallop.betterprogression.block.ModBlocks;
 
 
 public class ModItems {
@@ -37,6 +38,22 @@ public class ModItems {
             new HoeItem(ModToolMaterial.COPPER, new Item.Settings().attributeModifiers(HoeItem.createAttributeModifiers(
                     ModToolMaterial.COPPER, -1,-2))));
 
+    public static final Item BRONZE_PICKAXE = registerItem("bronze_pickaxe",
+            new PickaxeItem(ModToolMaterial.BRONZE, new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(
+                    ModToolMaterial.BRONZE, 0.5f,-2.8f))));
+    public static final Item BRONZE_AXE = registerItem("bronze_axe",
+            new AxeItem(ModToolMaterial.BRONZE, new Item.Settings().attributeModifiers(AxeItem.createAttributeModifiers(
+                    ModToolMaterial.BRONZE, 6,-3.3f))));
+    public static final Item BRONZE_SWORD = registerItem("bronze_sword",
+            new SwordItem(ModToolMaterial.BRONZE, new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(
+                    ModToolMaterial.BRONZE, 3,-2.6f))));
+    public static final Item BRONZE_SHOVEL = registerItem("bronze_shovel",
+            new ShovelItem(ModToolMaterial.BRONZE, new Item.Settings().attributeModifiers(ShovelItem.createAttributeModifiers(
+                    ModToolMaterial.BRONZE, 1f,-3f))));
+    public static final Item BRONZE_HOE = registerItem("bronze_hoe",
+            new HoeItem(ModToolMaterial.BRONZE, new Item.Settings().attributeModifiers(HoeItem.createAttributeModifiers(
+                    ModToolMaterial.BRONZE, -2,-1.5f))));
+
     public static final Item COPPERMAIL_HELMET = registerItem("coppermail_helmet",
             new ArmorItem(ModArmorMaterials.COPPERMAIL, ArmorItem.Type.HELMET,
                     new Item.Settings().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
@@ -50,6 +67,19 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.COPPERMAIL, ArmorItem.Type.BOOTS,
                     new Item.Settings().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
 
+    public static final Item BRONZE_HELMET = registerItem("bronze_helmet",
+            new ArmorItem(ModArmorMaterials.BRONZE, ArmorItem.Type.HELMET,
+                    new Item.Settings().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
+    public static final Item BRONZE_CHESTPLATE = registerItem("bronze_chestplate",
+            new ArmorItem(ModArmorMaterials.BRONZE, ArmorItem.Type.CHESTPLATE,
+                    new Item.Settings().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(15))));
+    public static final Item BRONZE_LEGGINGS = registerItem("bronze_leggings",
+            new ArmorItem(ModArmorMaterials.BRONZE, ArmorItem.Type.LEGGINGS,
+                    new Item.Settings().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
+    public static final Item BRONZE_BOOTS = registerItem("bronze_boots",
+            new ArmorItem(ModArmorMaterials.BRONZE, ArmorItem.Type.BOOTS,
+                    new Item.Settings().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
+
     private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries) {
         entries.add(PLANT_FIBER);
         entries.add(TOOL_HANDLE);
@@ -59,6 +89,8 @@ public class ModItems {
         entries.add(BRONZE_INGOT);
         entries.add(CRUDE_IRON);
     }
+
+
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(BetterProgression.MOD_ID, name), item);

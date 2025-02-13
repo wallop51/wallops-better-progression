@@ -27,13 +27,28 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider{
                         Blocks.LAPIS_BLOCK,
                         Blocks.LAPIS_ORE,
                         Blocks.DEEPSLATE_LAPIS_ORE,
-                        ModBlocks.FORGE);
+                        ModBlocks.FORGE,
+                        ModBlocks.CRUDE_IRON_BLOCK);
 
         getOrCreateTagBuilder(ModTags.Blocks.NEEDS_BRONZE_TOOL)
-                .add(Blocks.BEDROCK);
+                .add(
+                        ModBlocks.BRONZE_BLOCK,
+                        ModBlocks.CUT_BRONZE,
+                        ModBlocks.CUT_BRONZE_SLAB,
+                        ModBlocks.CUT_BRONZE_STAIRS,
+                        ModBlocks.CHISELED_BRONZE,
+                        ModBlocks.BRONZE_BARS);
 
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
-                .add(ModBlocks.FORGE);
+                .add(
+                        ModBlocks.FORGE,
+                        ModBlocks.CRUDE_IRON_BLOCK,
+                        ModBlocks.BRONZE_BLOCK,
+                        ModBlocks.BRONZE_BARS,
+                        ModBlocks.CUT_BRONZE,
+                        ModBlocks.CUT_BRONZE_SLAB,
+                        ModBlocks.CUT_BRONZE_STAIRS,
+                        ModBlocks.CHISELED_BRONZE);
 
         getOrCreateTagBuilder(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL)
                 .forceAddTag(BlockTags.NEEDS_IRON_TOOL)

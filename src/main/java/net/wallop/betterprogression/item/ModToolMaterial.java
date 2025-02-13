@@ -13,7 +13,9 @@ import net.wallop.betterprogression.util.ModTags;
 import java.util.function.Supplier;
 public enum ModToolMaterial implements ToolMaterial {
     COPPER(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL, 220, 4f, 1f,
-            17, () -> Ingredient.ofItems(Items.COPPER_INGOT));
+            17, () -> Ingredient.ofItems(Items.COPPER_INGOT)),
+    BRONZE(ModTags.Blocks.INCORRECT_FOR_BRONZE_TOOL, 450, 5f, 2f,
+            22, () -> Ingredient.ofItems(ModItems.BRONZE_INGOT));
 
     private final TagKey<Block> inverseTag;
     private final int itemDurability;

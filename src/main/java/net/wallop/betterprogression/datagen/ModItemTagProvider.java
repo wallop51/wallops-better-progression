@@ -31,6 +31,17 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ItemTags.HOES)
                 .add(ModItems.COPPER_HOE);
 
+        getOrCreateTagBuilder(ItemTags.SWORDS)
+                .add(ModItems.BRONZE_SWORD);
+        getOrCreateTagBuilder(ItemTags.PICKAXES)
+                .add(ModItems.BRONZE_PICKAXE);
+        getOrCreateTagBuilder(ItemTags.SHOVELS)
+                .add(ModItems.BRONZE_SHOVEL);
+        getOrCreateTagBuilder(ItemTags.AXES)
+                .add(ModItems.BRONZE_AXE);
+        getOrCreateTagBuilder(ItemTags.HOES)
+                .add(ModItems.BRONZE_HOE);
+
         getOrCreateTagBuilder(ItemTags.HEAD_ARMOR)
                 .add(ModItems.COPPERMAIL_HELMET);
         getOrCreateTagBuilder(ItemTags.CHEST_ARMOR)
@@ -39,6 +50,15 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.COPPERMAIL_LEGGINGS);
         getOrCreateTagBuilder(ItemTags.FOOT_ARMOR)
                 .add(ModItems.COPPERMAIL_BOOTS);
+
+        getOrCreateTagBuilder(ItemTags.HEAD_ARMOR)
+                .add(ModItems.BRONZE_HELMET);
+        getOrCreateTagBuilder(ItemTags.CHEST_ARMOR)
+                .add(ModItems.BRONZE_CHESTPLATE);
+        getOrCreateTagBuilder(ItemTags.LEG_ARMOR)
+                .add(ModItems.BRONZE_LEGGINGS);
+        getOrCreateTagBuilder(ItemTags.FOOT_ARMOR)
+                .add(ModItems.BRONZE_BOOTS);
 
         getOrCreateTagBuilder(ModTags.Items.TIN_OIL_FOOD_INGREDIENTS)
                 .add(Items.APPLE)

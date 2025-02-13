@@ -14,11 +14,27 @@
   "item.betterprogression.coppermail_chestplate": "Coppermail Chestplate",
   "item.betterprogression.coppermail_leggings": "Coppermail Leggings",
   "item.betterprogression.coppermail_boots": "Coppermail Boots",
+  "item.betterprogression.bronze_helmet": "Bronze Helmet",
+  "item.betterprogression.bronze_chestplate": "Bronze Chestplate",
+  "item.betterprogression.bronze_leggings": "Bronze Leggings",
+  "item.betterprogression.bronze_boots": "Bronze Boots",
   "item.betterprogression.bronze_ingot": "Bronze Ingot",
   "item.betterprogression.totem_of_forging": "Totem of Forging",
   "item.betterprogression.crude_iron": "Crude Iron",
+  "item.betterprogression.bronze_sword": "Bronze Sword",
+  "item.betterprogression.bronze_pickaxe": "Bronze Pickaxe",
+  "item.betterprogression.bronze_axe": "Bronze Axe",
+  "item.betterprogression.bronze_shovel": "Bronze Shovel",
+  "item.betterprogression.bronze_hoe": "Bronze Hoe",
 
   "block.betterprogression.forge": "Forge",
+  "block.betterprogression.crude_iron_block": "Block of Crude Iron",
+  "block.betterprogression.bronze_block": "Block of Bronze",
+  "block.betterprogression.cut_bronze": "Cut Bronze",
+  "block.betterprogression.cut_bronze_slab": "Cut Bronze Slab",
+  "block.betterprogression.cut_bronze_stairs": "Cut Bronze Stairs",
+  "block.betterprogression.chiseled_bronze": "Chiseled Bronze",
+  "block.betterprogression.bronze_bars": "Bronze Bars",
 
   "itemgroup.better_progression": "Better Progression"
 }

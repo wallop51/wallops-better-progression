@@ -11,10 +11,12 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.wallop.betterprogression.BetterProgression;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ForgeScreen extends HandledScreen<ForgeScreenHandler> {
 
     private static final Identifier LIT_PROGRESS_TEXTURE = Identifier.of(BetterProgression.MOD_ID,"container/forge/lit_progress");
-    private static final Identifier BURN_PROGRESS_TEXTURE = Identifier.of(BetterProgression.MOD_ID,"container/forge/burn_progress");
     private static final Identifier TEXTURE = Identifier.of(BetterProgression.MOD_ID,"textures/gui/container/forge.png");
 
     public ForgeScreen(ForgeScreenHandler handler, PlayerInventory inventory, Text title) {
@@ -35,7 +37,7 @@ public class ForgeScreen extends HandledScreen<ForgeScreenHandler> {
         }
 
         int l = MathHelper.ceil(this.handler.getCookProgress() * 31.0f);
-        context.drawGuiTexture(BURN_PROGRESS_TEXTURE, 31, 28, 0, 0, x + 88,y + 28,l, 28);
+        context.drawGuiTexture(this.handler.getBurnProgressTexture(), 31, 28, 0, 0, x + 88,y + 28,l, 28);
     }
 
     @Override

@@ -1,5 +1,10 @@
 {
   "values": [
-    "minecraft:bedrock"
+    "betterprogression:bronze_block",
+    "betterprogression:cut_bronze",
+    "betterprogression:cut_bronze_slab",
+    "betterprogression:cut_bronze_stairs",
+    "betterprogression:chiseled_bronze",
+    "betterprogression:bronze_bars"
   ]
 }

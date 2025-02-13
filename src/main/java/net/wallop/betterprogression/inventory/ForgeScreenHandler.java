@@ -5,16 +5,21 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.wallop.betterprogression.BetterProgression;
 import net.wallop.betterprogression.block.entity.ForgeBlockEntity;
+import net.wallop.betterprogression.util.ModTags;
 
 public class ForgeScreenHandler extends ScreenHandler {
     private final Inventory inventory;
@@ -42,11 +47,41 @@ public class ForgeScreenHandler extends ScreenHandler {
         addProperties(propertyDelegate);
 
         //Forge Inventory
-        this.addSlot(new Slot(inventory, 0,70,23));//Input 1
-        this.addSlot(new Slot(inventory, 1,70,48));//Input 2
-        this.addSlot(new Slot(inventory, 2,8,62));//Upgrade
-        this.addSlot(new Slot(inventory, 3,33,35));//Fuel
-        this.addSlot(new Slot(inventory, 4,125,35));//Output
+
+        //Input 1
+        this.addSlot(new Slot(inventory, 0,70,23) {
+            @Override
+            public boolean canInsert(ItemStack stack) {
+                return stack.isIn(ModTags.Items.FORGE_SLOT_0_ITEMS);
+            }
+        });
+
+        //Input 2
+        this.addSlot(new Slot(inventory, 1,70,48) {
+            @Override
+            public boolean canInsert(ItemStack stack) {
+                return stack.isIn(ModTags.Items.FORGE_SLOT_1_ITEMS);
+            }
+        });
+
+        //Upgrade
+        this.addSlot(new Slot(inventory, 2,8,62) {
+            @Override
+            public boolean canInsert(ItemStack stack) {
+                return stack.isIn(ModTags.Items.FORGE_SLOT_2_ITEMS);
+            }
+        });
+
+        //Fuel
+        this.addSlot(new Slot(inventory, 3,33,35) {
+            @Override
+            public boolean canInsert(ItemStack stack) {
+                return ForgeBlockEntity.canUseAsFuel(stack);
+            }
+        });
+
+        //Output
+        this.addSlot(new ForgeOutputSlot(playerInventory.player, inventory, 4,125,35));
 
         int m;
         int l;
@@ -94,6 +129,13 @@ public class ForgeScreenHandler extends ScreenHandler {
         }
 
         return newStack;
+    }
+
+    public Identifier getBurnProgressTexture() {
+        if (this.inventory.getStack(1).isEmpty()) {
+            return Identifier.of(BetterProgression.MOD_ID,"container/forge/burn_progress_1");
+        }
+        return Identifier.of(BetterProgression.MOD_ID,"container/forge/burn_progress");
     }
 
     public float getCookProgress() {

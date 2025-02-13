@@ -1,5 +1,12 @@
 {
   "values": [
-    "betterprogression:forge"
+    "betterprogression:forge",
+    "betterprogression:crude_iron_block",
+    "betterprogression:bronze_block",
+    "betterprogression:bronze_bars",
+    "betterprogression:cut_bronze",
+    "betterprogression:cut_bronze_slab",
+    "betterprogression:cut_bronze_stairs",
+    "betterprogression:chiseled_bronze"
   ]
 }

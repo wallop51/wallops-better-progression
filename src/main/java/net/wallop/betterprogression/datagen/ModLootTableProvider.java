@@ -29,6 +29,13 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
     @Override
     public void generate() {
         addDrop(ModBlocks.FORGE);
+        addDrop(ModBlocks.BRONZE_BLOCK);
+        addDrop(ModBlocks.CRUDE_IRON_BLOCK);
+        addDrop(ModBlocks.CUT_BRONZE);
+        addDrop(ModBlocks.BRONZE_BARS);
+        addDrop(ModBlocks.CUT_BRONZE_SLAB, slabDrops(ModBlocks.CUT_BRONZE_SLAB));
+        addDrop(ModBlocks.CUT_BRONZE_STAIRS);
+        addDrop(ModBlocks.CHISELED_BRONZE);
 
     }
 }

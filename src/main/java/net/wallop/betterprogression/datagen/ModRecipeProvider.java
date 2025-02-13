@@ -7,6 +7,7 @@ import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.SmeltingRecipe;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
@@ -232,6 +233,46 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("#")
                 .criterion("has_copper", conditionsFromItem(Items.COPPER_INGOT))
                 .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.BRONZE_AXE)
+                .input('#', ModItems.TOOL_HANDLE)
+                .input('X', ModItems.BRONZE_INGOT)
+                .pattern("XX")
+                .pattern("X#")
+                .pattern(" #")
+                .criterion("has_bronze", conditionsFromItem(ModItems.BRONZE_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.BRONZE_HOE)
+                .input('#', ModItems.TOOL_HANDLE)
+                .input('X', ModItems.BRONZE_INGOT)
+                .pattern("XX")
+                .pattern(" #")
+                .pattern(" #")
+                .criterion("has_bronze", conditionsFromItem(ModItems.BRONZE_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.BRONZE_PICKAXE)
+                .input('#', ModItems.TOOL_HANDLE)
+                .input('X', ModItems.BRONZE_INGOT)
+                .pattern("XXX")
+                .pattern(" # ")
+                .pattern(" # ")
+                .criterion("has_bronze", conditionsFromItem(ModItems.BRONZE_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.BRONZE_SHOVEL)
+                .input('#', ModItems.TOOL_HANDLE)
+                .input('X', ModItems.BRONZE_INGOT)
+                .pattern("X")
+                .pattern("#")
+                .pattern("#")
+                .criterion("has_bronze", conditionsFromItem(ModItems.BRONZE_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.BRONZE_SWORD)
+                .input('#', ModItems.TOOL_HANDLE)
+                .input('X', ModItems.BRONZE_INGOT)
+                .pattern("X")
+                .pattern("X")
+                .pattern("#")
+                .criterion("has_bronze", conditionsFromItem(ModItems.BRONZE_INGOT))
+                .offerTo(exporter);
 
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.COPPERMAIL,2)
@@ -279,6 +320,33 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion("has_coppermail", conditionsFromItem(ModItems.COPPERMAIL))
                 .offerTo(exporter);
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.BRONZE_HELMET)
+                .input('#', ModItems.BRONZE_INGOT)
+                .pattern("###")
+                .pattern("# #")
+                .criterion("has_bronze", conditionsFromItem(ModItems.BRONZE_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.BRONZE_CHESTPLATE)
+                .input('#', ModItems.BRONZE_INGOT)
+                .pattern("# #")
+                .pattern("###")
+                .pattern("###")
+                .criterion("has_bronze", conditionsFromItem(ModItems.BRONZE_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.BRONZE_LEGGINGS)
+                .input('#', ModItems.BRONZE_INGOT)
+                .pattern("###")
+                .pattern("# #")
+                .pattern("# #")
+                .criterion("has_bronze", conditionsFromItem(ModItems.BRONZE_INGOT))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.BRONZE_BOOTS)
+                .input('#', ModItems.BRONZE_INGOT)
+                .pattern("# #")
+                .pattern("# #")
+                .criterion("has_bronze", conditionsFromItem(ModItems.BRONZE_INGOT))
+                .offerTo(exporter);
+
         ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.TIN_OIL)
                 .input(Items.BOWL)
                 .input(Items.DANDELION)
@@ -297,6 +365,40 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion("has_furnace", conditionsFromItem(Blocks.FURNACE))
                 .criterion("has_copper", conditionsFromItem(Blocks.COPPER_BLOCK))
                 .offerTo(exporter);
+
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.BRONZE_INGOT,
+                RecipeCategory.MISC, ModBlocks.BRONZE_BLOCK);
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.CRUDE_IRON,
+                RecipeCategory.MISC, ModBlocks.CRUDE_IRON_BLOCK);
+
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_BRONZE, ModBlocks.BRONZE_BLOCK, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_BRONZE, ModBlocks.BRONZE_BLOCK, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_BRONZE, ModBlocks.CUT_BRONZE, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_BRONZE_SLAB, ModBlocks.BRONZE_BLOCK, 2);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_BRONZE_SLAB, ModBlocks.CUT_BRONZE, 2);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_BRONZE_STAIRS, ModBlocks.BRONZE_BLOCK, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_BRONZE_STAIRS, ModBlocks.CUT_BRONZE, 1);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_BRONZE, 4)
+                .input('#', ModBlocks.BRONZE_BLOCK)
+                .pattern("##")
+                .pattern("##")
+                .criterion("has_bronze_ingot", conditionsFromItem(ModItems.BRONZE_INGOT))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BRONZE_BARS, 16)
+                .input('#', ModItems.BRONZE_INGOT)
+                .pattern("###")
+                .pattern("###")
+                .criterion("has_bronze_ingot", conditionsFromItem(ModItems.BRONZE_INGOT))
+                .offerTo(exporter);
+
+        offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_BRONZE_SLAB, ModBlocks.CUT_BRONZE);
+        offerChiseledBlockRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_BRONZE, ModBlocks.CUT_BRONZE_SLAB);
+
+        createStairsRecipe(ModBlocks.CUT_BRONZE_STAIRS, Ingredient.ofItems(ModBlocks.CUT_BRONZE))
+                .criterion(hasItem(ModBlocks.CUT_BRONZE), conditionsFromItem(ModBlocks.CUT_BRONZE))
+                .offerTo(exporter, Identifier.of(getRecipeName(ModBlocks.CUT_BRONZE_STAIRS)));
 
     }
 }
