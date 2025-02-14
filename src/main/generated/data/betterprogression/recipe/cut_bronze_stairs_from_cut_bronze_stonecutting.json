@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "betterprogression:cut_bronze"
+  },
+  "result": {
+    "count": 1,
+    "id": "betterprogression:cut_bronze_stairs"
+  }
+}

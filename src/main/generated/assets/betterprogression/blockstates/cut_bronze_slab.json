@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "betterprogression:block/cut_bronze_slab"
+    },
+    "type=double": {
+      "model": "betterprogression:block/cut_bronze"
+    },
+    "type=top": {
+      "model": "betterprogression:block/cut_bronze_slab_top"
+    }
+  }
+}

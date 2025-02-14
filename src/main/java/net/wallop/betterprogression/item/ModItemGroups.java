@@ -51,6 +51,7 @@ public class ModItemGroups {
                         entries.add(ModItems.CRUDE_IRON);
                         entries.add(ModBlocks.CRUDE_IRON_BLOCK);
                         entries.add(ModItems.TOTEM_OF_FORGING);
+                        entries.add(ModItems.BRONZE_SPAWN_EGG);
 
                     }).build());
 

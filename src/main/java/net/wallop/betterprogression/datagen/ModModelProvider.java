@@ -5,9 +5,12 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.wallop.betterprogression.block.ModBlocks;
 import net.wallop.betterprogression.item.ModItems;
+
+import java.util.Optional;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -62,6 +65,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.BRONZE_CHESTPLATE, Models.GENERATED);
         itemModelGenerator.register(ModItems.BRONZE_LEGGINGS, Models.GENERATED);
         itemModelGenerator.register(ModItems.BRONZE_BOOTS, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.BRONZE_SPAWN_EGG,
+                new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
     }
 
 

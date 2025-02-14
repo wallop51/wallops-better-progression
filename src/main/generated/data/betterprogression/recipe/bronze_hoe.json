@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "betterprogression:tool_handle"
+    },
+    "X": {
+      "item": "betterprogression:bronze_ingot"
+    }
+  },
+  "pattern": [
+    "XX",
+    " #",
+    " #"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterprogression:bronze_hoe"
+  }
+}

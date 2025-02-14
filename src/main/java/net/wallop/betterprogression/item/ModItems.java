@@ -8,6 +8,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.wallop.betterprogression.BetterProgression;
 import net.wallop.betterprogression.block.ModBlocks;
+import net.wallop.betterprogression.entity.ModEntities;
 
 
 public class ModItems {
@@ -79,6 +80,9 @@ public class ModItems {
     public static final Item BRONZE_BOOTS = registerItem("bronze_boots",
             new ArmorItem(ModArmorMaterials.BRONZE, ArmorItem.Type.BOOTS,
                     new Item.Settings().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
+
+    public static final Item BRONZE_SPAWN_EGG = registerItem("bronze_spawn_egg",
+            new SpawnEggItem(ModEntities.BRONZE, 0x4d4c28, 0xe38236, new Item.Settings()));
 
     private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries) {
         entries.add(PLANT_FIBER);

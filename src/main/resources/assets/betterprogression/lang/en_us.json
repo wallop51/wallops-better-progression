@@ -26,6 +26,7 @@
   "item.betterprogression.bronze_axe": "Bronze Axe",
   "item.betterprogression.bronze_shovel": "Bronze Shovel",
   "item.betterprogression.bronze_hoe": "Bronze Hoe",
+  "item.betterprogression.bronze_spawn_egg": "Bronze Spawn Egg",
 
   "block.betterprogression.forge": "Forge",
   "block.betterprogression.crude_iron_block": "Block of Crude Iron",
@@ -36,5 +37,7 @@
   "block.betterprogression.chiseled_bronze": "Chiseled Bronze",
   "block.betterprogression.bronze_bars": "Bronze Bars",
 
-  "itemgroup.better_progression": "Better Progression"
+  "itemgroup.better_progression": "Better Progression",
+
+  "entity.better_progression.bronze": "Bronze"
 }

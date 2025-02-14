@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "betterprogression:bronze_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "betterprogression:bronze_ingot"
+  }
+}
