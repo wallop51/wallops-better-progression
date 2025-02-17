@@ -11,6 +11,7 @@ public class BronzeRenderer extends MobEntityRenderer<BronzeEntity, BronzeModel<
 
     public BronzeRenderer(EntityRendererFactory.Context context) {
         super(context, new BronzeModel<>(context.getPart(BronzeModel.BRONZE)), 0.4f);
+        this.addFeature(new BronzeGlowFeatureRenderer<>(this));
     }
 
     @Override

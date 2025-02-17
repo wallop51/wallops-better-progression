@@ -48,6 +48,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.CUT_BRONZE_STAIRS);
                         entries.add(ModBlocks.CHISELED_BRONZE);
                         entries.add(ModBlocks.BRONZE_BARS);
+                        entries.add(ModItems.BRONZE_SPEAR);
                         entries.add(ModItems.CRUDE_IRON);
                         entries.add(ModBlocks.CRUDE_IRON_BLOCK);
                         entries.add(ModItems.TOTEM_OF_FORGING);

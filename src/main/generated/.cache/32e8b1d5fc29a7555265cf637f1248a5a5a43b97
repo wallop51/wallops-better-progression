@@ -1,7 +1,7 @@
-// 1.21	2025-02-13T23:48:46.9182314	Wallop's Better Progression/Block Loot Tables
+// 1.21	2025-02-16T19:41:33.1854406	Wallop's Better Progression/Block Loot Tables
 d787242356ac34a880f89faff29b8f357cd985a1 data\betterprogression\loot_table\blocks\cut_bronze_stairs.json
-a77a2e75b2eba46e1083295bb48b08c3187eb8bd data\betterprogression\loot_table\blocks\cut_bronze.json
 075b9ec63f2bc8699d7a32a7a7d9952b927a24a4 data\betterprogression\loot_table\blocks\cut_bronze_slab.json
+a77a2e75b2eba46e1083295bb48b08c3187eb8bd data\betterprogression\loot_table\blocks\cut_bronze.json
 52907b6083285d05843e57c015d948aaa622ee77 data\betterprogression\loot_table\blocks\chiseled_bronze.json
 d2fb9f0c05bee59b08c05ee31810b990c79d97c8 data\betterprogression\loot_table\blocks\crude_iron_block.json
 10723ff70645e19946b03864f7d23361a467e9b1 data\betterprogression\loot_table\blocks\bronze_block.json

@@ -1,4 +1,4 @@
-// 1.21	2025-02-13T23:48:46.9072205	Wallop's Better Progression/Model Definitions
+// 1.21	2025-02-16T19:41:33.1754294	Wallop's Better Progression/Model Definitions
 dd0639df85039d44e663fad62715a1f75b884c86 assets\betterprogression\models\item\bronze_sword.json
 5587c391af138d7742506fa700c57465acbc869e assets\betterprogression\models\item\copper_shovel.json
 d3aa86cdfcb05111072e19cf6c41c2b757ea81c4 assets\betterprogression\models\block\cut_bronze_stairs_outer.json
@@ -28,11 +28,12 @@ dcaaf9e42a7ff0cdeff1d170f0c9683056cc4011 assets\betterprogression\models\block\c
 18a78c5f0087a51c66514f5972ddb4ed640d4246 assets\betterprogression\blockstates\bronze_block.json
 356db914b9f0b5d1487f362aa79b6cfc2c18e50e assets\betterprogression\models\item\plant_fiber.json
 aecb5063b4e50dcf26515565d8a8d333ae453041 assets\betterprogression\models\item\forge.json
+1a77fb4ee387f362e5868a836e65961e1d578c65 assets\betterprogression\models\item\bronze_spear.json
 36c877abc78a92d72ed56196cd527ff70c77ba56 assets\betterprogression\models\block\bronze_block.json
 00d20aa510b3e06c3690b00d49c1cd2a2e2c5984 assets\betterprogression\models\item\crude_iron.json
 a715c78f0d21c6b5ca811841a784fd7fbe19c56a assets\betterprogression\models\item\bronze_axe.json
-0eb5014498b1397c7b824cdb1acdfc509f61317e assets\betterprogression\models\item\cut_bronze_slab.json
 12d386e2be0c9a24be02c5a90fe21798d3e38a02 assets\betterprogression\models\item\copper_pickaxe.json
+0eb5014498b1397c7b824cdb1acdfc509f61317e assets\betterprogression\models\item\cut_bronze_slab.json
 989eda2ca94e5f6f26aa02f49a87cbff78406432 assets\betterprogression\models\item\bronze_ingot.json
 249bb1c24cc6c930876742303aa7b90dc1f13512 assets\betterprogression\models\block\forge_on.json
 b7ea8de4ed557a296fe7862faee99a31b4150a13 assets\betterprogression\models\block\cut_bronze_slab_top.json

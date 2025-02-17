@@ -2,13 +2,16 @@ package net.wallop.betterprogression.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.wallop.betterprogression.BetterProgression;
 import net.wallop.betterprogression.block.ModBlocks;
 import net.wallop.betterprogression.entity.ModEntities;
+import net.wallop.betterprogression.item.custom.BronzeSpearItem;
 
 
 public class ModItems {
@@ -83,6 +86,13 @@ public class ModItems {
 
     public static final Item BRONZE_SPAWN_EGG = registerItem("bronze_spawn_egg",
             new SpawnEggItem(ModEntities.BRONZE, 0x4d4c28, 0xe38236, new Item.Settings()));
+
+    public static final Item BRONZE_SPEAR = registerItem("bronze_spear",
+            new BronzeSpearItem(new Item.Settings()
+                    .rarity(Rarity.RARE)
+                    .maxDamage(250)
+                    .attributeModifiers(BronzeSpearItem.createAttributeModifiers())
+                    .component(DataComponentTypes.TOOL, BronzeSpearItem.createToolComponent())));
 
     private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries) {
         entries.add(PLANT_FIBER);
