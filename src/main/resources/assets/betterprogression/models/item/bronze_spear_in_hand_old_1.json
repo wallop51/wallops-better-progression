@@ -1,0 +1,66 @@
+{
+	"credit": "Made with Blockbench",
+	"gui_light": "front",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "betterprogression:item/bronze_spear_in_hand",
+		"particle": "betterprogression:item/bronze_spear_in_hand"
+	},
+	"elements": [
+		{
+			"from": [5.5, 15, 9],
+			"to": [10.5, 22, 9],
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [8, 24, 9]},
+			"faces": {
+				"north": {"uv": [2, 0, 4.5, 3.5], "texture": "#0"},
+				"east": {"uv": [2, 0, 2, 3.5], "texture": "#0"},
+				"south": {"uv": [4.5, 0, 7, 3.5], "texture": "#0"},
+				"west": {"uv": [4.5, 0, 4.5, 3.5], "texture": "#0"},
+				"up": {"uv": [4.5, 0, 2, 0], "texture": "#0"},
+				"down": {"uv": [7, 0, 4.5, 0], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7.5, -8, 8.5],
+			"to": [8.5, 17, 9.5],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [8, -8, 9]},
+			"faces": {
+				"north": {"uv": [0.5, 3.5, 1, 16], "texture": "#0"},
+				"east": {"uv": [0, 3.5, 0.5, 16], "texture": "#0"},
+				"south": {"uv": [1.5, 3.5, 2, 16], "texture": "#0"},
+				"west": {"uv": [1, 3.5, 1.5, 16], "texture": "#0"},
+				"up": {"uv": [1, 3.5, 0.5, 3], "texture": "#0"},
+				"down": {"uv": [1.5, 3, 1, 3.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8, 15, 6.5],
+			"to": [8, 22, 11.5],
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [8, 24, 9]},
+			"faces": {
+				"north": {"uv": [4.5, 0, 4.5, 3.5], "texture": "#0"},
+				"east": {"uv": [2, 0, 4.5, 3.5], "texture": "#0"},
+				"south": {"uv": [7, 0, 7, 3.5], "texture": "#0"},
+				"west": {"uv": [4.5, 0, 7, 3.5], "texture": "#0"},
+				"up": {"uv": [4.5, 0, 4.5, -2.5], "texture": "#0"},
+				"down": {"uv": [4.5, -2.5, 4.5, 0], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "bone",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [0, 1, 2]
+		}
+	],
+	"overrides": [
+		{
+			"predicate": {
+				"throwing": 1
+			},
+			"model": "betterprogression:item/bronze_spear_throwing"
+		}
+	]
+}

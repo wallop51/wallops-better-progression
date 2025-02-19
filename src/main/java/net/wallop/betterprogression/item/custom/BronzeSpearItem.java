@@ -6,12 +6,11 @@ import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.component.type.ToolComponent;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -26,6 +25,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.*;
@@ -36,8 +36,14 @@ import net.wallop.betterprogression.entity.custom.BronzeSpearEntity;
 import java.util.List;
 
 public class BronzeSpearItem extends Item implements ProjectileItem {
+    public boolean inUse;
+
     public BronzeSpearItem(Item.Settings settings) {
         super(settings);
+    }
+
+    public boolean isBeingUsed() {
+        return this.inUse;
     }
 
     private static boolean isAboutToBreak(ItemStack stack) {
@@ -56,7 +62,7 @@ public class BronzeSpearItem extends Item implements ProjectileItem {
                         stack.damage(1, playerEntity, LivingEntity.getSlotForHand(user.getActiveHand()));
 
                         BronzeSpearEntity bronzeSpearEntity = new BronzeSpearEntity(world, playerEntity, stack);
-                        bronzeSpearEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, 1.5F, 1.0F);
+                        bronzeSpearEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, 1.6F, 1.0F);
                         if (playerEntity.isInCreativeMode()) {
                             bronzeSpearEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
                         }
@@ -70,6 +76,7 @@ public class BronzeSpearItem extends Item implements ProjectileItem {
                 }
             }
         }
+        inUse = false;
     }
 
     public static AttributeModifiersComponent createAttributeModifiers() {
@@ -84,7 +91,17 @@ public class BronzeSpearItem extends Item implements ProjectileItem {
                         new EntityAttributeModifier(BASE_ATTACK_SPEED_MODIFIER_ID, -2.9F, EntityAttributeModifier.Operation.ADD_VALUE),
                         AttributeModifierSlot.MAINHAND
                 )
+                .add(
+                        EntityAttributes.PLAYER_ENTITY_INTERACTION_RANGE,
+                        new EntityAttributeModifier(Identifier.ofVanilla("entity_interaction_range"),1.5f, EntityAttributeModifier.Operation.ADD_VALUE),
+                        AttributeModifierSlot.MAINHAND
+                )
                 .build();
+    }
+
+    @Override
+    public float getBonusAttackDamage(Entity target, float baseAttackDamage, DamageSource damageSource) {
+        return target.getType().getSpawnGroup() == SpawnGroup.WATER_AMBIENT ? 10f : 0f;
     }
 
     @Override
@@ -110,6 +127,7 @@ public class BronzeSpearItem extends Item implements ProjectileItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        inUse = true;
         ItemStack itemStack = user.getStackInHand(hand);
         if (isAboutToBreak(itemStack)) {
             return TypedActionResult.fail(itemStack);

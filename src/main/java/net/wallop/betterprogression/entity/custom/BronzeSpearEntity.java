@@ -1,6 +1,5 @@
 package net.wallop.betterprogression.entity.custom;
 
-import net.minecraft.block.PumpkinBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -13,7 +12,6 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 import net.wallop.betterprogression.entity.ModEntities;
 import net.wallop.betterprogression.item.ModItems;
-import net.wallop.betterprogression.item.custom.BronzeSpearItem;
 
 public class BronzeSpearEntity extends PersistentProjectileEntity {
     public BronzeSpearEntity(EntityType<? extends BronzeSpearEntity> entityType, World world) {
@@ -31,7 +29,7 @@ public class BronzeSpearEntity extends PersistentProjectileEntity {
         DamageSource damageSource = this.getDamageSources().arrow(this, owner);
         float damage = 6f;
         if (entity.damage(damageSource, damage)) {
-            if (entity.getType() == EntityType.ENDERMAN || entity.getType() == ModEntities.BRONZE) {
+            if (entity.getType() == EntityType.ENDERMAN) {
                 return;
             }
 
