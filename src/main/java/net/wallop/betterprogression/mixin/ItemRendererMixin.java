@@ -6,10 +6,16 @@ import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.ModelIdentifier;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 import net.wallop.betterprogression.BetterProgression;
+import net.wallop.betterprogression.component.ModDataComponentTypes;
 import net.wallop.betterprogression.item.ModItems;
 import net.wallop.betterprogression.item.custom.BronzeSpearItem;
 import org.spongepowered.asm.mixin.Final;
@@ -18,8 +24,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
+import java.util.logging.Logger;
+
 @Mixin(ItemRenderer.class)
 public abstract class ItemRendererMixin {
+    private final ModelIdentifier BRONZE_SPEAR_IN_HAND = ModelIdentifier.ofInventoryVariant(Identifier.of(BetterProgression.MOD_ID, "bronze_spear_in_hand"));
+    private final ModelIdentifier BRONZE_SPEAR_THROWING = ModelIdentifier.ofInventoryVariant(Identifier.of(BetterProgression.MOD_ID,"bronze_spear_throwing"));
 
     @Shadow
     @Final
@@ -47,14 +57,15 @@ public abstract class ItemRendererMixin {
             ordinal = 1
     )
     public BakedModel getHeldItemModelMixin(BakedModel bakedModel, @Local(argsOnly = true) ItemStack stack) {
-        if (stack.getItem() == ModItems.BRONZE_SPEAR) {
-            Item item = stack.getItem();
-            if (((BronzeSpearItem) item).isBeingUsed()) {
-                return this.models.getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(BetterProgression.MOD_ID,"bronze_spear_throwing")));
-            }
-            return this.models.getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(BetterProgression.MOD_ID, "bronze_spear_in_hand")));
-        }
+        if (stack.isOf(ModItems.BRONZE_SPEAR)) {
+            bakedModel = this.models.getModelManager().getModel(BRONZE_SPEAR_IN_HAND);
+        } else return bakedModel;
 
+        if (stack.get(ModDataComponentTypes.THROWING) != null) {
+            if (Boolean.TRUE.equals(stack.get(ModDataComponentTypes.THROWING))) {
+                bakedModel = this.models.getModelManager().getModel(BRONZE_SPEAR_THROWING);
+            } else return bakedModel;
+        }
         return bakedModel;
     }
 }

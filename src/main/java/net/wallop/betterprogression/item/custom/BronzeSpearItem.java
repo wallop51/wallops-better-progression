@@ -30,8 +30,10 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
+import net.wallop.betterprogression.component.ModDataComponentTypes;
 import net.wallop.betterprogression.entity.ModEntities;
 import net.wallop.betterprogression.entity.custom.BronzeSpearEntity;
+import net.wallop.betterprogression.item.ModItems;
 
 import java.util.List;
 
@@ -42,9 +44,10 @@ public class BronzeSpearItem extends Item implements ProjectileItem {
         super(settings);
     }
 
-    public boolean isBeingUsed() {
-        return this.inUse;
+    public static boolean isBeingUsed(LivingEntity user) {
+        return user.isUsingItem() && user.getActiveItem().isOf(ModItems.BRONZE_SPEAR);
     }
+
 
     private static boolean isAboutToBreak(ItemStack stack) {
         return stack.getDamage() >= stack.getMaxDamage() - 1;
@@ -76,7 +79,7 @@ public class BronzeSpearItem extends Item implements ProjectileItem {
                 }
             }
         }
-        inUse = false;
+        user.getStackInHand(user.getActiveHand()).set(ModDataComponentTypes.THROWING, false);
     }
 
     public static AttributeModifiersComponent createAttributeModifiers() {
@@ -129,6 +132,7 @@ public class BronzeSpearItem extends Item implements ProjectileItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         inUse = true;
         ItemStack itemStack = user.getStackInHand(hand);
+        itemStack.set(ModDataComponentTypes.THROWING, true);
         if (isAboutToBreak(itemStack)) {
             return TypedActionResult.fail(itemStack);
         } else {

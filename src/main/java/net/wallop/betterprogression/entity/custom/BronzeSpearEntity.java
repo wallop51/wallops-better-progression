@@ -4,12 +4,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.wallop.betterprogression.effect.ModEffects;
 import net.wallop.betterprogression.entity.ModEntities;
 import net.wallop.betterprogression.item.ModItems;
 
@@ -40,6 +44,13 @@ public class BronzeSpearEntity extends PersistentProjectileEntity {
 
         }
 
+        if (owner != null) {
+            if (owner.isPlayer()) {
+                float f = owner.distanceTo(entity);
+                ((LivingEntity) owner).addStatusEffect(new StatusEffectInstance(ModEffects.SEISMIC, MathHelper.ceil(MathHelper.clamp(f*10,50,220)), 0, false, false, true));
+            }
+        }
+
         this.setVelocity(this.getVelocity().multiply(-0.01, -0.1,-0.01));
         this.playSound(SoundEvents.ITEM_TRIDENT_HIT, 1F,1F);
     }
@@ -58,7 +69,7 @@ public class BronzeSpearEntity extends PersistentProjectileEntity {
 
     @Override
     protected float getDragInWater() {
-        return 0.8F;
+        return 0.99F;
     }
 
     @Override
