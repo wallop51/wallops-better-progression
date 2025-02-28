@@ -42,6 +42,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.TIN_OIL, Models.GENERATED);
         itemModelGenerator.register(ModItems.BRONZE_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.CRUDE_IRON, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BRONZE_ROD, Models.GENERATED);
         itemModelGenerator.register(ModItems.TOTEM_OF_FORGING, Models.GENERATED);
         itemModelGenerator.register(ModItems.BRONZE_SPEAR, Models.GENERATED);
 

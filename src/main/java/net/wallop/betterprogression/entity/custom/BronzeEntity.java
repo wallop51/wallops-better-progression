@@ -9,43 +9,61 @@ import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
+import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
+import net.wallop.betterprogression.BetterProgression;
+import net.wallop.betterprogression.entity.ai.BronzeShootGoal;
+import net.wallop.betterprogression.entity.ai.BronzeSpearAttackGoal;
+import net.wallop.betterprogression.item.ModItems;
+import net.wallop.betterprogression.item.custom.BronzeSpearItem;
 
 public class BronzeEntity extends HostileEntity implements RangedAttackMob {
     public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState shootAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
+    public int shootAnimationTimeout = 0;
+    private static final TrackedData<Boolean> SHOOTING =
+            DataTracker.registerData(BronzeEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public BronzeEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
     }
 
     @Override
+    public ItemStack getProjectileType(ItemStack stack) {
+        return ModItems.BRONZE_SPEAR.getDefaultStack();
+    }
+
+    @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new BowAttackGoal<>(this, 0.30, 40, 10));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, 5));
+        this.goalSelector.add(1, new BronzeShootGoal(this, 1, 30,10));
+        this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0));
         this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 10F));
         this.goalSelector.add(4, new LookAroundGoal(this));
 
+        this.targetSelector.add(0, new RevengeGoal(this));
         this.targetSelector.add(1, new ActiveTargetGoal(this, PlayerEntity.class, true));
+        this.targetSelector.add(2, new ActiveTargetGoal(this, IronGolemEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal(this, PigEntity.class, true));
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
-        return MobEntity.createMobAttributes()
+        return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23F)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4F)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20);
     }
 
     private void setupAnimationStates() {
@@ -55,6 +73,30 @@ public class BronzeEntity extends HostileEntity implements RangedAttackMob {
         } else {
             --this.idleAnimationTimeout;
         }
+
+        if (this.isShooting()) {
+            if (this.shootAnimationTimeout <= 0) {
+                this.shootAnimationTimeout = 29;
+                this.shootAnimationState.start(this.age);
+            } else --this.shootAnimationTimeout;
+        } else {
+            shootAnimationState.stop();
+            shootAnimationTimeout = -1;
+        }
+    }
+
+    public void setShooting(boolean attacking) {
+        this.dataTracker.set(SHOOTING, attacking);
+    }
+
+    public boolean isShooting() {
+        return this.dataTracker.get(SHOOTING);
+    }
+
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(SHOOTING, false);
     }
 
     @Override
@@ -75,19 +117,21 @@ public class BronzeEntity extends HostileEntity implements RangedAttackMob {
 
     @Override
     public void shootAt(LivingEntity target, float pullProgress) {
-        ItemStack itemStack = Items.BOW.getDefaultStack();
-        ItemStack itemStack2 = Items.ARROW.getDefaultStack();
-        PersistentProjectileEntity persistentProjectileEntity = this.createArrowProjectile(itemStack2, pullProgress, itemStack);
-        double d = target.getX() - this.getX();
-        double e = target.getBodyY(0.3333333333333333) - persistentProjectileEntity.getY();
-        double f = target.getZ() - this.getZ();
-        double g = Math.sqrt(d * d + f * f);
-        persistentProjectileEntity.setVelocity(d, e + g * 0.2F, f, 1.6F, (float)(14 - this.getWorld().getDifficulty().getId() * 4));
-        this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-        this.getWorld().spawnEntity(persistentProjectileEntity);
+            ItemStack itemStack2 = ModItems.BRONZE_SPEAR.getDefaultStack();
+            PersistentProjectileEntity persistentProjectileEntity = this.createSpearProjectile(itemStack2, pullProgress, this);
+            double d = target.getX() - this.getX();
+            double e = target.getBodyY(0.3333333333333333) - persistentProjectileEntity.getY();
+            double f = target.getZ() - this.getZ();
+            double g = Math.sqrt(d * d + f * f);
+            persistentProjectileEntity.setVelocity(d, e + g * 0.2F, f, 1.6F, (float)(12 - this.getWorld().getDifficulty().getId() * 4));
+            this.playSound(SoundEvents.ENTITY_LLAMA_SPIT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+            this.getWorld().spawnEntity(persistentProjectileEntity);
+
     }
 
-    protected PersistentProjectileEntity createArrowProjectile(ItemStack arrow, float damageModifier, @Nullable ItemStack shotFrom) {
-        return ProjectileUtil.createArrowProjectile(this, arrow, damageModifier, shotFrom);
+    protected PersistentProjectileEntity createSpearProjectile(ItemStack spear, float damageModifier, LivingEntity entity) {
+        PersistentProjectileEntity persistentProjectileEntity = BronzeSpearItem.createBronzeSpear(entity.getWorld(), spear, entity);
+        persistentProjectileEntity.applyDamageModifier(damageModifier);
+        return persistentProjectileEntity;
     }
 }

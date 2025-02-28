@@ -23,6 +23,7 @@ public class ModItems {
     public static final Item BRONZE_INGOT = registerItem("bronze_ingot", new Item(new Item.Settings()));
     public static final Item CRUDE_IRON = registerItem("crude_iron", new Item(new Item.Settings()));
     public static final Item EMPTY_SLOT = registerItem("empty_slot", new Item(new Item.Settings()));
+    public static final Item BRONZE_ROD = registerItem("bronze_rod", new Item(new Item.Settings()));
     public static final Item TOTEM_OF_FORGING = registerItem("totem_of_forging", new Item(new Item.Settings().maxCount(1)));
     public static final Item TIN_OIL = registerItem("tin_oil", new Item(new Item.Settings().food(ModFoodComponents.TIN_OIL).maxCount(16).recipeRemainder(Items.BOWL)));
 

@@ -34,6 +34,7 @@ import net.wallop.betterprogression.component.ModDataComponentTypes;
 import net.wallop.betterprogression.entity.ModEntities;
 import net.wallop.betterprogression.entity.custom.BronzeSpearEntity;
 import net.wallop.betterprogression.item.ModItems;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -44,8 +45,8 @@ public class BronzeSpearItem extends Item implements ProjectileItem {
         super(settings);
     }
 
-    public static boolean isBeingUsed(LivingEntity user) {
-        return user.isUsingItem() && user.getActiveItem().isOf(ModItems.BRONZE_SPEAR);
+    public static PersistentProjectileEntity createBronzeSpear(World world, ItemStack stack, LivingEntity shooter) {
+        return new BronzeSpearEntity(world, shooter, stack.copyWithCount(1));
     }
 
 

@@ -20,6 +20,7 @@ import net.wallop.betterprogression.command.RecipeCommand;
 import net.wallop.betterprogression.component.ModDataComponentTypes;
 import net.wallop.betterprogression.effect.ModEffects;
 import net.wallop.betterprogression.entity.ModEntities;
+import net.wallop.betterprogression.entity.custom.BindEntity;
 import net.wallop.betterprogression.entity.custom.BronzeEntity;
 import net.wallop.betterprogression.inventory.ForgeScreenHandler;
 import net.wallop.betterprogression.item.ModItemGroups;
@@ -55,6 +56,7 @@ public class BetterProgression implements ModInitializer {
 		ModDataComponentTypes.registerDataComponentTypes();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.BRONZE, BronzeEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.BIND, BindEntity.createAttributes());
 
 		LOGGER.info("Loaded!");
 	}

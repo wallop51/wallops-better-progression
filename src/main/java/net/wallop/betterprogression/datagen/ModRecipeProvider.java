@@ -393,6 +393,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion("has_bronze_ingot", conditionsFromItem(ModItems.BRONZE_INGOT))
                 .offerTo(exporter);
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.BRONZE_SPEAR)
+                .input('R', ModItems.BRONZE_ROD)
+                .input('I', ModItems.BRONZE_INGOT)
+                .input('F', Items.FEATHER)
+                .pattern(" I")
+                .pattern("FR")
+                .pattern(" R")
+                .criterion("has_bronze_rod", conditionsFromItem(ModItems.BRONZE_ROD))
+                .offerTo(exporter);
+
+
         offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_BRONZE_SLAB, ModBlocks.CUT_BRONZE);
         offerChiseledBlockRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_BRONZE, ModBlocks.CUT_BRONZE_SLAB);
 

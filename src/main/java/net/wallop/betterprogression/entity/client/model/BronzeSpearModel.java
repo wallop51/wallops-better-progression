@@ -1,4 +1,4 @@
-package net.wallop.betterprogression.entity.client;
+package net.wallop.betterprogression.entity.client.model;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;

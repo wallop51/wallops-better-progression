@@ -1,15 +1,13 @@
-package net.wallop.betterprogression.entity.client;
+package net.wallop.betterprogression.entity.client.model;
 
-import com.ibm.icu.text.Normalizer2;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
 import net.wallop.betterprogression.BetterProgression;
+import net.wallop.betterprogression.entity.client.animation.BronzeAnimations;
 import net.wallop.betterprogression.entity.custom.BronzeEntity;
 
 public class BronzeModel<T extends BronzeEntity> extends SinglePartEntityModel<T> {
@@ -88,6 +86,7 @@ public class BronzeModel<T extends BronzeEntity> extends SinglePartEntityModel<T
         // animate movement here
 
         this.updateAnimation(entity.idleAnimationState, BronzeAnimations.IDLE, ageInTicks, 1f);
+        this.updateAnimation(entity.shootAnimationState, BronzeAnimations.SHOOT, ageInTicks, 1f);
 
     }
 

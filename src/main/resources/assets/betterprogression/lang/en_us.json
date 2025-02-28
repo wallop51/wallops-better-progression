@@ -28,6 +28,7 @@
   "item.betterprogression.bronze_hoe": "Bronze Hoe",
   "item.betterprogression.bronze_spawn_egg": "Bronze Spawn Egg",
   "item.betterprogression.bronze_spear": "Bronze Spear",
+  "item.betterprogression.bronze_rod": "Bronze Rod",
 
   "block.betterprogression.forge": "Forge",
   "block.betterprogression.crude_iron_block": "Block of Crude Iron",
@@ -42,5 +43,7 @@
 
   "effect.betterprogression.seismic": "Seismic",
 
-  "entity.better_progression.bronze": "Bronze"
+  "entity.betterprogression.bronze": "Bronze",
+  "entity.betterprogression.bronze_spear": "Bronze Spear",
+  "entity.betterprogression.bind": "Bind"
 }

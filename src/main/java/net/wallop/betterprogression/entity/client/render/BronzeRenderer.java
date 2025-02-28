@@ -1,9 +1,10 @@
-package net.wallop.betterprogression.entity.client;
+package net.wallop.betterprogression.entity.client.render;
 
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 import net.wallop.betterprogression.BetterProgression;
+import net.wallop.betterprogression.entity.client.model.BronzeModel;
 import net.wallop.betterprogression.entity.custom.BronzeEntity;
 
 public class BronzeRenderer extends MobEntityRenderer<BronzeEntity, BronzeModel<BronzeEntity>> {
