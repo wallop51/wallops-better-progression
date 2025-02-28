@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "I": {
+      "item": "betterprogression:bronze_ingot"
+    },
+    "R": {
+      "item": "betterprogression:bronze_rod"
+    }
+  },
+  "pattern": [
+    " I",
+    "FR",
+    " R"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterprogression:bronze_spear"
+  }
+}
