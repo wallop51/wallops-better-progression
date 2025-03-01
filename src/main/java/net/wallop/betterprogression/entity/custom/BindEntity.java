@@ -1,30 +1,54 @@
 package net.wallop.betterprogression.entity.custom;
 
 import net.minecraft.entity.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.*;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.DamageTypeTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Arm;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import net.wallop.betterprogression.BetterProgression;
+import org.jetbrains.annotations.Nullable;
 
-public class BindEntity extends LivingEntity {
+public class BindEntity extends Entity implements Attackable {
     public final AnimationState bindAnimationState = new AnimationState();
+    public final AnimationState deathAnimationState = new AnimationState();
     private boolean animationBegun = false;
+    public float health;
+    private int ticksUntilDeath = 200;
+    private LivingEntity lastAttacker;
 
-    public BindEntity(EntityType<? extends LivingEntity> entityType, World world) {
+    private static final TrackedData<Boolean> SHOULD_PLAY_DEATH_ANIMATION =
+            DataTracker.registerData(BindEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
+    private static final TrackedData<Integer> DEATH_ANIMATION_TIMEOUT =
+            DataTracker.registerData(BindEntity.class, TrackedDataHandlerRegistry.INTEGER);
+
+    public BindEntity(EntityType<? extends Entity> entityType, World world) {
         super(entityType, world);
+        this.health = getDefaultHealth(world);
     }
 
-    public static DefaultAttributeContainer.Builder createAttributes() {
-        return MobEntity.createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 18);
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        this.lastAttacker = source.getAttacker() instanceof LivingEntity ? (LivingEntity)source.getAttacker() : lastAttacker;
+        if (this.isInvulnerableTo(source)) {
+            return false;
+        } else if (this.getWorld().isClient) {
+            return true;
+        } else {
+            this.scheduleVelocityUpdate();
+            this.health = (this.health - amount);
+            this.emitGameEvent(GameEvent.ENTITY_DAMAGE, source.getAttacker());
+            return true;
+        }
+    }
+
+    @Override
+    public boolean canHit() {
+        return true;
     }
 
     @Override
@@ -33,19 +57,47 @@ public class BindEntity extends LivingEntity {
 
         if (this.getWorld().isClient()) {
             this.setupAnimationStates();
+
+        } else {
+            //BetterProgression.LOGGER.info("DeathAnimationTimeout={}", this.getDeathAnimationTimeout());
+            if (this.ticksUntilDeath == 1 || this.health <= 0) {
+                this.setShouldPlayDeathAnimation(true);
+
+                if (this.getDeathAnimationTimeout() >= -1) {
+                    this.setDeathAnimationTimeout(this.getDeathAnimationTimeout() - 1);
+                } else {
+                    //BetterProgression.LOGGER.info("[Server] Discarding BindEntity");
+                    this.discard();
+                    return;
+                }
+                //BetterProgression.LOGGER.info("[Server] ticksUntilDeath={}, setting shouldPlayDeathAnimation=true, health={}, deathAnimationTimeout={}",
+                //        this.ticksUntilDeath, this.health, this.getDeathAnimationTimeout());
+            } else {
+                //BetterProgression.LOGGER.info("[Server] ticksUntilDeath={}", this.ticksUntilDeath);
+                --this.ticksUntilDeath;
+            }
         }
     }
 
     private void setupAnimationStates() {
+        //boolean shouldPlayDeathAnimation = this.shouldPlayDeathAnimation();
+        //int deathAnimationTimeout = this.getDeathAnimationTimeout();
+        //BetterProgression.LOGGER.info("[Client] shouldPlayDeathAnimation={}, deathAnimationTimeout={}", shouldPlayDeathAnimation, deathAnimationTimeout);
+
         if (!this.animationBegun) {
             this.bindAnimationState.start(this.age);
             this.animationBegun = true;
         }
-    }
 
-    @Override
-    public boolean damage(DamageSource source, float amount) {
-        return super.damage(source, amount);
+        if (this.shouldPlayDeathAnimation()) {
+            //BetterProgression.LOGGER.info("[Client] shouldPlayDeathAnimation detected! Starting death animation. deathAnimationTimeout={}",
+            //        this.getDeathAnimationTimeout());
+
+            if (this.getDeathAnimationTimeout() == 4) {
+                this.bindAnimationState.stop();
+                this.deathAnimationState.start(this.age);
+            }
+        }
     }
 
     @Override
@@ -73,53 +125,76 @@ public class BindEntity extends LivingEntity {
     }
 
     @Override
-    public Iterable<ItemStack> getArmorItems() {
-        return DefaultedList.ofSize(4, ItemStack.EMPTY);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        builder.add(SHOULD_PLAY_DEATH_ANIMATION, false);
+        builder.add(DEATH_ANIMATION_TIMEOUT, 5);
     }
 
     @Override
-    public ItemStack getEquippedStack(EquipmentSlot slot) {
-        return ItemStack.EMPTY;
+    protected void readCustomDataFromNbt(NbtCompound nbt) {
+        this.dataTracker.set(SHOULD_PLAY_DEATH_ANIMATION, nbt.getBoolean("ShouldPlayDeathAnimation"));
+        this.animationBegun = nbt.getBoolean("AnimationBegun");
+
+        if (nbt.contains("DeathAnimationTimeout")) {
+            this.dataTracker.set(DEATH_ANIMATION_TIMEOUT, nbt.getInt("DeathAnimationTimeout"));
+        } else {
+            this.dataTracker.set(DEATH_ANIMATION_TIMEOUT, 5); // Reset to default if not found
+        }
+
+        if (nbt.contains("TicksUntilDeath")) {
+            this.ticksUntilDeath = nbt.getInt("TicksUntilDeath");
+        } else {
+            this.ticksUntilDeath = 200;
+        }
+        if (nbt.contains("Health")) {
+            this.health = nbt.getFloat("Health");
+        } else {
+            this.health = getDefaultHealth(this.getWorld());
+        }
     }
 
-    @Override
-    public void equipStack(EquipmentSlot slot, ItemStack stack) {
-
+    private float getDefaultHealth(World world) {
+        return 8 * ((float) world.getDifficulty().getId() / 2 + 1); // easy -> 12, normal -> 16, hard -> 20;
     }
 
+
     @Override
-    public Arm getMainArm() {
-        return Arm.RIGHT;
+    protected void writeCustomDataToNbt(NbtCompound nbt) {
+        nbt.putBoolean("AnimationBegun", this.animationBegun);
+        nbt.putFloat("Health", this.health);
+        nbt.putInt("TicksUntilDeath", this.ticksUntilDeath);
+        nbt.putBoolean("ShouldPlayDeathAnimation", this.dataTracker.get(SHOULD_PLAY_DEATH_ANIMATION));
+        nbt.putInt("DeathAnimationTimeout", this.dataTracker.get(DEATH_ANIMATION_TIMEOUT));
     }
 
-    @Override
-    public boolean isPushable() {
-        return false;
+    public void setDeathAnimationTimeout(int deathAnimationTimeout) {
+        this.dataTracker.set(DEATH_ANIMATION_TIMEOUT, deathAnimationTimeout);
     }
 
-    @Override
-    protected void pushAway(Entity entity) {
-
+    public int getDeathAnimationTimeout() {
+        return this.dataTracker.get(DEATH_ANIMATION_TIMEOUT);
     }
 
-    @Override
-    public void kill() {
-        this.remove(Entity.RemovalReason.KILLED);
-        this.emitGameEvent(GameEvent.ENTITY_DIE);
+    public void setShouldPlayDeathAnimation(boolean shouldPlayDeathAnimation) {
+        if (!this.getWorld().isClient()) {
+            this.dataTracker.set(SHOULD_PLAY_DEATH_ANIMATION, shouldPlayDeathAnimation);
+            //BetterProgression.LOGGER.info("[Server] shouldPlayDeathAnimation set to {}", shouldPlayDeathAnimation);
+        }
     }
 
-    @Override
-    public void onStruckByLightning(ServerWorld world, LightningEntity lightning) {
-
+    public boolean shouldPlayDeathAnimation() {
+        return this.dataTracker.get(SHOULD_PLAY_DEATH_ANIMATION);
     }
 
-    @Override
-    public boolean isAffectedBySplashPotions() {
-        return false;
-    }
 
+//    @Override
+//    public void onStruckByLightning(ServerWorld world, LightningEntity lightning) {
+//
+//    }
+
+    @Nullable
     @Override
-    public boolean isMobOrPlayer() {
-        return false;
+    public LivingEntity getLastAttacker() {
+        return this.lastAttacker;
     }
 }

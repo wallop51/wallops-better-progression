@@ -61,13 +61,17 @@ public class BindModel<T extends BindEntity> extends SinglePartEntityModel<T> {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
 
         this.updateAnimation(entity.bindAnimationState, BindAnimations.BIND, ageInTicks, 1f);
+        this.updateAnimation(entity.deathAnimationState, BindAnimations.DEATH, ageInTicks, 1f);
 
     }
 
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
+        matrices.push();
+        matrices.scale(1,-1,1);
         pair2.render(matrices, vertexConsumer, light, overlay, color);
         pair1.render(matrices, vertexConsumer, light, overlay, color);
+        matrices.pop();
     }
 
     @Override

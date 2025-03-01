@@ -56,7 +56,6 @@ public class BetterProgression implements ModInitializer {
 		ModDataComponentTypes.registerDataComponentTypes();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.BRONZE, BronzeEntity.createAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.BIND, BindEntity.createAttributes());
 
 		LOGGER.info("Loaded!");
 	}
