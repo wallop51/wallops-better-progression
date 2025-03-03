@@ -4,6 +4,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
+import net.minecraft.entity.data.DataTracker;
 import net.minecraft.util.math.MathHelper;
 import net.wallop.betterprogression.BetterProgression;
 import net.wallop.betterprogression.entity.custom.BronzeEntity;
@@ -41,11 +42,14 @@ public class BronzeShootGoal extends ProjectileAttackGoal {
         seenTicks = 0;
     }
 
+
     protected void shoot() {
         if (isEnemyInRangeAndSeen()) {
             shouldCountUntilNextAttack = true;
 
-            entity.getNavigation().stop();
+            if (this.entity.distanceTo(this.target) <= 5) {
+                entity.getNavigation().stop();
+            }
 
             if (isTimeToStartShootAnimation()) {
                 entity.setShooting(true);
@@ -58,6 +62,8 @@ public class BronzeShootGoal extends ProjectileAttackGoal {
                 performAttack(target);
             }
         } else {
+            this.entity.setShouldBind(this.entity.getBindCooldown() <= 0);
+
             this.entity.getLookControl().lookAt(this.target, 30.0F, 30.0F);
             this.entity.getNavigation().startMovingTo(this.target, this.mobSpeed);
             entity.getNavigation().startMovingTo(target, mobSpeed);
@@ -69,9 +75,15 @@ public class BronzeShootGoal extends ProjectileAttackGoal {
 
     }
 
+    @Override
+    public void stop() {
+        super.stop();
+        this.entity.setShooting(false);
+    }
+
     private void performAttack(LivingEntity enemy) {
         this.resetAttackCooldown();
-        BetterProgression.LOGGER.info("Shot ------------------");
+        //BetterProgression.LOGGER.info("Shot ------------------");
 
         float f = (float) Math.sqrt(entity.distanceTo(target)) / this.maxShootRange;
         float pullProgress = MathHelper.clamp(f, 0.1f, 1f);
@@ -85,7 +97,7 @@ public class BronzeShootGoal extends ProjectileAttackGoal {
 
     private boolean isEnemyInRangeAndSeen() {
         double squaredDistanceToTarget = this.entity.squaredDistanceTo(this.target.getX(), this.target.getY(), this.target.getZ());
-        return squaredDistanceToTarget < this.squaredMaxShootRange - 5 && this.seenTicks >=5;
+        return squaredDistanceToTarget < this.squaredMaxShootRange && this.seenTicks >=5;
     }
 
     protected boolean isTimeToStartShootAnimation() {
@@ -112,7 +124,8 @@ public class BronzeShootGoal extends ProjectileAttackGoal {
         }
 
         if (target != null) {
+            //BetterProgression.LOGGER.info("Target {}", target.getName().toString());
             this.shoot();
-        }
+        } else this.entity.setShooting(false);
     }
 }

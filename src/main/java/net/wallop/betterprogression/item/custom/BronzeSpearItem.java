@@ -49,10 +49,19 @@ public class BronzeSpearItem extends Item implements ProjectileItem {
         return new BronzeSpearEntity(world, shooter, stack.copyWithCount(1));
     }
 
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        if (!world.isClient() && entity instanceof PlayerEntity player) {
+            if (!selected) {
+                stack.set(ModDataComponentTypes.THROWING, false);
+            }
+        }
+    }
 
     private static boolean isAboutToBreak(ItemStack stack) {
         return stack.getDamage() >= stack.getMaxDamage() - 1;
     }
+
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
@@ -141,6 +150,8 @@ public class BronzeSpearItem extends Item implements ProjectileItem {
             return TypedActionResult.consume(itemStack);
         }
     }
+
+
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {

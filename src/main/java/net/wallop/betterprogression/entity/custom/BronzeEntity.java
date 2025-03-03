@@ -1,5 +1,6 @@
 package net.wallop.betterprogression.entity.custom;
 
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.AnimationState;
@@ -22,8 +23,8 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.wallop.betterprogression.BetterProgression;
+import net.wallop.betterprogression.entity.ai.BronzeBindGoal;
 import net.wallop.betterprogression.entity.ai.BronzeShootGoal;
-import net.wallop.betterprogression.entity.ai.BronzeSpearAttackGoal;
 import net.wallop.betterprogression.item.ModItems;
 import net.wallop.betterprogression.item.custom.BronzeSpearItem;
 
@@ -32,7 +33,15 @@ public class BronzeEntity extends HostileEntity implements RangedAttackMob {
     public final AnimationState shootAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
     public int shootAnimationTimeout = 0;
+    private static final int BIND_COOLDOWN_SECONDS = 20;
+
     private static final TrackedData<Boolean> SHOOTING =
+            DataTracker.registerData(BronzeEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
+    private static final TrackedData<Integer> BIND_COOLDOWN =
+            DataTracker.registerData(BronzeEntity.class, TrackedDataHandlerRegistry.INTEGER);
+
+    private static final TrackedData<Boolean> SHOULD_BIND =
             DataTracker.registerData(BronzeEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public BronzeEntity(EntityType<? extends HostileEntity> entityType, World world) {
@@ -47,10 +56,11 @@ public class BronzeEntity extends HostileEntity implements RangedAttackMob {
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new BronzeShootGoal(this, 1, 30,10));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0));
-        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 10F));
-        this.goalSelector.add(4, new LookAroundGoal(this));
+        this.goalSelector.add(2, new BronzeShootGoal(this, 1, 30,10));
+        this.goalSelector.add(1, new BronzeBindGoal(this));
+        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0));
+        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 10F));
+        this.goalSelector.add(5, new LookAroundGoal(this));
 
         this.targetSelector.add(0, new RevengeGoal(this));
         this.targetSelector.add(1, new ActiveTargetGoal(this, PlayerEntity.class, true));
@@ -93,10 +103,38 @@ public class BronzeEntity extends HostileEntity implements RangedAttackMob {
         return this.dataTracker.get(SHOOTING);
     }
 
+    public void decrementBindCooldown() {
+        this.setBindCooldown(this.getBindCooldown() - 1);
+    }
+
+    public void setBindCooldown(int cooldown) {
+        this.dataTracker.set(BIND_COOLDOWN, cooldown);
+        this.setShouldBind(cooldown <= 0);
+    }
+
+    public void resetBindCooldown() {
+        this.dataTracker.set(BIND_COOLDOWN, BIND_COOLDOWN_SECONDS * 20);
+        this.setShouldBind(false);
+    }
+
+    public int getBindCooldown() {
+        return this.dataTracker.get(BIND_COOLDOWN);
+    }
+
+    public void setShouldBind(boolean bool) {
+        this.dataTracker.set(SHOULD_BIND, bool);
+    }
+
+    public boolean shouldBind() {
+        return this.dataTracker.get(SHOULD_BIND);
+    }
+
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(SHOOTING, false);
+        builder.add(BIND_COOLDOWN, 0);
+        builder.add(SHOULD_BIND, false);
     }
 
     @Override
@@ -105,6 +143,12 @@ public class BronzeEntity extends HostileEntity implements RangedAttackMob {
 
         if (this.getWorld().isClient()) {
             this.setupAnimationStates();
+        } else if (this.getBindCooldown() > 0) {
+            this.decrementBindCooldown();
+        }
+
+        if (!this.getWorld().isClient()) {
+            BetterProgression.LOGGER.info("Shooting = {}", isShooting());
         }
     }
 

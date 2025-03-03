@@ -1,5 +1,6 @@
 package net.wallop.betterprogression.entity.custom;
 
+import com.mojang.datafixers.kinds.IdF;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.*;
 import net.minecraft.entity.data.DataTracker;
@@ -10,15 +11,19 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.wallop.betterprogression.BetterProgression;
+import net.wallop.betterprogression.entity.ModEntities;
+import net.wallop.betterprogression.entity.ai.BronzeBindGoal;
 import org.jetbrains.annotations.Nullable;
 
 public class BindEntity extends Entity implements Attackable {
     public final AnimationState bindAnimationState = new AnimationState();
     public final AnimationState deathAnimationState = new AnimationState();
+    private final BindEntity entity;
     private boolean animationBegun = false;
     public float health;
     private int ticksUntilDeath = 200;
     private LivingEntity lastAttacker;
+    private LivingEntity target;
 
     private static final TrackedData<Boolean> SHOULD_PLAY_DEATH_ANIMATION =
             DataTracker.registerData(BindEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -28,12 +33,28 @@ public class BindEntity extends Entity implements Attackable {
 
     public BindEntity(EntityType<? extends Entity> entityType, World world) {
         super(entityType, world);
+        this.entity = this;
         this.health = getDefaultHealth(world);
+    }
+
+    public BindEntity(EntityType<? extends Entity> entityType, World world, LivingEntity target) {
+        this(entityType, world);
+        this.target = target;
     }
 
     @Override
     public boolean damage(DamageSource source, float amount) {
         this.lastAttacker = source.getAttacker() instanceof LivingEntity ? (LivingEntity)source.getAttacker() : lastAttacker;
+
+
+
+        if (this.target != null && source.getAttacker() != null) {
+            if (source.getAttacker().getType() == ModEntities.BRONZE) {
+                this.target.damage(source, amount);
+                return true;
+            }
+        }
+
         if (this.isInvulnerableTo(source)) {
             return false;
         } else if (this.getWorld().isClient) {
@@ -59,6 +80,17 @@ public class BindEntity extends Entity implements Attackable {
             this.setupAnimationStates();
 
         } else {
+
+            //BetterProgression.LOGGER.info("[Server] Bind Health = {}", (int)this.health);
+
+            if (this.target != null) {
+                this.target.teleport(this.entity.getX(), this.entity.getY(), this.entity.getZ(), false);
+                if (this.target.getPose() == EntityPose.DYING) {
+                    this.health = 0;
+                    this.target = null;
+                }
+            }
+
             //BetterProgression.LOGGER.info("DeathAnimationTimeout={}", this.getDeathAnimationTimeout());
             if (this.ticksUntilDeath == 1 || this.health <= 0) {
                 this.setShouldPlayDeathAnimation(true);

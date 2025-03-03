@@ -32,7 +32,7 @@ public class BronzeAnimations {
                 ))
                 .build();
 
-        public static final Animation SHOOT = Animation.Builder.create(1.5F).looping()
+        public static final Animation SHOOT = Animation.Builder.create(1.5F)
                 .addBoneAnimation("head", new Transformation(Transformation.Targets.ROTATE,
                         new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                         new Keyframe(0.6667F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -20.0F), Transformation.Interpolations.LINEAR),
