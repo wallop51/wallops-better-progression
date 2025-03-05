@@ -88,7 +88,7 @@ public class BronzeSpearAttackGoal extends Goal{
     }
 
     protected boolean isTimeToStartAttackAnimation() {
-        BetterProgression.LOGGER.info("Starting attack animation at ticksUntilNextAttack = " + ticksUntilNextAttack);
+        //BetterProgression.LOGGER.info("Starting attack animation at ticksUntilNextAttack = " + ticksUntilNextAttack);
         return  ticksUntilNextAttack <= attackDelay;
     }
 
@@ -99,7 +99,7 @@ public class BronzeSpearAttackGoal extends Goal{
             this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack -1, 0);
         }
 
-        BetterProgression.LOGGER.info("ticksUntilNextAttack = " + ticksUntilNextAttack + " updateCountdownTicks = " + (updateCountdownTicks - 1));
+        //BetterProgression.LOGGER.info("ticksUntilNextAttack = " + ticksUntilNextAttack + " updateCountdownTicks = " + (updateCountdownTicks - 1));
 
         double d = this.mob.squaredDistanceTo(this.target.getX(), this.target.getY(), this.target.getZ());
         boolean bl = this.mob.getVisibilityCache().canSee(this.target);
@@ -141,7 +141,7 @@ public class BronzeSpearAttackGoal extends Goal{
             float f = (float)Math.sqrt(d) / this.maxShootRange;
             float g = MathHelper.clamp(f, 0.1F, 1.0F);
             this.owner.shootAt(this.target, g);
-            BetterProgression.LOGGER.info("Shot! -------------------");
+            //BetterProgression.LOGGER.info("Shot! -------------------");
             this.resetAttackCooldown();
             this.updateCountdownTicks = MathHelper.floor(f * (float)(this.maxIntervalTicks - this.minIntervalTicks) + (float)this.minIntervalTicks);
         } else if (this.updateCountdownTicks < 0) {

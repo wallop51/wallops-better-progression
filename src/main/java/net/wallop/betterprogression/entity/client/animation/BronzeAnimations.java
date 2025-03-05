@@ -9,7 +9,7 @@ public class BronzeAnimations {
         public static final Animation IDLE = Animation.Builder.create(1.5F).looping()
                 .addBoneAnimation("head", new Transformation(Transformation.Targets.TRANSLATE,
                         new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
-                        new Keyframe(0.75F, AnimationHelper.createTranslationalVector(0.0F, 0.25F, 0.0F), Transformation.Interpolations.CUBIC),
+                        new Keyframe(0.75F, AnimationHelper.createTranslationalVector(0.0F, 0.75F, 0.0F), Transformation.Interpolations.CUBIC),
                         new Keyframe(1.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC)
                 ))
                 .addBoneAnimation("bottomrods", new Transformation(Transformation.Targets.ROTATE,

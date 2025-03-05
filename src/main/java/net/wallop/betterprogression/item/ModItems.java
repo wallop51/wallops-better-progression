@@ -45,7 +45,7 @@ public class ModItems {
 
     public static final Item BRONZE_PICKAXE = registerItem("bronze_pickaxe",
             new PickaxeItem(ModToolMaterial.BRONZE, new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(
-                    ModToolMaterial.BRONZE, 0.5f,-2.8f))));
+                    ModToolMaterial.BRONZE, 0f,-2.8f))));
     public static final Item BRONZE_AXE = registerItem("bronze_axe",
             new AxeItem(ModToolMaterial.BRONZE, new Item.Settings().attributeModifiers(AxeItem.createAttributeModifiers(
                     ModToolMaterial.BRONZE, 6,-3.3f))));
@@ -57,7 +57,7 @@ public class ModItems {
                     ModToolMaterial.BRONZE, 1f,-3f))));
     public static final Item BRONZE_HOE = registerItem("bronze_hoe",
             new HoeItem(ModToolMaterial.BRONZE, new Item.Settings().attributeModifiers(HoeItem.createAttributeModifiers(
-                    ModToolMaterial.BRONZE, -2,-1.5f))));
+                    ModToolMaterial.BRONZE, -2,-1f))));
 
     public static final Item COPPERMAIL_HELMET = registerItem("coppermail_helmet",
             new ArmorItem(ModArmorMaterials.COPPERMAIL, ArmorItem.Type.HELMET,

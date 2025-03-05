@@ -30,7 +30,10 @@ public class BronzeSpearModel<T extends BronzeSpearEntity> extends SinglePartEnt
 
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
+        matrices.push();
+        matrices.translate(0, 0.2,0);
         bronze_spear.render(matrices, vertexConsumer, light, overlay, color);
+        matrices.pop();
     }
 
     @Override

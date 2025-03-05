@@ -8,7 +8,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.wallop.betterprogression.BetterProgression;
 import net.wallop.betterprogression.entity.client.animation.BindAnimations;
-import net.wallop.betterprogression.entity.client.animation.BronzeAnimations;
 import net.wallop.betterprogression.entity.custom.BindEntity;
 
 public class BindModel<T extends BindEntity> extends SinglePartEntityModel<T> {

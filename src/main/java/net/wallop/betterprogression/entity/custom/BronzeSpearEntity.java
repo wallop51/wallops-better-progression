@@ -18,6 +18,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.wallop.betterprogression.component.ModDataComponentTypes;
 import net.wallop.betterprogression.effect.ModEffects;
 import net.wallop.betterprogression.entity.ModEntities;
 import net.wallop.betterprogression.item.ModItems;
@@ -35,6 +36,7 @@ public class BronzeSpearEntity extends PersistentProjectileEntity {
 
     public BronzeSpearEntity(World world, LivingEntity owner, ItemStack stack) {
         super(ModEntities.BRONZE_SPEAR, owner, world, stack, null);
+        stack.set(ModDataComponentTypes.THROWING, false);
         int variant = owner.isPlayer() ? 1 : 0;
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant);
     }
@@ -47,6 +49,7 @@ public class BronzeSpearEntity extends PersistentProjectileEntity {
 
     @Override
     public void tick() {
+
         if (this.inGroundTime > 4) {
             this.dealtDamage = true;
         }
@@ -83,6 +86,8 @@ public class BronzeSpearEntity extends PersistentProjectileEntity {
         this.playSound(SoundEvents.ITEM_TRIDENT_HIT, 1F,1F);
     }
 
+    
+
     @Override
     protected SoundEvent getHitSound() {
         return SoundEvents.ITEM_TRIDENT_HIT_GROUND;
@@ -92,6 +97,7 @@ public class BronzeSpearEntity extends PersistentProjectileEntity {
     protected boolean tryPickup(PlayerEntity player) {
         return super.tryPickup(player) || this.isNoClip() && this.isOwner(player) && player.getInventory().insertStack(this.asItemStack());
     }
+
 
     @Override
     public void onPlayerCollision(PlayerEntity player) {

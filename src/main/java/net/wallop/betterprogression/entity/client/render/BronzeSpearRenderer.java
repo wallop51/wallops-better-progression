@@ -20,7 +20,7 @@ import net.wallop.betterprogression.entity.custom.BronzeSpearVariant;
 import java.util.Map;
 
 public class BronzeSpearRenderer extends EntityRenderer<BronzeSpearEntity> {
-    private final BronzeSpearModel model;
+    private final BronzeSpearModel<BronzeSpearEntity> model;
 
     private static final Map<BronzeSpearVariant, Identifier> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(BronzeSpearVariant.class), map -> {

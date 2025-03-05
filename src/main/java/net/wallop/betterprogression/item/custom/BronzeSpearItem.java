@@ -58,6 +58,8 @@ public class BronzeSpearItem extends Item implements ProjectileItem {
         }
     }
 
+
+
     private static boolean isAboutToBreak(ItemStack stack) {
         return stack.getDamage() >= stack.getMaxDamage() - 1;
     }
@@ -72,6 +74,9 @@ public class BronzeSpearItem extends Item implements ProjectileItem {
                     RegistryEntry<SoundEvent> registryEntry = (RegistryEntry<SoundEvent>)EnchantmentHelper.getEffect(stack, EnchantmentEffectComponentTypes.TRIDENT_SOUND)
                             .orElse(SoundEvents.ITEM_TRIDENT_THROW);
                     if (!world.isClient) {
+
+                        user.getStackInHand(user.getActiveHand()).set(ModDataComponentTypes.THROWING, false);
+
                         stack.damage(1, playerEntity, LivingEntity.getSlotForHand(user.getActiveHand()));
 
                         BronzeSpearEntity bronzeSpearEntity = new BronzeSpearEntity(world, playerEntity, stack);
@@ -89,7 +94,6 @@ public class BronzeSpearItem extends Item implements ProjectileItem {
                 }
             }
         }
-        user.getStackInHand(user.getActiveHand()).set(ModDataComponentTypes.THROWING, false);
     }
 
     public static AttributeModifiersComponent createAttributeModifiers() {

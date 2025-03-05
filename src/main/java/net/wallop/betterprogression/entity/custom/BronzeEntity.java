@@ -147,9 +147,9 @@ public class BronzeEntity extends HostileEntity implements RangedAttackMob {
             this.decrementBindCooldown();
         }
 
-        if (!this.getWorld().isClient()) {
-            BetterProgression.LOGGER.info("Shooting = {}", isShooting());
-        }
+        //if (!this.getWorld().isClient()) {
+            //BetterProgression.LOGGER.info("Shooting = {}", isShooting());
+        //}
     }
 
     @Override
