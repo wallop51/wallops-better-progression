@@ -44,6 +44,12 @@
 
   "item.betterprogression.music_disc_arid_echoes.desc": "James Walker - Arid Echoes",
 
+  "sounds.betterprogression.bronze_idle": "Bronze breathes",
+  "sounds.betterprogression.bronze_entity_hit": "Bronze hurts",
+  "sounds.betterprogression.bronze_death": "Bronze dies",
+  "sounds.betterprogression.entity_bind_spawn": "Bronze binds",
+  "sounds.betterprogression.entity_bind_death": "Bind retracts",
+
   "effect.betterprogression.seismic": "Seismic",
 
   "entity.betterprogression.bronze": "Bronze",

@@ -1,4 +1,38 @@
 {
+  "bronze_idle": {
+    "subtitle": "sounds.betterprogression.bronze_idle",
+    "sounds": [
+      "betterprogression:bronze_idle_1",
+      "betterprogression:bronze_idle_2",
+      "betterprogression:bronze_idle_3"
+    ]
+  },
+
+  "bronze_entity_hit": {
+    "subtitle": "sounds.betterprogression.bronze_entity_hit",
+    "sounds": [
+      "betterprogression:bronze_entity_hit"
+    ]
+  },
+  "bronze_death": {
+    "subtitle": "sounds.betterprogression.bronze_death",
+    "sounds": [
+      "betterprogression:bronze_death"
+    ]
+  },
+  "entity_bind_spawn": {
+    "subtitle": "sounds.betterprogression.entity_bind_spawn",
+    "sounds": [
+      "betterprogression:entity_bind_spawn"
+    ]
+  },
+  "entity_bind_death": {
+    "subtitle": "sounds.betterprogression.entity_bind_death",
+    "sounds": [
+      "betterprogression:entity_bind_spawn"
+    ]
+  },
+
   "arid_echoes": {
     "sounds": [
       {

@@ -14,6 +14,11 @@ public class ModSounds {
     public static final RegistryKey<JukeboxSong> ARID_ECHOES_KEY =
             RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(BetterProgression.MOD_ID, "arid_echoes"));
 
+    public static final SoundEvent BRONZE_IDLE = registerSoundEvent("bronze_idle");
+    public static final SoundEvent BRONZE_ENTITY_HIT = registerSoundEvent("bronze_entity_hit");
+    public static final SoundEvent BRONZE_DEATH = registerSoundEvent("bronze_death");
+    public static final SoundEvent ENTITY_BIND_SPAWN = registerSoundEvent("entity_bind_spawn");
+    public static final SoundEvent ENTITY_BIND_DEATH = registerSoundEvent("entity_bind_death");
 
     private static SoundEvent registerSoundEvent(String name) {
         Identifier id = Identifier.of(BetterProgression.MOD_ID, name);

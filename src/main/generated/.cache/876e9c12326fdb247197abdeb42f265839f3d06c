@@ -1,4 +1,4 @@
-// 1.21	2025-02-16T19:41:33.1794329	Wallop's Better Progression/Recipes
+// 1.21	2025-03-07T18:03:37.2782565	Wallop's Better Progression/Recipes
 c98b3da1f1317edda30e782eb5e49645485c5130 data\betterprogression\advancement\recipes\combat\bronze_helmet.json
 2049366ced623029eec4b15ffdacbac5eb84b8c3 data\betterprogression\advancement\recipes\tools\diamond_pickaxe.json
 67485f006b666bff6a0e0d0cbe36af0b68c80798 data\betterprogression\advancement\recipes\misc\bronze_block.json
@@ -59,6 +59,7 @@ c9d5ba12e78af4040067adc5e9fcae956814ed27 data\betterprogression\recipe\cut_bronz
 9c41f1b65b111145db2bd0e16327546fa582e5ab data\betterprogression\recipe\copper_axe.json
 566d8b15fc1a1e8dcc4ab33b329a2b4e037ec233 data\betterprogression\advancement\recipes\tools\bronze_pickaxe.json
 a95b18b2637a3e4ad69cbe1f9835559ad4630595 data\betterprogression\recipe\stone_sword.json
+47997b16a166ac1398158badfc3ec1562ec464b3 data\betterprogression\recipe\bronze_spear.json
 df51bb808a7a938b5aba8fc0efaa3f330f9bfc68 data\betterprogression\recipe\stone_hoe.json
 0aaa50a111e841e86fcfbda2cd2d1f898aba1718 data\betterprogression\recipe\cut_bronze_stairs.json
 49d8b529ca68f55004eb9019f861b7f15b63ee02 data\betterprogression\recipe\diamond_hoe.json
@@ -116,4 +117,5 @@ b3dc5deb2f5bda56e11156cfd3084db088f0bb82 data\betterprogression\advancement\reci
 b095e277d5259d797a7514868173236b587acb47 data\betterprogression\recipe\cut_bronze_stairs_from_bronze_block_stonecutting.json
 78e4a68abb07cdad4062e104e4d99af71a379f15 data\betterprogression\recipe\iron_hoe.json
 c088f4e517ebf16ff5ed04b4b7b3b65db8856943 data\betterprogression\recipe\tin_oil.json
+7d6616953913a867e141923d55e5dff8f24d7c46 data\betterprogression\advancement\recipes\combat\bronze_spear.json
 289b08a46dfdb9872a34367a60a770710a37d5dd data\betterprogression\recipe\copper_shovel.json

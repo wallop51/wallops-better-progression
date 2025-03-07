@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.wallop.betterprogression.BetterProgression;
 import net.wallop.betterprogression.entity.ModEntities;
+import net.wallop.betterprogression.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 
 public class BindEntity extends Entity implements Attackable {
@@ -104,6 +105,9 @@ public class BindEntity extends Entity implements Attackable {
                 ++this.particleTickCounter;
                 this.spawnParticles();
             }
+            if (this.particleTickCounter == 1) {
+                this.playSound(ModSounds.ENTITY_BIND_SPAWN, 1, 1);
+            }
 
 
 
@@ -120,6 +124,10 @@ public class BindEntity extends Entity implements Attackable {
             //BetterProgression.LOGGER.info("DeathAnimationTimeout={}", this.getDeathAnimationTimeout());
             if (this.ticksUntilDeath == 1 || this.health <= 0) {
                 this.setShouldPlayDeathAnimation(true);
+
+                if (this.getDeathAnimationTimeout() == 5) {
+                    this.playSound(ModSounds.ENTITY_BIND_DEATH,1,0.5f);
+                }
 
                 if (this.getDeathAnimationTimeout() >= -1) {
                     this.setDeathAnimationTimeout(this.getDeathAnimationTimeout() - 1);
@@ -255,4 +263,5 @@ public class BindEntity extends Entity implements Attackable {
     public LivingEntity getLastAttacker() {
         return this.lastAttacker;
     }
+
 }
