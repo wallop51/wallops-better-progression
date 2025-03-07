@@ -46,8 +46,13 @@ public class ModBlocks {
         entries.add(ModBlocks.BRONZE_BLOCK);
         entries.add(ModBlocks.CUT_BRONZE);
         entries.add(ModBlocks.CUT_BRONZE_SLAB);
+        entries.add(ModBlocks.CUT_BRONZE_STAIRS);
         entries.add(ModBlocks.CHISELED_BRONZE);
         entries.add(ModBlocks.BRONZE_BARS);
+    }
+
+    private static void addItemsToFunctionalBlocksTabItemGroup(FabricItemGroupEntries entries) {
+        entries.add(FORGE);
     }
 
     private static Item registerBlockItem(String name, Block block) {
@@ -59,5 +64,6 @@ public class ModBlocks {
         BetterProgression.LOGGER.info("Registering Mod Blocks for " + BetterProgression.MOD_ID);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(ModBlocks::addItemsToBuildingBlocksTabItemGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(ModBlocks::addItemsToFunctionalBlocksTabItemGroup);
     }
 }

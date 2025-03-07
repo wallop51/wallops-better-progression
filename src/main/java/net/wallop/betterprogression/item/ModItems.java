@@ -107,10 +107,45 @@ public class ModItems {
         entries.add(CLOTH);
         entries.add(TIN_DUST);
         entries.add(BRONZE_INGOT);
+        entries.add(BRONZE_ROD);
         entries.add(CRUDE_IRON);
     }
 
+    private static void addItemsToToolsTabItemGroup(FabricItemGroupEntries entries) {
+        entries.add(ARID_ECHOES_MUSIC_DISC);
+        entries.add(COPPER_SHOVEL);
+        entries.add(COPPER_PICKAXE);
+        entries.add(COPPER_AXE);
+        entries.add(COPPER_HOE);
+        entries.add(BRONZE_SHOVEL);
+        entries.add(BRONZE_PICKAXE);
+        entries.add(BRONZE_AXE);
+        entries.add(BRONZE_HOE);
+    }
 
+    private static void addItemsToCombatTabItemGroup(FabricItemGroupEntries entries) {
+        entries.add(COPPER_SWORD);
+        entries.add(BRONZE_SWORD);
+        entries.add(BRONZE_SPEAR);
+        entries.add(COPPER_AXE);
+        entries.add(BRONZE_AXE);
+        entries.add(COPPERMAIL_HELMET);
+        entries.add(COPPERMAIL_CHESTPLATE);
+        entries.add(COPPERMAIL_LEGGINGS);
+        entries.add(COPPERMAIL_BOOTS);
+        entries.add(BRONZE_HELMET);
+        entries.add(BRONZE_CHESTPLATE);
+        entries.add(BRONZE_LEGGINGS);
+        entries.add(BRONZE_BOOTS);
+    }
+
+    private static void addItemsToFoodTabItemGroup(FabricItemGroupEntries entries) {
+        entries.add(TIN_OIL);
+    }
+
+    private static void addItemsToSpawnEggItemGroup(FabricItemGroupEntries entries) {
+        entries.add(BRONZE_SPAWN_EGG);
+    }
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(BetterProgression.MOD_ID, name), item);
@@ -120,5 +155,9 @@ public class ModItems {
         BetterProgression.LOGGER.info("Registering Mod Items for " + BetterProgression.MOD_ID);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModItems::addItemsToIngredientTabItemGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(ModItems::addItemsToToolsTabItemGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(ModItems::addItemsToCombatTabItemGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(ModItems::addItemsToFoodTabItemGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(ModItems::addItemsToSpawnEggItemGroup);
     }
 }
