@@ -1,0 +1,8 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "item.betterprogression.music_disc_arid_echoes.desc"
+  },
+  "length_in_seconds": 75.105,
+  "sound_event": "betterprogression:arid_echoes"
+}

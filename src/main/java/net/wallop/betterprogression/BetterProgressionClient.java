@@ -4,9 +4,11 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.render.RenderLayer;
 import net.wallop.betterprogression.block.ModBlocks;
 import net.wallop.betterprogression.entity.ModEntities;
@@ -17,6 +19,8 @@ import net.wallop.betterprogression.entity.client.render.BronzeRenderer;
 import net.wallop.betterprogression.entity.client.model.BronzeSpearModel;
 import net.wallop.betterprogression.entity.client.render.BronzeSpearRenderer;
 import net.wallop.betterprogression.inventory.ForgeScreen;
+import net.wallop.betterprogression.particle.BronzeSandParticle;
+import net.wallop.betterprogression.particle.ModParticles;
 
 @Environment(EnvType.CLIENT)
 public class BetterProgressionClient implements ClientModInitializer {
@@ -33,5 +37,7 @@ public class BetterProgressionClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(BindModel.BIND, BindModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.BIND, BindRenderer::new);
+
+        ParticleFactoryRegistry.getInstance().register(ModParticles.BRONZE_SAND_PARTICLE, BronzeSandParticle.Factory::new);
     }
 }

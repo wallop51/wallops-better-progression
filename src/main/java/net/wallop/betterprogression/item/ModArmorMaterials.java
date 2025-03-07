@@ -21,7 +21,7 @@ public class ModArmorMaterials {
     public static final RegistryEntry<ArmorMaterial> COPPERMAIL = register("coppermail", Util.make(new EnumMap(ArmorItem.Type.class), map -> {
         map.put(ArmorItem.Type.BOOTS, 1);
         map.put(ArmorItem.Type.LEGGINGS, 4);
-        map.put(ArmorItem.Type.CHESTPLATE, 5);
+        map.put(ArmorItem.Type.CHESTPLATE, 4);
         map.put(ArmorItem.Type.HELMET, 2);
         map.put(ArmorItem.Type.BODY, 4);
     }), 17, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.0F, 0.0F, () -> Ingredient.ofItems(ModItems.COPPERMAIL));
@@ -30,8 +30,8 @@ public class ModArmorMaterials {
         map.put(ArmorItem.Type.BOOTS, 2);
         map.put(ArmorItem.Type.LEGGINGS, 4);
         map.put(ArmorItem.Type.CHESTPLATE, 5);
-        map.put(ArmorItem.Type.HELMET, 3);
-        map.put(ArmorItem.Type.BODY, 4);
+        map.put(ArmorItem.Type.HELMET, 2);
+        map.put(ArmorItem.Type.BODY, 5);
     }), 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> Ingredient.ofItems(ModItems.BRONZE_INGOT));
 
     private static RegistryEntry<ArmorMaterial> register(

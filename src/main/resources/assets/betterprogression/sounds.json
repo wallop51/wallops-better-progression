@@ -1,0 +1,10 @@
+{
+  "arid_echoes": {
+    "sounds": [
+      {
+        "name": "betterprogression:arid_echoes",
+        "stream": true
+      }
+    ]
+  }
+}

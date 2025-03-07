@@ -51,6 +51,7 @@ public class ModItemGroups {
                         entries.add(ModItems.BRONZE_SPAWN_EGG);
                         entries.add(ModItems.BRONZE_ROD);
                         entries.add(ModItems.BRONZE_SPEAR);
+                        entries.add(ModItems.ARID_ECHOES_MUSIC_DISC);
                         entries.add(ModItems.CRUDE_IRON);
                         entries.add(ModBlocks.CRUDE_IRON_BLOCK);
                         entries.add(ModItems.TOTEM_OF_FORGING);

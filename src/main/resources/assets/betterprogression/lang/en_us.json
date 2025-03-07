@@ -29,6 +29,7 @@
   "item.betterprogression.bronze_spawn_egg": "Bronze Spawn Egg",
   "item.betterprogression.bronze_spear": "Bronze Spear",
   "item.betterprogression.bronze_rod": "Bronze Rod",
+  "item.betterprogression.music_disc_arid_echoes": "Music Disc",
 
   "block.betterprogression.forge": "Forge",
   "block.betterprogression.crude_iron_block": "Block of Crude Iron",
@@ -40,6 +41,8 @@
   "block.betterprogression.bronze_bars": "Bronze Bars",
 
   "itemgroup.better_progression": "Better Progression",
+
+  "item.betterprogression.music_disc_arid_echoes.desc": "James Walker - Arid Echoes",
 
   "effect.betterprogression.seismic": "Seismic",
 

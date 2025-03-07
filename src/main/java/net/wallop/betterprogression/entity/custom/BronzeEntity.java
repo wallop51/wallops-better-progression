@@ -19,6 +19,9 @@ import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.BlockStateParticleEffect;
+import net.minecraft.particle.DustParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -27,6 +30,8 @@ import net.wallop.betterprogression.entity.ai.BronzeBindGoal;
 import net.wallop.betterprogression.entity.ai.BronzeShootGoal;
 import net.wallop.betterprogression.item.ModItems;
 import net.wallop.betterprogression.item.custom.BronzeSpearItem;
+import net.wallop.betterprogression.particle.ModParticles;
+import org.joml.Vector3f;
 
 public class BronzeEntity extends HostileEntity implements RangedAttackMob {
     public final AnimationState idleAnimationState = new AnimationState();
@@ -143,6 +148,9 @@ public class BronzeEntity extends HostileEntity implements RangedAttackMob {
 
         if (this.getWorld().isClient()) {
             this.setupAnimationStates();
+
+            //TODO: add particles here maybe?
+
         } else if (this.getBindCooldown() > 0) {
             this.decrementBindCooldown();
         }

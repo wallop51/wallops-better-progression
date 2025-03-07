@@ -19,7 +19,9 @@ import net.wallop.betterprogression.entity.custom.BronzeEntity;
 import net.wallop.betterprogression.inventory.ForgeScreenHandler;
 import net.wallop.betterprogression.item.ModItemGroups;
 import net.wallop.betterprogression.item.ModItems;
+import net.wallop.betterprogression.particle.ModParticles;
 import net.wallop.betterprogression.recipe.ModRecipes;
+import net.wallop.betterprogression.sound.ModSounds;
 import net.wallop.betterprogression.util.ModLootTableModifiers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +47,9 @@ public class BetterProgression implements ModInitializer {
 		ModEntities.registerModEntities();
 		RecipeCommand.register();
 		ModEffects.registerEffects();
+		ModParticles.registerParticles();
 		ModDataComponentTypes.registerDataComponentTypes();
+		ModSounds.registerSounds();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.BRONZE, BronzeEntity.createAttributes());
 

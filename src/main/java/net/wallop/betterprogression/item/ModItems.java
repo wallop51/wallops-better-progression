@@ -12,6 +12,7 @@ import net.wallop.betterprogression.BetterProgression;
 import net.wallop.betterprogression.block.ModBlocks;
 import net.wallop.betterprogression.entity.ModEntities;
 import net.wallop.betterprogression.item.custom.BronzeSpearItem;
+import net.wallop.betterprogression.sound.ModSounds;
 
 
 public class ModItems {
@@ -29,35 +30,35 @@ public class ModItems {
 
     public static final Item COPPER_PICKAXE = registerItem("copper_pickaxe",
             new PickaxeItem(ModToolMaterial.COPPER, new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(
-                    ModToolMaterial.COPPER, 1,-2.8f))));
+                    ModToolMaterial.COPPER, 0.5f,-2.8f))));
     public static final Item COPPER_AXE = registerItem("copper_axe",
             new AxeItem(ModToolMaterial.COPPER, new Item.Settings().attributeModifiers(AxeItem.createAttributeModifiers(
-                    ModToolMaterial.COPPER, 7,-3.15f))));
+                    ModToolMaterial.COPPER, 6.5f,-3.15f))));
     public static final Item COPPER_SWORD = registerItem("copper_sword",
             new SwordItem(ModToolMaterial.COPPER, new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(
-                        ModToolMaterial.COPPER, 3,-2.25f))));
+                        ModToolMaterial.COPPER, 3,-2.4f))));
     public static final Item COPPER_SHOVEL = registerItem("copper_shovel",
             new ShovelItem(ModToolMaterial.COPPER, new Item.Settings().attributeModifiers(ShovelItem.createAttributeModifiers(
-                    ModToolMaterial.COPPER, 1.5f,-3f))));
+                    ModToolMaterial.COPPER, 1,-3f))));
     public static final Item COPPER_HOE = registerItem("copper_hoe",
             new HoeItem(ModToolMaterial.COPPER, new Item.Settings().attributeModifiers(HoeItem.createAttributeModifiers(
-                    ModToolMaterial.COPPER, -1,-2))));
+                    ModToolMaterial.COPPER, -1.5f,-2))));
 
     public static final Item BRONZE_PICKAXE = registerItem("bronze_pickaxe",
             new PickaxeItem(ModToolMaterial.BRONZE, new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(
-                    ModToolMaterial.BRONZE, 0f,-2.8f))));
+                    ModToolMaterial.BRONZE, 0.5f,-2.8f))));
     public static final Item BRONZE_AXE = registerItem("bronze_axe",
             new AxeItem(ModToolMaterial.BRONZE, new Item.Settings().attributeModifiers(AxeItem.createAttributeModifiers(
-                    ModToolMaterial.BRONZE, 6,-3.3f))));
+                    ModToolMaterial.BRONZE, 6.5f,-3.15f))));
     public static final Item BRONZE_SWORD = registerItem("bronze_sword",
             new SwordItem(ModToolMaterial.BRONZE, new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(
-                    ModToolMaterial.BRONZE, 3,-2.6f))));
+                    ModToolMaterial.BRONZE, 3,-2.4f))));
     public static final Item BRONZE_SHOVEL = registerItem("bronze_shovel",
             new ShovelItem(ModToolMaterial.BRONZE, new Item.Settings().attributeModifiers(ShovelItem.createAttributeModifiers(
-                    ModToolMaterial.BRONZE, 1f,-3f))));
+                    ModToolMaterial.BRONZE, 1.5f,-3f))));
     public static final Item BRONZE_HOE = registerItem("bronze_hoe",
             new HoeItem(ModToolMaterial.BRONZE, new Item.Settings().attributeModifiers(HoeItem.createAttributeModifiers(
-                    ModToolMaterial.BRONZE, -2,-1f))));
+                    ModToolMaterial.BRONZE, -1.5f,-1f))));
 
     public static final Item COPPERMAIL_HELMET = registerItem("coppermail_helmet",
             new ArmorItem(ModArmorMaterials.COPPERMAIL, ArmorItem.Type.HELMET,
@@ -94,6 +95,10 @@ public class ModItems {
                     .maxDamage(250)
                     .attributeModifiers(BronzeSpearItem.createAttributeModifiers())
                     .component(DataComponentTypes.TOOL, BronzeSpearItem.createToolComponent())));
+
+    public static final Item ARID_ECHOES_MUSIC_DISC = registerItem("music_disc_arid_echoes",
+            new Item(new Item.Settings().jukeboxPlayable(ModSounds.ARID_ECHOES_KEY).maxCount(1).rarity(Rarity.RARE)));
+
 
     private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries) {
         entries.add(PLANT_FIBER);

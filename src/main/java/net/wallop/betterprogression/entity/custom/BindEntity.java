@@ -1,6 +1,5 @@
 package net.wallop.betterprogression.entity.custom;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.*;
 import net.minecraft.entity.data.DataTracker;
@@ -21,7 +20,6 @@ public class BindEntity extends Entity implements Attackable {
     public final AnimationState bindAnimationState = new AnimationState();
     public final AnimationState deathAnimationState = new AnimationState();
     private final BindEntity entity;
-    private final BlockState floorBlockState;
     private boolean animationBegun = false;
     public float health;
     private int ticksUntilDeath = 200;
@@ -41,7 +39,6 @@ public class BindEntity extends Entity implements Attackable {
         this.entity = this;
         this.health = getDefaultHealth(world);
         this.world = world;
-        this.floorBlockState = this.getSteppingBlockState();
     }
 
     public BindEntity(EntityType<? extends Entity> entityType, World world, LivingEntity target) {
@@ -130,7 +127,6 @@ public class BindEntity extends Entity implements Attackable {
                 } else {
                     //BetterProgression.LOGGER.info("[Server] Discarding BindEntity");
                     this.discard();
-                    return;
                 }
                 //BetterProgression.LOGGER.info("[Server] ticksUntilDeath={}, setting shouldPlayDeathAnimation=true, health={}, deathAnimationTimeout={}",
                 //        this.ticksUntilDeath, this.health, this.getDeathAnimationTimeout());

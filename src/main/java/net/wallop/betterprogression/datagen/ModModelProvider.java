@@ -68,6 +68,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.BRONZE_LEGGINGS, Models.GENERATED);
         itemModelGenerator.register(ModItems.BRONZE_BOOTS, Models.GENERATED);
 
+        itemModelGenerator.register(ModItems.ARID_ECHOES_MUSIC_DISC, Models.GENERATED);
+
         itemModelGenerator.register(ModItems.BRONZE_SPAWN_EGG,
                 new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
     }
