@@ -28,6 +28,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.wallop.betterprogression.BetterProgression;
+import net.wallop.betterprogression.effect.ModEffects;
 import net.wallop.betterprogression.entity.ai.BronzeBindGoal;
 import net.wallop.betterprogression.entity.ai.BronzeShootGoal;
 import net.wallop.betterprogression.item.ModItems;
@@ -37,12 +38,19 @@ import net.wallop.betterprogression.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
 public class BronzeEntity extends HostileEntity implements RangedAttackMob {
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState shootAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
     public int shootAnimationTimeout = 0;
     private static final int BIND_COOLDOWN_SECONDS = 20;
+
+    //public final Map<UUID, Long> lastBindUse = new HashMap<>();
 
     private static final TrackedData<Boolean> SHOOTING =
             DataTracker.registerData(BronzeEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -135,14 +143,36 @@ public class BronzeEntity extends HostileEntity implements RangedAttackMob {
     }
 
     public boolean shouldBind() {
-        return this.dataTracker.get(SHOULD_BIND);
+//        long currentTime = this.getWorld().getTime();
+//
+//        if (lastBindUse.containsKey(getUuid()) && currentTime - lastBindUse.get(getUuid()) < BIND_COOLDOWN_SECONDS * 20) {
+//            return false;
+//        }
+//
+//        List<BronzeEntity> nearbyBronzes = getWorld().getEntitiesByClass(
+//                BronzeEntity.class, this.getBoundingBox().expand(10d), entity -> entity != this
+//        );
+//
+//        for (BronzeEntity bronze : nearbyBronzes) {
+//            if (lastBindUse.containsKey(bronze.getUuid()) && currentTime - lastBindUse.get(bronze.getUuid()) < 400) {
+//                return false;
+//            }
+//        }
+        LivingEntity target;
+        boolean targetHasBindResistance;
+        if (this.getTarget() != null) {
+            target = this.getTarget();
+            targetHasBindResistance = target.hasStatusEffect(ModEffects.BIND_RESISTANCE);
+        } else targetHasBindResistance = true;
+
+        return this.dataTracker.get(SHOULD_BIND) && !targetHasBindResistance;
     }
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(SHOOTING, false);
-        builder.add(BIND_COOLDOWN, 0);
+        builder.add(BIND_COOLDOWN, this.random.nextBetween(100,300));
         builder.add(SHOULD_BIND, false);
     }
 

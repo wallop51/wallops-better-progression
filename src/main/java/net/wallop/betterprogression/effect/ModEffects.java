@@ -17,6 +17,14 @@ public class ModEffects {
                     .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, Identifier.of(BetterProgression.MOD_ID,"seismic"), 6.0,
                             EntityAttributeModifier.Operation.ADD_VALUE));
 
+    public static final RegistryEntry<StatusEffect> BIND_RESISTANCE = registerStatusEffect(
+            "bind_resistance",
+            new DummyEffect(StatusEffectCategory.BENEFICIAL, 0x964B00));
+
+    public static final RegistryEntry<StatusEffect> BOUND = registerStatusEffect(
+            "bound",
+            new DummyEffect(StatusEffectCategory.HARMFUL, 0x412700));
+
     private static RegistryEntry<StatusEffect> registerStatusEffect(String name, StatusEffect statusEffect) {
         return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(BetterProgression.MOD_ID, name), statusEffect);
     }

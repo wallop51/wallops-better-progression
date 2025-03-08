@@ -51,6 +51,8 @@
   "sounds.betterprogression.entity_bind_death": "Bind retracts",
 
   "effect.betterprogression.seismic": "Seismic",
+  "effect.betterprogression.bind_resistance": "Bind Resistance",
+  "effect.betterprogression.bound": "Bound",
 
   "entity.betterprogression.bronze": "Bronze",
   "entity.betterprogression.bronze_spear": "Bronze Spear",

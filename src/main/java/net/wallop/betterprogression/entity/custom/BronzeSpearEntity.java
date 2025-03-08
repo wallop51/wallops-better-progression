@@ -62,7 +62,7 @@ public class BronzeSpearEntity extends PersistentProjectileEntity {
         Entity entity = entityHitResult.getEntity();
         Entity owner = this.getOwner();
         DamageSource damageSource = this.getDamageSources().thrown(this, owner);
-        float damage = owner == null ? 10f : (owner.isPlayer() ? 6f : 10f);
+        float damage = 6f;
 
         if (entity.damage(damageSource, damage)) {
             this.dealtDamage = true;

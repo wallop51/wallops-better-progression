@@ -5,6 +5,7 @@ import net.minecraft.entity.damage.*;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -13,6 +14,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.wallop.betterprogression.BetterProgression;
+import net.wallop.betterprogression.effect.ModEffects;
 import net.wallop.betterprogression.entity.ModEntities;
 import net.wallop.betterprogression.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
@@ -50,9 +52,10 @@ public class BindEntity extends Entity implements Attackable {
     @Override
     public boolean damage(DamageSource source, float amount) {
         this.lastAttacker = source.getAttacker() instanceof LivingEntity ? (LivingEntity)source.getAttacker() : lastAttacker;
+        Entity attacker = source.getAttacker();
 
-        if (this.target != null && source.getAttacker() != null) {
-            if (source.getAttacker().getType() == ModEntities.BRONZE) {
+        if (this.target != null && attacker != null) {
+            if (attacker.getType() == ModEntities.BRONZE) {
                 this.target.damage(source, amount);
                 return true;
             }
@@ -65,7 +68,12 @@ public class BindEntity extends Entity implements Attackable {
         } else {
             this.scheduleVelocityUpdate();
             this.health = (this.health - amount);
-            this.emitGameEvent(GameEvent.ENTITY_DAMAGE, source.getAttacker());
+            this.emitGameEvent(GameEvent.ENTITY_DAMAGE, attacker);
+            if (this.health <= 0 && attacker !=null) {
+                if (attacker.isPlayer()) {
+                    ((LivingEntity) attacker).addStatusEffect(new StatusEffectInstance(ModEffects.BIND_RESISTANCE, 400, 0, false, false, true));
+                }
+            }
             return true;
         }
     }
@@ -134,6 +142,7 @@ public class BindEntity extends Entity implements Attackable {
                     this.spawnParticles();
                 } else {
                     //BetterProgression.LOGGER.info("[Server] Discarding BindEntity");
+
                     this.discard();
                 }
                 //BetterProgression.LOGGER.info("[Server] ticksUntilDeath={}, setting shouldPlayDeathAnimation=true, health={}, deathAnimationTimeout={}",
@@ -220,7 +229,7 @@ public class BindEntity extends Entity implements Attackable {
     }
 
     private float getDefaultHealth(World world) {
-        return 8 * ((float) world.getDifficulty().getId() / 2 + 1); // easy -> 12, normal -> 16, hard -> 20;
+        return  ((float) world.getDifficulty().getId() * 2 + 2); // easy -> 4, normal -> 6, hard -> 8;
     }
 
 

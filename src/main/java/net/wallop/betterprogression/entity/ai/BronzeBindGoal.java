@@ -2,10 +2,16 @@ package net.wallop.betterprogression.entity.ai;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.wallop.betterprogression.effect.ModEffects;
 import net.wallop.betterprogression.entity.ModEntities;
 import net.wallop.betterprogression.entity.custom.BindEntity;
 import net.wallop.betterprogression.entity.custom.BronzeEntity;
+
+import static net.minecraft.command.argument.UuidArgumentType.getUuid;
 
 public class BronzeBindGoal extends Goal {
     BronzeEntity mob;
@@ -38,6 +44,7 @@ public class BronzeBindGoal extends Goal {
         this.bindEntity = new BindEntity(ModEntities.BIND, this.world, this.target);
         this.bindEntity.setPosition(target.getX(), target.getY(), target.getZ());
         this.world.spawnEntity(this.bindEntity);
+        this.target.addStatusEffect(new StatusEffectInstance(ModEffects.BOUND, 200, 0, false, false));
         this.target.damage(this.mob.getDamageSources().mobProjectile(this.bindEntity, this.mob), 4);
         this.stop();
     }
