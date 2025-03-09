@@ -1,4 +1,4 @@
-// 1.21	2025-03-07T18:03:37.2742536	Wallop's Better Progression/Model Definitions
+// 1.21	2025-03-09T19:45:57.8702966	Wallop's Better Progression/Model Definitions
 dd0639df85039d44e663fad62715a1f75b884c86 assets\betterprogression\models\item\bronze_sword.json
 d3aa86cdfcb05111072e19cf6c41c2b757ea81c4 assets\betterprogression\models\block\cut_bronze_stairs_outer.json
 5587c391af138d7742506fa700c57465acbc869e assets\betterprogression\models\item\copper_shovel.json
@@ -9,8 +9,8 @@ d969010ef95a552855be9d1f7b6470ddf534bedf assets\betterprogression\models\item\br
 c34e7fd9e79b4e8c526dcae31e846efb2957efa4 assets\betterprogression\models\item\totem_of_forging.json
 e270eca9a91273296b6e74bfeada84b1dafbb0cc assets\betterprogression\models\item\music_disc_arid_echoes.json
 953cee95f94bb8b60fbc05d4632a173dd93fb43b assets\betterprogression\models\item\copper_axe.json
-dbad8ee68a2c06adae7b4186575b85df8152d748 assets\betterprogression\models\block\cut_bronze_slab.json
 b40d4c2df8385bd26220dc782aba5abeb7fa0042 assets\betterprogression\models\item\cut_bronze.json
+dbad8ee68a2c06adae7b4186575b85df8152d748 assets\betterprogression\models\block\cut_bronze_slab.json
 67f39ebc396a43038b16ce2356de34180b795a0d assets\betterprogression\models\item\coppermail.json
 b9627ac684d2c6938d0bfb7ac9f45a370aa7ce64 assets\betterprogression\models\item\bronze_leggings.json
 fc9df01d43a43a64eb8c160e4a95c3fbc8da6123 assets\betterprogression\models\item\cloth.json

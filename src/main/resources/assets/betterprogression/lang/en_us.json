@@ -31,6 +31,16 @@
   "item.betterprogression.bronze_rod": "Bronze Rod",
   "item.betterprogression.music_disc_arid_echoes": "Music Disc",
 
+  "item.minecraft.potion.effect.bind_resistance_potion": "Potion of Bind Resistance",
+  "item.minecraft.splash_potion.effect.bind_resistance_potion": "Splash Potion of Bind Resistance",
+  "item.minecraft.lingering_potion.effect.bind_resistance_potion": "Lingering Potion of Bind Resistance",
+  "item.minecraft.tipped_arrow.effect.bind_resistance_potion": "Arrow of Bind Resistance",
+
+  "item.minecraft.potion.effect.long_bind_resistance_potion": "Potion of Bind Resistance",
+  "item.minecraft.splash_potion.effect.long_bind_resistance_potion": "Splash Potion of Bind Resistance",
+  "item.minecraft.lingering_potion.effect.long_bind_resistance_potion": "Lingering Potion of Bind Resistance",
+  "item.minecraft.tipped_arrow.effect.long_bind_resistance_potion": "Arrow of Bind Resistance",
+
   "block.betterprogression.forge": "Forge",
   "block.betterprogression.crude_iron_block": "Block of Crude Iron",
   "block.betterprogression.bronze_block": "Block of Bronze",
