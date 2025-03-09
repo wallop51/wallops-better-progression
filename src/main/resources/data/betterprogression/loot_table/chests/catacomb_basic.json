@@ -1,0 +1,66 @@
+{
+  "type": "chest",
+  "pools": [
+    {
+      "rolls": 3,
+      "bonus_rolls": 0,
+      "functions": [
+        {
+          "function": "set_count",
+          "count": {
+            "type": "uniform",
+            "min": 1,
+            "max": 8
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "betterprogression:plant_fiber",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "bone",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "gunpowder",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "rotten_flesh",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "sand",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "string",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "feather",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "spider_eye",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "betterprogression:bronze_rod",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}
