@@ -3,7 +3,10 @@ package net.wallop.betterprogression;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
+import net.minecraft.item.Items;
+import net.minecraft.potion.Potions;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.screen.ScreenHandlerType;
@@ -20,6 +23,7 @@ import net.wallop.betterprogression.inventory.ForgeScreenHandler;
 import net.wallop.betterprogression.item.ModItemGroups;
 import net.wallop.betterprogression.item.ModItems;
 import net.wallop.betterprogression.particle.ModParticles;
+import net.wallop.betterprogression.potion.ModPotions;
 import net.wallop.betterprogression.recipe.ModRecipes;
 import net.wallop.betterprogression.sound.ModSounds;
 import net.wallop.betterprogression.util.ModLootTableModifiers;
@@ -50,8 +54,14 @@ public class BetterProgression implements ModInitializer {
 		ModParticles.registerParticles();
 		ModDataComponentTypes.registerDataComponentTypes();
 		ModSounds.registerSounds();
+		ModPotions.registerPotions();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.BRONZE, BronzeEntity.createAttributes());
+
+		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
+			builder.registerPotionRecipe(Potions.AWKWARD, ModItems.BRONZE_ROD, ModPotions.BIND_RESISTANCE_POTION);
+			builder.registerPotionRecipe(ModPotions.BIND_RESISTANCE_POTION, Items.REDSTONE, ModPotions.LONG_BIND_RESISTANCE_POTION);
+		});
 
 		LOGGER.info("Loaded!");
 	}

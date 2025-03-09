@@ -97,7 +97,7 @@ public class ModItems {
                     .component(DataComponentTypes.TOOL, BronzeSpearItem.createToolComponent())));
 
     public static final Item ARID_ECHOES_MUSIC_DISC = registerItem("music_disc_arid_echoes",
-            new Item(new Item.Settings().jukeboxPlayable(ModSounds.ARID_ECHOES_KEY).maxCount(1).rarity(Rarity.RARE)));
+            new Item(new Item.Settings().jukeboxPlayable(ModSounds.ARID_ECHOES_KEY).maxCount(1).rarity(Rarity.UNCOMMON)));
 
 
     private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries) {
