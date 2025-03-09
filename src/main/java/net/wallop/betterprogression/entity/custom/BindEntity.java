@@ -72,6 +72,7 @@ public class BindEntity extends Entity implements Attackable {
             if (this.health <= 0 && attacker !=null) {
                 if (attacker.isPlayer()) {
                     ((LivingEntity) attacker).addStatusEffect(new StatusEffectInstance(ModEffects.BIND_RESISTANCE, 400, 0, false, false, true));
+                    ((LivingEntity) attacker).removeStatusEffect(ModEffects.BOUND);
                 }
             }
             return true;
@@ -123,7 +124,7 @@ public class BindEntity extends Entity implements Attackable {
 
             if (this.target != null) {
                 this.target.teleport(this.entity.getX(), this.entity.getY(), this.entity.getZ(), false);
-                if (this.target.getPose() == EntityPose.DYING) {
+                if (!this.target.isAlive() || this.target.isSpectator()) {
                     this.health = 0;
                     this.target = null;
                 }
