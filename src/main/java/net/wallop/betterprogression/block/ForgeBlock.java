@@ -33,11 +33,12 @@ import org.jetbrains.annotations.Nullable;
 public class ForgeBlock extends BlockWithEntity implements BlockEntityProvider {
 
     public static final BooleanProperty LIT = Properties.LIT;
+    public static final BooleanProperty UPGRADED = BooleanProperty.of("upgraded");
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
     public ForgeBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(LIT, false));
+        this.setDefaultState(this.stateManager.getDefaultState().with(LIT, false).with(UPGRADED, false));
     }
 
     @Override
@@ -45,6 +46,7 @@ public class ForgeBlock extends BlockWithEntity implements BlockEntityProvider {
         super.appendProperties(builder);
         builder.add(LIT);
         builder.add(FACING);
+        builder.add(UPGRADED);
     }
 
     @Override
@@ -145,6 +147,12 @@ public class ForgeBlock extends BlockWithEntity implements BlockEntityProvider {
             double j = random.nextDouble() * 9.0 / 16.0;
             double k = axis == Direction.Axis.Z ? (double)direction.getOffsetZ() * 0.52 : h;
             world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0, 0.0, 0.0);
+        }
+    }
+
+    public static void setUpgraded(Boolean upgraded, World world, BlockPos pos, BlockState state) {
+        if (!world.isClient()) {
+            world.setBlockState(pos, state.with(UPGRADED, upgraded));
         }
     }
 }
