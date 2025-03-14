@@ -1,12 +1,10 @@
 package net.wallop.betterprogression.inventory;
 
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.wallop.betterprogression.BetterProgression;
 import net.wallop.betterprogression.block.entity.ForgeBlockEntity;
 
 public class ForgeOutputSlot extends Slot {
@@ -49,8 +47,7 @@ public class ForgeOutputSlot extends Slot {
         stack.onCraftByPlayer(this.player.getWorld(), this.player, this.amount);
         if (this.player instanceof ServerPlayerEntity serverPlayerEntity && this.inventory instanceof ForgeBlockEntity forgeBlockEntity) {
             forgeBlockEntity.dropExperienceForRecipesUsed(serverPlayerEntity);
-            BetterProgression.LOGGER.info("dropExperienceForRecipesUsed called");
-        } else BetterProgression.LOGGER.info("if statement not passed");
+        }
 
         this.amount = 0;
     }

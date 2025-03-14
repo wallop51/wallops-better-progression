@@ -21,7 +21,7 @@ public class ForgeRecipe implements Recipe<ForgeRecipeInput> {
 
     private final ItemStack mOutput;
     private final int mCookingTime;
-    private final int mExperience;
+    private final float mExperience;
     private final List<Ingredient> mRecipeItems;
 
     private enum ForgeRecipeAttributes {
@@ -38,7 +38,7 @@ public class ForgeRecipe implements Recipe<ForgeRecipeInput> {
 
     private static final int mNumberOfInputs = 3;
 
-    public ForgeRecipe(int cookingtime, int experience, List<Ingredient> recipeItems, ItemStack output) {
+    public ForgeRecipe(int cookingtime, float experience, List<Ingredient> recipeItems, ItemStack output) {
         mCookingTime = cookingtime;
         mExperience = experience;
         mRecipeItems = recipeItems;
@@ -88,7 +88,7 @@ public class ForgeRecipe implements Recipe<ForgeRecipeInput> {
         return mCookingTime;
     }
 
-    public int getExperience() {
+    public float getExperience() {
         return mExperience;
     }
 
@@ -120,7 +120,7 @@ public class ForgeRecipe implements Recipe<ForgeRecipeInput> {
 
         public static final MapCodec<ForgeRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 Codec.INT.fieldOf(ForgeRecipeAttributes.COOKINGTIME.value).forGetter(ForgeRecipe::getCookingTime),
-                Codec.INT.fieldOf(ForgeRecipeAttributes.EXPERIENCE.value).forGetter(ForgeRecipe::getExperience),
+                Codec.FLOAT.fieldOf(ForgeRecipeAttributes.EXPERIENCE.value).forGetter(ForgeRecipe::getExperience),
                 validateAmount(Ingredient.ALLOW_EMPTY_CODEC, mNumberOfInputs)
                         .fieldOf(ForgeRecipeAttributes.INGREDIENTS.value)
                         .forGetter(ForgeRecipe::getIngredients),
@@ -162,7 +162,7 @@ public class ForgeRecipe implements Recipe<ForgeRecipeInput> {
 
         private static ForgeRecipe read(RegistryByteBuf buf) {
             int cookingtime = buf.readInt();
-            int experience = buf.readInt();
+            float experience = buf.readFloat();
             //BetterProgression.LOGGER.info("Reading recipe: " + experience);
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
 
@@ -184,7 +184,7 @@ public class ForgeRecipe implements Recipe<ForgeRecipeInput> {
 
         private static void write(RegistryByteBuf buf, ForgeRecipe recipe) {
             buf.writeInt(recipe.getCookingTime());
-            buf.writeInt(recipe.getExperience());
+            buf.writeFloat(recipe.getExperience());
             buf.writeInt(recipe.getIngredients().size());
 
             for (Ingredient ingredient : recipe.getIngredients()) {

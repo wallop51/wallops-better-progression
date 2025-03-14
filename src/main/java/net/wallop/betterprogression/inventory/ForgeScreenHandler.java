@@ -113,6 +113,14 @@ public class ForgeScreenHandler extends ScreenHandler {
         if (slot != null && slot.hasStack()) {
             ItemStack originalStack = slot.getStack();
             newStack = originalStack.copy();
+            if (invSlot == 4) {
+                if (!this.insertItem(originalStack, 5, 41, true)) {
+                    return ItemStack.EMPTY;
+                }
+
+                slot.onQuickTransfer(originalStack, newStack);
+            }
+
             if (invSlot < this.inventory.size()) {
                 if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
                     return ItemStack.EMPTY;
