@@ -183,7 +183,10 @@ public class BindEntity extends Entity implements Attackable {
                 damageSource.getTypeRegistryEntry() == DamageTypes.CAMPFIRE ||
                 damageSource.getTypeRegistryEntry() == DamageTypes.DROWN ||
                 damageSource.getTypeRegistryEntry() == DamageTypes.HOT_FLOOR ||
-                damageSource.getTypeRegistryEntry() == DamageTypes.THORNS
+                damageSource.getTypeRegistryEntry() == DamageTypes.THORNS ||
+                damageSource.getTypeRegistryEntry() == DamageTypes.IN_FIRE ||
+                damageSource.getTypeRegistryEntry() == DamageTypes.LAVA ||
+                damageSource.getTypeRegistryEntry() == DamageTypes.ON_FIRE
         ) {
             return true;
         }
