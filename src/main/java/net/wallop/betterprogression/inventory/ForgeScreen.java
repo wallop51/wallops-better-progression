@@ -5,14 +5,10 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.wallop.betterprogression.BetterProgression;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ForgeScreen extends HandledScreen<ForgeScreenHandler> {
 
@@ -31,13 +27,19 @@ public class ForgeScreen extends HandledScreen<ForgeScreenHandler> {
         int x = (width - backgroundWidth) / 2;
         int y = (height - backgroundHeight) / 2;
         context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
+//        CODE FOR OLD LIT PROGRESS TEXTURE
+//        if (this.handler.isBurning()) {
+//            int h = MathHelper.ceil(this.handler.getFuelProgress() * 40.0F) + 1;
+//            context.drawGuiTexture(LIT_PROGRESS_TEXTURE, 7,41,0,41-h,x + 55,y + 23 + 41 - h,7,h);
+//        }
+
         if (this.handler.isBurning()) {
-            int h = MathHelper.ceil(this.handler.getFuelProgress() * 40.0F) + 1;
-            context.drawGuiTexture(LIT_PROGRESS_TEXTURE, 7,41,0,41-h,x + 55,y + 23 + 41 - h,7,h);
+            int h = MathHelper.ceil(this.handler.getFuelProgress() * 13.0F) + 1;
+            context.drawGuiTexture(LIT_PROGRESS_TEXTURE, 14, 14, 0, 14 - h, x + 62, y + 36 + 14 - h, 14, h);
         }
 
         int l = MathHelper.ceil(this.handler.getCookProgress() * 31.0f);
-        context.drawGuiTexture(this.handler.getBurnProgressTexture(), 31, 28, 0, 0, x + 88,y + 28,l, 28);
+        context.drawGuiTexture(this.handler.getBurnProgressTexture(), 31, 28, 0, 0, x + 98,y + 28,l, 28);
     }
 
     @Override

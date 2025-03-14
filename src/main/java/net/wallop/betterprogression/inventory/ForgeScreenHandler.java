@@ -49,7 +49,7 @@ public class ForgeScreenHandler extends ScreenHandler {
         //Forge Inventory
 
         //Input 1
-        this.addSlot(new Slot(inventory, 0,70,23) {
+        this.addSlot(new Slot(inventory, 0,80,23) {
             @Override
             public boolean canInsert(ItemStack stack) {
                 return stack.isIn(ModTags.Items.FORGE_SLOT_0_ITEMS);
@@ -57,7 +57,7 @@ public class ForgeScreenHandler extends ScreenHandler {
         });
 
         //Input 2
-        this.addSlot(new Slot(inventory, 1,70,48) {
+        this.addSlot(new Slot(inventory, 1,80,48) {
             @Override
             public boolean canInsert(ItemStack stack) {
                 return stack.isIn(ModTags.Items.FORGE_SLOT_1_ITEMS);
@@ -65,7 +65,7 @@ public class ForgeScreenHandler extends ScreenHandler {
         });
 
         //Upgrade
-        this.addSlot(new Slot(inventory, 2,8,62) {
+        this.addSlot(new Slot(inventory, 2,18,35) {
             @Override
             public boolean canInsert(ItemStack stack) {
                 return stack.isIn(ModTags.Items.FORGE_SLOT_2_ITEMS);
@@ -73,7 +73,7 @@ public class ForgeScreenHandler extends ScreenHandler {
         });
 
         //Fuel
-        this.addSlot(new Slot(inventory, 3,33,35) {
+        this.addSlot(new Slot(inventory, 3,43,35) {
             @Override
             public boolean canInsert(ItemStack stack) {
                 return ForgeBlockEntity.canUseAsFuel(stack);
@@ -81,7 +81,7 @@ public class ForgeScreenHandler extends ScreenHandler {
         });
 
         //Output
-        this.addSlot(new ForgeOutputSlot(playerInventory.player, inventory, 4,125,35));
+        this.addSlot(new ForgeOutputSlot(playerInventory.player, inventory, 4,135,35));
 
         int m;
         int l;
