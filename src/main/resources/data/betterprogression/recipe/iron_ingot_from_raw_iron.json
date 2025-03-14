@@ -2,7 +2,7 @@
   "type": "betterprogression:forge",
   "id": "betterprogression:iron_ingot_from_raw_iron",
   "cookingtime": 200,
-  "experience": 4,
+  "experience": 0.7,
   "ingredients": [
     {
       "item": "minecraft:raw_iron"

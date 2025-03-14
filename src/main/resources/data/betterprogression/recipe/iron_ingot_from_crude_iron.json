@@ -2,7 +2,7 @@
   "type": "betterprogression:forge",
   "id": "betterprogression:iron_ingot_from_crude_iron",
   "cookingtime": 160,
-  "experience": 1,
+  "experience": 0.7,
   "ingredients": [
     {
       "item": "betterprogression:crude_iron"
