@@ -59,6 +59,7 @@
   "sounds.betterprogression.bronze_death": "Bronze dies",
   "sounds.betterprogression.entity_bind_spawn": "Bronze binds",
   "sounds.betterprogression.entity_bind_death": "Bind retracts",
+  "sounds.betterprogression.forge_crackle": "Forge crackles",
 
   "effect.betterprogression.seismic": "Seismic",
   "effect.betterprogression.bind_resistance": "Bind Resistance",

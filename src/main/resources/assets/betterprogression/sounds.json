@@ -8,6 +8,14 @@
     ]
   },
 
+  "forge_crackle": {
+    "subtitle": "sounds.betterprogression.forge_crackle",
+    "sounds": [
+      "betterprogression:forge_crackle_1",
+      "betterprogression:forge_crackle_2"
+    ]
+  },
+
   "bronze_entity_hit": {
     "subtitle": "sounds.betterprogression.bronze_entity_hit",
     "sounds": [

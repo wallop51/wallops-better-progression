@@ -19,6 +19,7 @@ public class ModSounds {
     public static final SoundEvent BRONZE_DEATH = registerSoundEvent("bronze_death");
     public static final SoundEvent ENTITY_BIND_SPAWN = registerSoundEvent("entity_bind_spawn");
     public static final SoundEvent ENTITY_BIND_DEATH = registerSoundEvent("entity_bind_death");
+    public static final SoundEvent FORGE_CRACKLE = registerSoundEvent("forge_crackle");
 
     private static SoundEvent registerSoundEvent(String name) {
         Identifier id = Identifier.of(BetterProgression.MOD_ID, name);
