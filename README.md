@@ -13,6 +13,7 @@ This mod is still in early development. Current features include:
 - 'Oil of tin' - an early game healing potion
 - A blaze-like mob called the bronze
 - A bronze spear weapon with increased reach
+- Desert Cataombs - an underground desert structure
 
 Planned features:
 - Locking the iron tier behind a boss mob
