@@ -9,6 +9,7 @@ import net.wallop.betterprogression.BetterProgression;
 import net.wallop.betterprogression.entity.custom.BindEntity;
 import net.wallop.betterprogression.entity.custom.BronzeEntity;
 import net.wallop.betterprogression.entity.custom.BronzeSpearEntity;
+import net.wallop.betterprogression.entity.custom.ElderGolemEntity;
 
 public class ModEntities {
     public static final EntityType<BronzeEntity> BRONZE = Registry.register(Registries.ENTITY_TYPE,
@@ -25,6 +26,11 @@ public class ModEntities {
             Identifier.of(BetterProgression.MOD_ID, "bind"),
             EntityType.Builder.<BindEntity>create(BindEntity::new, SpawnGroup.MISC)
                     .dimensions(0.9f,1f).build());
+
+    public static final EntityType<ElderGolemEntity> ELDER_GOLEM = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(BetterProgression.MOD_ID, "elder_golem"),
+            EntityType.Builder.create(ElderGolemEntity::new, SpawnGroup.MISC)
+                    .dimensions(2,2.8f).build());
 
     public static void registerModEntities() {
         BetterProgression.LOGGER.info("Registering Mod Entities for " + BetterProgression.MOD_ID);

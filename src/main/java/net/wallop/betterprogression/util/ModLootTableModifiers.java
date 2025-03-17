@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.block.BeetrootsBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CropBlock;
+import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.condition.LootCondition;
@@ -38,7 +39,8 @@ public class ModLootTableModifiers {
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1f, 3f)).build());
                     tableBuilder.pool(poolBuilder.build());
 
-            }if (Blocks.CARROTS.getLootTableKey() == key && source.isBuiltin()) {
+            }
+            if (Blocks.CARROTS.getLootTableKey() == key && source.isBuiltin()) {
                     LootCondition.Builder builder = BlockStatePropertyLootCondition.builder(Blocks.CARROTS)
                             .properties(StatePredicate.Builder.create().exactMatch(CropBlock.AGE, CropBlock.MAX_AGE));
 
@@ -53,7 +55,8 @@ public class ModLootTableModifiers {
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1f, 3f)).build());
                     tableBuilder.pool(poolBuilder.build());
 
-            }if (Blocks.POTATOES.getLootTableKey() == key && source.isBuiltin()) {
+            }
+            if (Blocks.POTATOES.getLootTableKey() == key && source.isBuiltin()) {
                     LootCondition.Builder builder = BlockStatePropertyLootCondition.builder(Blocks.POTATOES)
                             .properties(StatePredicate.Builder.create().exactMatch(CropBlock.AGE, CropBlock.MAX_AGE));
 
@@ -68,7 +71,8 @@ public class ModLootTableModifiers {
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1f, 3f)).build());
                     tableBuilder.pool(poolBuilder.build());
 
-            }if (Blocks.BEETROOTS.getLootTableKey() == key && source.isBuiltin()) {
+            }
+            if (Blocks.BEETROOTS.getLootTableKey() == key && source.isBuiltin()) {
                     LootCondition.Builder builder = BlockStatePropertyLootCondition.builder(Blocks.BEETROOTS)
                             .properties(StatePredicate.Builder.create().exactMatch(CropBlock.AGE, BeetrootsBlock.BEETROOTS_MAX_AGE));
 
@@ -83,21 +87,24 @@ public class ModLootTableModifiers {
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1f, 3f)).build());
                     tableBuilder.pool(poolBuilder.build());
 
-            }if (Blocks.GRANITE.getLootTableKey() == key && source.isBuiltin()) {
+            }
+            if (Blocks.GRANITE.getLootTableKey() == key && source.isBuiltin()) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(0.3f))
                         .with(ItemEntry.builder(ModItems.TIN_DUST))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1f,2f)).build());
                 tableBuilder.pool(poolBuilder.build());
-            }if (Blocks.ANDESITE.getLootTableKey() == key && source.isBuiltin()) {
+            }
+            if (Blocks.ANDESITE.getLootTableKey() == key && source.isBuiltin()) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(0.2f))
                         .with(ItemEntry.builder(ModItems.TIN_DUST))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1f,1f)).build());
                 tableBuilder.pool(poolBuilder.build());
-            }if (Blocks.DIORITE.getLootTableKey() == key && source.isBuiltin()) {
+            }
+            if (Blocks.DIORITE.getLootTableKey() == key && source.isBuiltin()) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(0.1f))
@@ -107,5 +114,11 @@ public class ModLootTableModifiers {
             }
         });
 
+        LootTableEvents.REPLACE.register((key, original, source, registries) -> {
+            if (EntityType.CREEPER.getLootTableId() == key && source.isBuiltin()) {
+
+            }
+            return original;
+        });
     }
 }

@@ -76,7 +76,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.TIN_DUST);
 
         getOrCreateTagBuilder(ModTags.Items.FORGE_SLOT_2_ITEMS)
-                .add(ModItems.TOTEM_OF_FORGING);
+                .add(ModItems.TOTEM_OF_FORGING)
+                .add(ModItems.SMOLDERING_CORE);
 
     }
 }

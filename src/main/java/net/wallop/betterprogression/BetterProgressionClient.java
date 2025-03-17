@@ -14,10 +14,12 @@ import net.wallop.betterprogression.block.ModBlocks;
 import net.wallop.betterprogression.entity.ModEntities;
 import net.wallop.betterprogression.entity.client.model.BindModel;
 import net.wallop.betterprogression.entity.client.model.BronzeModel;
+import net.wallop.betterprogression.entity.client.model.ElderGolemModel;
 import net.wallop.betterprogression.entity.client.render.BindRenderer;
 import net.wallop.betterprogression.entity.client.render.BronzeRenderer;
 import net.wallop.betterprogression.entity.client.model.BronzeSpearModel;
 import net.wallop.betterprogression.entity.client.render.BronzeSpearRenderer;
+import net.wallop.betterprogression.entity.client.render.ElderGolemRenderer;
 import net.wallop.betterprogression.inventory.ForgeScreen;
 import net.wallop.betterprogression.particle.BronzeSandParticle;
 import net.wallop.betterprogression.particle.ModParticles;
@@ -37,6 +39,9 @@ public class BetterProgressionClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(BindModel.BIND, BindModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.BIND, BindRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ElderGolemModel.ELDER_GOLEM, ElderGolemModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.ELDER_GOLEM, ElderGolemRenderer::new);
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.BRONZE_SAND_PARTICLE, BronzeSandParticle.Factory::new);
     }

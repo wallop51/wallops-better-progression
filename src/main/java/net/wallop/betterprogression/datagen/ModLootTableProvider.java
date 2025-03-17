@@ -36,6 +36,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.CUT_BRONZE_SLAB, slabDrops(ModBlocks.CUT_BRONZE_SLAB));
         addDrop(ModBlocks.CUT_BRONZE_STAIRS);
         addDrop(ModBlocks.CHISELED_BRONZE);
+        addDrop(ModBlocks.SMOLDERING_CORE);
 
     }
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_smoldering_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betterprogression:smoldering_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:smoldering_core_from_iron_ingot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_smoldering_core"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:smoldering_core_from_iron_ingot"
+    ]
+  }
+}

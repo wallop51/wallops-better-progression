@@ -1,6 +1,6 @@
-// 1.21	2025-03-09T19:45:57.8813072	Wallop's Better Progression/Tags for minecraft:block
+// 1.21	2025-03-17T23:05:22.9908963	Wallop's Better Progression/Tags for minecraft:block
 fdebcf221341cac7a4207c6b48e71dd1e5aa9202 data\minecraft\tags\block\incorrect_for_stone_tool.json
-905708edd34527431794590be5035b2af5e5bbc9 data\betterprogression\tags\block\needs_bronze_tool.json
-8e5e873f2e3ef95b0037719675075b52d8d11b97 data\minecraft\tags\block\mineable\pickaxe.json
+0fa2684db3fa27b760e9c6a73f87067f6254f4e3 data\betterprogression\tags\block\needs_bronze_tool.json
+0314dca0c9a9d317a2fcaee31a48b41408383144 data\minecraft\tags\block\mineable\pickaxe.json
 e57d46f39aa16caf0b0a13b04022ae91b2d47006 data\betterprogression\tags\block\needs_copper_tool.json
 e0a2cd68fc76f36260cd0b2375c128f5a955f002 data\betterprogression\tags\block\incorrect_for_copper_tool.json

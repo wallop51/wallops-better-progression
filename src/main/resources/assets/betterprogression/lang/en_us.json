@@ -27,6 +27,7 @@
   "item.betterprogression.bronze_shovel": "Bronze Shovel",
   "item.betterprogression.bronze_hoe": "Bronze Hoe",
   "item.betterprogression.bronze_spawn_egg": "Bronze Spawn Egg",
+  "item.betterprogression.elder_golem_spawn_egg": "Elder Golem Spawn Egg",
   "item.betterprogression.bronze_spear": "Bronze Spear",
   "item.betterprogression.bronze_rod": "Bronze Rod",
   "item.betterprogression.music_disc_arid_echoes": "Music Disc",
@@ -49,6 +50,7 @@
   "block.betterprogression.cut_bronze_stairs": "Cut Bronze Stairs",
   "block.betterprogression.chiseled_bronze": "Chiseled Bronze",
   "block.betterprogression.bronze_bars": "Bronze Bars",
+  "block.betterprogression.smoldering_core": "Smoldering Core",
 
   "itemgroup.better_progression": "Better Progression",
 
@@ -67,5 +69,6 @@
 
   "entity.betterprogression.bronze": "Bronze",
   "entity.betterprogression.bronze_spear": "Bronze Spear",
-  "entity.betterprogression.bind": "Bind"
+  "entity.betterprogression.bind": "Bind",
+  "entity.betterprogression.elder_golem": "Elder Golem"
 }

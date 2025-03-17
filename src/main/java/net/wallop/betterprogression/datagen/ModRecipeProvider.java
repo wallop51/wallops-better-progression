@@ -17,6 +17,7 @@ import net.wallop.betterprogression.block.ModBlocks;
 import net.wallop.betterprogression.item.ModItems;
 import net.wallop.betterprogression.util.ModTags;
 
+import java.awt.*;
 import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
@@ -403,6 +404,22 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion("has_bronze_rod", conditionsFromItem(ModItems.BRONZE_ROD))
                 .offerTo(exporter);
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.SMOLDERING_CORE, 2)
+                .input('I', ModItems.CRUDE_IRON)
+                .input('C', ModBlocks.SMOLDERING_CORE)
+                .pattern("III")
+                .pattern("ICI")
+                .pattern("III")
+                .criterion("has_smoldering_core", conditionsFromItem(ModBlocks.SMOLDERING_CORE))
+                .offerTo(exporter, Identifier.of("smoldering_core_from_crude_iron"));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.SMOLDERING_CORE, 2)
+                .input('I', Items.IRON_INGOT)
+                .input('C', ModBlocks.SMOLDERING_CORE)
+                .pattern("III")
+                .pattern("ICI")
+                .pattern("III")
+                .criterion("has_smoldering_core", conditionsFromItem(ModBlocks.SMOLDERING_CORE))
+                .offerTo(exporter, Identifier.of("smoldering_core_from_iron_ingot"));
 
         offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CUT_BRONZE_SLAB, ModBlocks.CUT_BRONZE);
         offerChiseledBlockRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_BRONZE, ModBlocks.CUT_BRONZE_SLAB);

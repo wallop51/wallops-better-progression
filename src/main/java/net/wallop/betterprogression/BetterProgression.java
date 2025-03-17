@@ -19,6 +19,7 @@ import net.wallop.betterprogression.component.ModDataComponentTypes;
 import net.wallop.betterprogression.effect.ModEffects;
 import net.wallop.betterprogression.entity.ModEntities;
 import net.wallop.betterprogression.entity.custom.BronzeEntity;
+import net.wallop.betterprogression.entity.custom.ElderGolemEntity;
 import net.wallop.betterprogression.inventory.ForgeScreenHandler;
 import net.wallop.betterprogression.item.ModItemGroups;
 import net.wallop.betterprogression.item.ModItems;
@@ -57,6 +58,7 @@ public class BetterProgression implements ModInitializer {
 		ModPotions.registerPotions();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.BRONZE, BronzeEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.ELDER_GOLEM, ElderGolemEntity.createAttributes());
 
 		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
 			builder.registerPotionRecipe(Potions.AWKWARD, ModItems.BRONZE_ROD, ModPotions.BIND_RESISTANCE_POTION);

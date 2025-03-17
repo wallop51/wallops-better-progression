@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.wallop.betterprogression.BetterProgression;
@@ -17,6 +18,12 @@ public class ModBlocks {
 
     public static final Block FORGE = registerBlock("forge", new ForgeBlock(
             AbstractBlock.Settings.copy(Blocks.BLAST_FURNACE)));
+
+    public static final Block SMOLDERING_CORE = registerBlock("smoldering_core", new SmolderingCoreBlock(
+            AbstractBlock.Settings.copy(Blocks.HEAVY_CORE)
+                    .luminance(state -> 15)
+                    .sounds(BlockSoundGroup.NETHERRACK)
+                    .requiresTool()));
 
     public static final Block BRONZE_BLOCK = registerBlock("bronze_block", new Block(
             AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)));
@@ -49,6 +56,7 @@ public class ModBlocks {
         entries.add(ModBlocks.CUT_BRONZE_STAIRS);
         entries.add(ModBlocks.CHISELED_BRONZE);
         entries.add(ModBlocks.BRONZE_BARS);
+        entries.add(ModBlocks.SMOLDERING_CORE);
     }
 
     private static void addItemsToFunctionalBlocksTabItemGroup(FabricItemGroupEntries entries) {

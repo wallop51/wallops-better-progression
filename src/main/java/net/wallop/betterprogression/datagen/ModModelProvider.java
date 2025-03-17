@@ -25,6 +25,9 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CRUDE_IRON_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BRONZE_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CHISELED_BRONZE);
+
+        blockStateModelGenerator.registerSimpleState(ModBlocks.SMOLDERING_CORE);
+
         BlockStateModelGenerator.BlockTexturePool cut_bronze_pool =
                 blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.CUT_BRONZE);
 
@@ -71,6 +74,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ARID_ECHOES_MUSIC_DISC, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.BRONZE_SPAWN_EGG,
+                new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
+        itemModelGenerator.register(ModItems.ELDER_GOLEM_SPAWN_EGG,
                 new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
     }
 

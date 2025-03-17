@@ -1,8 +1,8 @@
-// 1.21	2025-03-09T19:45:57.8803066	Wallop's Better Progression/Tags for minecraft:item
+// 1.21	2025-03-17T23:05:22.9898949	Wallop's Better Progression/Tags for minecraft:item
 65fad8a82eb17214ab172003a2f85ce4727eb5ae data\betterprogression\tags\item\forge_slot_0_items.json
-f53ba68a1faa95a92fd97633b4147c5c06f7a22c data\minecraft\tags\item\leg_armor.json
 cc575b04e8f58939704670bcf2a5f2234aebb0d6 data\minecraft\tags\item\foot_armor.json
-84dba95a576e58b9dff267f7a9407f6a5db47b7c data\betterprogression\tags\item\forge_slot_2_items.json
+f53ba68a1faa95a92fd97633b4147c5c06f7a22c data\minecraft\tags\item\leg_armor.json
+d6e83116fe105642ea2cd62e5909e845e8a12523 data\betterprogression\tags\item\forge_slot_2_items.json
 7191f63d2dadd2905af19028342dbb003d05a6a0 data\betterprogression\tags\item\tin_oil_food_ingredients.json
 0bdeeec5fa9b1b968c408671d93efa51c784cc64 data\minecraft\tags\item\axes.json
 f7831d5a730fa34b88e9011644e3e44a5ff33ed6 data\minecraft\tags\item\swords.json

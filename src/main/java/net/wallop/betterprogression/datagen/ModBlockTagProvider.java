@@ -37,7 +37,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider{
                         ModBlocks.CUT_BRONZE_SLAB,
                         ModBlocks.CUT_BRONZE_STAIRS,
                         ModBlocks.CHISELED_BRONZE,
-                        ModBlocks.BRONZE_BARS);
+                        ModBlocks.BRONZE_BARS,
+                        ModBlocks.SMOLDERING_CORE);
 
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(
@@ -48,7 +49,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider{
                         ModBlocks.CUT_BRONZE,
                         ModBlocks.CUT_BRONZE_SLAB,
                         ModBlocks.CUT_BRONZE_STAIRS,
-                        ModBlocks.CHISELED_BRONZE);
+                        ModBlocks.CHISELED_BRONZE,
+                        ModBlocks.SMOLDERING_CORE);
 
         getOrCreateTagBuilder(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL)
                 .forceAddTag(BlockTags.NEEDS_IRON_TOOL)

@@ -19,7 +19,10 @@ public class ModItems {
     public static final Item PLANT_FIBER = registerItem("plant_fiber", new Item(new Item.Settings()));
     public static final Item TOOL_HANDLE = registerItem("tool_handle", new Item(new Item.Settings()));
     public static final Item COPPERMAIL = registerItem("coppermail", new Item(new Item.Settings()));
+
     public static final Item CLOTH = registerItem("cloth", new Item(new Item.Settings()));
+
+
     public static final Item TIN_DUST = registerItem("tin_dust", new Item(new Item.Settings()));
     public static final Item BRONZE_INGOT = registerItem("bronze_ingot", new Item(new Item.Settings()));
     public static final Item CRUDE_IRON = registerItem("crude_iron", new Item(new Item.Settings()));
@@ -89,6 +92,9 @@ public class ModItems {
     public static final Item BRONZE_SPAWN_EGG = registerItem("bronze_spawn_egg",
             new SpawnEggItem(ModEntities.BRONZE, 0x4d4c28, 0xe38236, new Item.Settings()));
 
+    public static final Item ELDER_GOLEM_SPAWN_EGG = registerItem("elder_golem_spawn_egg",
+            new SpawnEggItem(ModEntities.ELDER_GOLEM, 0x3f3e42, 0xc42b08, new Item.Settings()));
+
     public static final Item BRONZE_SPEAR = registerItem("bronze_spear",
             new BronzeSpearItem(new Item.Settings()
                     .rarity(Rarity.RARE)
@@ -97,8 +103,14 @@ public class ModItems {
                     .component(DataComponentTypes.TOOL, BronzeSpearItem.createToolComponent())));
 
     public static final Item ARID_ECHOES_MUSIC_DISC = registerItem("music_disc_arid_echoes",
-            new Item(new Item.Settings().jukeboxPlayable(ModSounds.ARID_ECHOES_KEY).maxCount(1).rarity(Rarity.UNCOMMON)));
+            new Item(new Item.Settings().jukeboxPlayable(ModSounds.ARID_ECHOES_KEY).maxCount(1).rarity(Rarity.RARE)));
 
+    public static final Item SMOLDERING_CORE = registerSmolderingCoreItem();
+
+    private static Item registerSmolderingCoreItem() {
+        return registerItem("smoldering_core", new BlockItem(ModBlocks.SMOLDERING_CORE, new Item.Settings()
+                .rarity(Rarity.EPIC)));
+    }
 
     private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries) {
         entries.add(PLANT_FIBER);
@@ -145,6 +157,7 @@ public class ModItems {
 
     private static void addItemsToSpawnEggItemGroup(FabricItemGroupEntries entries) {
         entries.add(BRONZE_SPAWN_EGG);
+        entries.add(ELDER_GOLEM_SPAWN_EGG);
     }
 
     private static Item registerItem(String name, Item item) {
